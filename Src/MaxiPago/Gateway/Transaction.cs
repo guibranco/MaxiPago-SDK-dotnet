@@ -10,10 +10,10 @@ namespace MaxiPago.Gateway
 
         public Transaction()
         {
-            this.Environment = "TEST";
+            Environment = "TEST";
         }
 
-        private TransactionRequest request;
+        private TransactionRequest _request;
 
         /// <summary>
         /// Faz uma autorização com captura.
@@ -24,11 +24,11 @@ namespace MaxiPago.Gateway
                 , string fraudCheck, string softDescriptor, decimal? iataFee)
         {
 
-            this.FillRequestBase("sale", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
+            FillRequestBase("sale", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
                 , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments, chargeInterest
                 , ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
@@ -41,9 +41,9 @@ namespace MaxiPago.Gateway
                 , string fraudCheck, string softDescriptor, decimal? iataFee)
         {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey);
 
-            Order order = this.request.Order;
+            Order order = _request.Order;
             RequestBase rBase = new RequestBase();
 
             if (operation.Equals("sale"))
@@ -107,11 +107,11 @@ namespace MaxiPago.Gateway
         {
 
 
-            this.FillRequestBase("sale", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
+            FillRequestBase("sale", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
                     , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments, chargeInterest
                     , ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
 
-            RequestBase sale = this.request.Order.Sale;
+            RequestBase sale = _request.Order.Sale;
 
             Billing billing = new Billing();
             sale.Billing = billing;
@@ -139,7 +139,7 @@ namespace MaxiPago.Gateway
             shipping.Postalcode = shippingPostalCode;
             shipping.State = shippingState;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
@@ -152,7 +152,7 @@ namespace MaxiPago.Gateway
         {
 
 
-            return this.PayWithToken("sale", merchantId, merchantKey, referenceNum, chargeTotal, processorId, token, customerId
+            return PayWithToken("sale", merchantId, merchantKey, referenceNum, chargeTotal, processorId, token, customerId
                                     , numberOfInstallments, chargeInterest, ipAddress, currencyCode, fraudCheck, softDescriptor, iataFee);
 
         }
@@ -187,11 +187,11 @@ namespace MaxiPago.Gateway
                 , string fraudCheck, string softDescriptor, decimal? iataFee)
         {
 
-            this.FillRequestBase("auth", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
+            FillRequestBase("auth", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
                     , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments
                     , chargeInterest, ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
@@ -207,11 +207,11 @@ namespace MaxiPago.Gateway
                 , string shippingPhone, string shippingEmail, string currencyCode, string fraudCheck, string softDescriptor, decimal? iataFee)
         {
 
-            this.FillRequestBase("auth", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
+            FillRequestBase("auth", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
                     , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments
                     , chargeInterest, ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
 
-            RequestBase auth = this.request.Order.Auth;
+            RequestBase auth = _request.Order.Auth;
 
             Billing billing = new Billing();
             auth.Billing = billing;
@@ -239,7 +239,7 @@ namespace MaxiPago.Gateway
             shipping.Postalcode = shippingPostalCode;
             shipping.State = shippingState;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
@@ -252,7 +252,7 @@ namespace MaxiPago.Gateway
         {
 
 
-            return this.PayWithToken("auth", merchantId, merchantKey, referenceNum, chargeTotal, processorId, token, customerId
+            return PayWithToken("auth", merchantId, merchantKey, referenceNum, chargeTotal, processorId, token, customerId
                                     , numberOfInstallments, chargeInterest, ipAddress, currencyCode, fraudCheck, softDescriptor, iataFee);
 
         }
@@ -287,9 +287,9 @@ namespace MaxiPago.Gateway
                                  , string billingPostalCode, string billingCountry, string billingPhone, string billingEmail)
         {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey);
 
-            Order order = this.request.Order;
+            Order order = _request.Order;
             RequestBase sale = new RequestBase();
             order.Sale = sale;
             sale.ReferenceNum = referenceNum;
@@ -325,7 +325,7 @@ namespace MaxiPago.Gateway
             boleto.Instructions = instructions;
             boleto.Number = number;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
@@ -337,9 +337,9 @@ namespace MaxiPago.Gateway
                                 , string fraudCheck, string softDescriptor, decimal? iataFee)
         {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey);
 
-            Order order = this.request.Order;
+            Order order = _request.Order;
             RequestBase rBase = new RequestBase();
 
             if (operation.Equals("sale"))
@@ -380,7 +380,7 @@ namespace MaxiPago.Gateway
             payType.OnFile.CustomerId = customerId;
             payType.OnFile.Token = token;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
@@ -397,9 +397,9 @@ namespace MaxiPago.Gateway
                                                             , decimal? iataFee)
         {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey);
 
-            Order order = this.request.Order;
+            Order order = _request.Order;
             RequestBase rBase = new RequestBase();
 
             if (operation.Equals("sale"))
@@ -465,7 +465,7 @@ namespace MaxiPago.Gateway
             rBase.SaveOnFile.OnFileMaxChargeAmount = onFileMaxChargeAmount;
             rBase.SaveOnFile.OnFilePermission = onFilePermission;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
@@ -477,16 +477,16 @@ namespace MaxiPago.Gateway
 
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey);
 
             CaptureOrReturn capture = new CaptureOrReturn();
-            this.request.Order.Capture = capture;
+            _request.Order.Capture = capture;
 
             capture.OrderId = orderID;
             capture.ReferenceNum = referenceNum;
             capture.Payment.ChargeTotal = chargeTotal;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
@@ -498,16 +498,16 @@ namespace MaxiPago.Gateway
 
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey);
 
-            CaptureOrReturn _return = new CaptureOrReturn();
-            this.request.Order.Return = _return;
+            CaptureOrReturn captureOrReturn = new CaptureOrReturn();
+            _request.Order.Return = captureOrReturn;
 
-            _return.OrderId = orderID;
-            _return.ReferenceNum = referenceNum;
-            _return.Payment.ChargeTotal = chargeTotal;
+            captureOrReturn.OrderId = orderID;
+            captureOrReturn.ReferenceNum = referenceNum;
+            captureOrReturn.Payment.ChargeTotal = chargeTotal;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
@@ -517,15 +517,15 @@ namespace MaxiPago.Gateway
         public ResponseBase Void(string merchantId, string merchantKey, string transactionID, string ipAddress)
         {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey);
 
-            MaxiPago.DataContract.Transactional.Void voidTransaction = new MaxiPago.DataContract.Transactional.Void();
-            this.request.Order.Void = voidTransaction;
+            Void voidTransaction = new Void();
+            _request.Order.Void = voidTransaction;
 
             voidTransaction.IpAddress = ipAddress;
             voidTransaction.TransactionId = transactionID;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
@@ -544,7 +544,7 @@ namespace MaxiPago.Gateway
                 , failureThreshold, currencyCode);
             //ATENCAO: installments é o campo a ser usado (numberOfInstallments é referente ao Parcelamento)
 
-            TransactionDetail detail = this.request.Order.RecurringPayment.TransactionDetail;
+            TransactionDetail detail = _request.Order.RecurringPayment.TransactionDetail;
 
             PayType payType = detail.PayType;
 
@@ -557,7 +557,7 @@ namespace MaxiPago.Gateway
             creditCard.ExpYear = expYear;
             creditCard.Number = creditCardNumber;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -574,7 +574,7 @@ namespace MaxiPago.Gateway
                     , chargeInterest, ipAddress, action, startDate, frequency, period, installments
                     , failureThreshold, currencyCode);
 
-            TransactionDetail detail = this.request.Order.RecurringPayment.TransactionDetail;
+            TransactionDetail detail = _request.Order.RecurringPayment.TransactionDetail;
             PayType payType = detail.PayType;
 
             OnFile onFile = new OnFile();
@@ -583,7 +583,7 @@ namespace MaxiPago.Gateway
             onFile.CustomerId = customerId;
             onFile.Token = token;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -596,9 +596,9 @@ namespace MaxiPago.Gateway
             , string currencyCode)
         {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey);
 
-            Order order = this.request.Order;
+            Order order = _request.Order;
             RequestBase recurringPayment = new RequestBase();
             order.RecurringPayment = recurringPayment;
 
@@ -640,9 +640,9 @@ namespace MaxiPago.Gateway
                                     , string processorId, string parametersUrl, string ipAddress, string customerIdExt)
         {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey);
 
-            Order order = this.request.Order;
+            Order order = _request.Order;
             RequestBase sale = new RequestBase();
             order.Sale = sale;
 
@@ -666,7 +666,7 @@ namespace MaxiPago.Gateway
 
             debit.ParametersURL = parametersUrl;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 

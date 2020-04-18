@@ -21,7 +21,7 @@ namespace MaxiPago.Gateway
             if (request == null)
                 throw new Exception("The Request can not be null or empty");
 
-            string xml = ToXml<T>(request);
+            string xml = ToXml(request);
 
             // Gets environment URL
             string url = GetUrl(request, environment);
@@ -100,9 +100,6 @@ namespace MaxiPago.Gateway
             {
                 serializer.Serialize(writer, request, ns);
                 string result = writer.ToString();
-
-                if (result == null)
-                    return null;
 
                 result = result.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", null);
 
