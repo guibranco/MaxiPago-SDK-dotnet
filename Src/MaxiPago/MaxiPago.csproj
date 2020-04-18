@@ -6,12 +6,12 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Guilherme Branco Stracini</Authors>
     <Copyright>© 2020 Guilherme Branco Stracini. All rights reserved.</Copyright>
-    <Description>A boilerplate template project for .NET API clients wrappers</Description>
-    <PackageProjectUrl>https://github.com/guibranco/apiclient-boilerplate-dotnet</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/guibranco/apiclient-boilerplate-dotnet</RepositoryUrl>
+    <Description>The MaxiPago gateway SDK for .NET projects</Description>
+    <PackageProjectUrl>https://github.com/guibranco/MaxiPago-SDK-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/guibranco/MaxiPago-SDK-dotnet</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <PackageTags>boilerplate</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/guibranco/apiclient-boilerplate-dotnet/master/logo.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/guibranco/MaxiPago-SDK-dotnet/master/logo.png</PackageIconUrl>
     <PackageIcon>logo.png</PackageIcon>
     <Version>1.0.0</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
