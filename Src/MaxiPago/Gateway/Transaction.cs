@@ -43,8 +43,8 @@ namespace MaxiPago.Gateway
 
             _request = new TransactionRequest(merchantId, merchantKey);
 
-            Order order = _request.Order;
-            RequestBase rBase = new RequestBase();
+            var order = _request.Order;
+            var rBase = new RequestBase();
 
             if (operation.Equals("sale"))
                 order.Sale = rBase;
@@ -59,7 +59,7 @@ namespace MaxiPago.Gateway
             rBase.FraudCheck = fraudCheck;
 
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-            Payment payment = new Payment();
+            var payment = new Payment();
             rBase.Payment = payment;
             payment.ChargeTotal = chargeTotal;
             payment.CurrencyCode = currencyCode;
@@ -69,20 +69,21 @@ namespace MaxiPago.Gateway
             if (string.IsNullOrEmpty(numberOfInstallments))
                 numberOfInstallments = "0";
 
-            int tranInstallments = int.Parse(numberOfInstallments);
+            var tranInstallments = int.Parse(numberOfInstallments);
 
             //Verifica se vai precisar criar o nó de parcelas e juros.
             if (!string.IsNullOrEmpty(chargeInterest) && tranInstallments > 1)
             {
-                payment.CreditInstallment = new CreditInstallment();
-                payment.CreditInstallment.ChargeInterest = chargeInterest.ToUpper();
-                payment.CreditInstallment.NumberOfInstallments = numberOfInstallments;
+                payment.CreditInstallment = new CreditInstallment
+                {
+                    ChargeInterest = chargeInterest.ToUpper(), NumberOfInstallments = numberOfInstallments
+                };
             }
 
-            TransactionDetail detail = rBase.TransactionDetail;
-            PayType payType = detail.PayType;
+            var detail = rBase.TransactionDetail;
+            var payType = detail.PayType;
 
-            CreditCard creditCard = new CreditCard();
+            var creditCard = new CreditCard();
             payType.CreditCard = creditCard;
 
             creditCard.CvvInd = cvvInd;
@@ -111,9 +112,9 @@ namespace MaxiPago.Gateway
                     , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments, chargeInterest
                     , ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
 
-            RequestBase sale = _request.Order.Sale;
+            var sale = _request.Order.Sale;
 
-            Billing billing = new Billing();
+            var billing = new Billing();
             sale.Billing = billing;
 
             billing.Address1 = billingAddress;
@@ -126,7 +127,7 @@ namespace MaxiPago.Gateway
             billing.Postalcode = billingPostalCode;
             billing.State = billingState;
 
-            Shipping shipping = new Shipping();
+            var shipping = new Shipping();
             sale.Shipping = shipping;
 
             shipping.Address1 = shippingAddress;
@@ -211,9 +212,9 @@ namespace MaxiPago.Gateway
                     , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments
                     , chargeInterest, ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
 
-            RequestBase auth = _request.Order.Auth;
+            var auth = _request.Order.Auth;
 
-            Billing billing = new Billing();
+            var billing = new Billing();
             auth.Billing = billing;
 
             billing.Address1 = billingAddress;
@@ -226,7 +227,7 @@ namespace MaxiPago.Gateway
             billing.Postalcode = billingPostalCode;
             billing.State = billingState;
 
-            Shipping shipping = new Shipping();
+            var shipping = new Shipping();
             auth.Shipping = shipping;
 
             shipping.Address1 = shippingAddress;
@@ -289,15 +290,15 @@ namespace MaxiPago.Gateway
 
             _request = new TransactionRequest(merchantId, merchantKey);
 
-            Order order = _request.Order;
-            RequestBase sale = new RequestBase();
+            var order = _request.Order;
+            var sale = new RequestBase();
             order.Sale = sale;
             sale.ReferenceNum = referenceNum;
             sale.ProcessorId = processorId;
             sale.IpAddress = ipAddress;
             sale.CustomerIdExt = customerIdExt;
 
-            Billing billing = new Billing();
+            var billing = new Billing();
             sale.Billing = billing;
 
             billing.Address1 = billingAddress;
@@ -311,14 +312,14 @@ namespace MaxiPago.Gateway
             billing.State = billingState;
 
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-            Payment payment = new Payment();
+            var payment = new Payment();
             sale.Payment = payment;
             payment.ChargeTotal = chargeTotal;
 
-            TransactionDetail detail = sale.TransactionDetail;
-            PayType payType = detail.PayType;
+            var detail = sale.TransactionDetail;
+            var payType = detail.PayType;
 
-            Boleto boleto = new Boleto();
+            var boleto = new Boleto();
             payType.Boleto = boleto;
 
             boleto.ExpirationDate = expirationDate;
@@ -339,8 +340,8 @@ namespace MaxiPago.Gateway
 
             _request = new TransactionRequest(merchantId, merchantKey);
 
-            Order order = _request.Order;
-            RequestBase rBase = new RequestBase();
+            var order = _request.Order;
+            var rBase = new RequestBase();
 
             if (operation.Equals("sale"))
                 order.Sale = rBase;
@@ -353,7 +354,7 @@ namespace MaxiPago.Gateway
             rBase.FraudCheck = fraudCheck;
 
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-            Payment payment = new Payment();
+            var payment = new Payment();
             rBase.Payment = payment;
             payment.ChargeTotal = chargeTotal;
             payment.CurrencyCode = currencyCode;
@@ -363,22 +364,21 @@ namespace MaxiPago.Gateway
             if (string.IsNullOrEmpty(numberOfInstallments))
                 numberOfInstallments = "0";
 
-            int tranInstallments = int.Parse(numberOfInstallments);
+            var tranInstallments = int.Parse(numberOfInstallments);
 
             //Verifica se vai precisar criar o nó de parcelas e juros.
             if (!string.IsNullOrEmpty(chargeInterest) && tranInstallments > 1)
             {
-                payment.CreditInstallment = new CreditInstallment();
-                payment.CreditInstallment.ChargeInterest = chargeInterest.ToUpper();
-                payment.CreditInstallment.NumberOfInstallments = numberOfInstallments;
+                payment.CreditInstallment = new CreditInstallment
+                {
+                    ChargeInterest = chargeInterest.ToUpper(), NumberOfInstallments = numberOfInstallments
+                };
             }
 
-            TransactionDetail detail = rBase.TransactionDetail;
-            PayType payType = detail.PayType;
+            var detail = rBase.TransactionDetail;
+            var payType = detail.PayType;
 
-            payType.OnFile = new OnFile();
-            payType.OnFile.CustomerId = customerId;
-            payType.OnFile.Token = token;
+            payType.OnFile = new OnFile {CustomerId = customerId, Token = token};
 
             return new Utils().SendRequest(_request, Environment);
 
@@ -399,8 +399,8 @@ namespace MaxiPago.Gateway
 
             _request = new TransactionRequest(merchantId, merchantKey);
 
-            Order order = _request.Order;
-            RequestBase rBase = new RequestBase();
+            var order = _request.Order;
+            var rBase = new RequestBase();
 
             if (operation.Equals("sale"))
                 order.Sale = rBase;
@@ -412,7 +412,7 @@ namespace MaxiPago.Gateway
             rBase.IpAddress = ipAddress;
             rBase.FraudCheck = fraudCheck;
 
-            Billing billing = new Billing();
+            var billing = new Billing();
             rBase.Billing = billing;
 
             billing.Address1 = billingAddress;
@@ -426,7 +426,7 @@ namespace MaxiPago.Gateway
             billing.State = billingState;
 
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-            Payment payment = new Payment();
+            var payment = new Payment();
             rBase.Payment = payment;
             payment.ChargeTotal = chargeTotal;
             payment.CurrencyCode = currencyCode;
@@ -436,20 +436,22 @@ namespace MaxiPago.Gateway
             if (string.IsNullOrEmpty(numberOfInstallments))
                 numberOfInstallments = "0";
 
-            int tranInstallments = int.Parse(numberOfInstallments);
+            var tranInstallments = int.Parse(numberOfInstallments);
 
             //Verifica se vai precisar criar o nó de parcelas e juros.
             if (!string.IsNullOrEmpty(chargeInterest) && tranInstallments > 1)
             {
-                payment.CreditInstallment = new CreditInstallment();
-                payment.CreditInstallment.ChargeInterest = chargeInterest.ToUpper();
-                payment.CreditInstallment.NumberOfInstallments = numberOfInstallments;
+                payment.CreditInstallment = new CreditInstallment
+                {
+                    ChargeInterest = chargeInterest.ToUpper(), 
+                    NumberOfInstallments = numberOfInstallments
+                };
             }
 
-            TransactionDetail detail = rBase.TransactionDetail;
-            PayType payType = detail.PayType;
+            var detail = rBase.TransactionDetail;
+            var payType = detail.PayType;
 
-            CreditCard creditCard = new CreditCard();
+            var creditCard = new CreditCard();
             payType.CreditCard = creditCard;
 
             creditCard.CvvInd = cvvInd;
@@ -458,12 +460,14 @@ namespace MaxiPago.Gateway
             creditCard.ExpYear = expYear;
             creditCard.Number = creditCardNumber;
 
-            rBase.SaveOnFile = new SaveOnFile();
-            rBase.SaveOnFile.CustomerToken = customerToken;
-            rBase.SaveOnFile.OnFileComment = onFileComment;
-            rBase.SaveOnFile.OnFileEndDate = onFileEndDate;
-            rBase.SaveOnFile.OnFileMaxChargeAmount = onFileMaxChargeAmount;
-            rBase.SaveOnFile.OnFilePermission = onFilePermission;
+            rBase.SaveOnFile = new SaveOnFile
+            {
+                CustomerToken = customerToken,
+                OnFileComment = onFileComment,
+                OnFileEndDate = onFileEndDate,
+                OnFileMaxChargeAmount = onFileMaxChargeAmount,
+                OnFilePermission = onFilePermission
+            };
 
             return new Utils().SendRequest(_request, Environment);
 
@@ -479,7 +483,7 @@ namespace MaxiPago.Gateway
 
             _request = new TransactionRequest(merchantId, merchantKey);
 
-            CaptureOrReturn capture = new CaptureOrReturn();
+            var capture = new CaptureOrReturn();
             _request.Order.Capture = capture;
 
             capture.OrderId = orderID;
@@ -500,7 +504,7 @@ namespace MaxiPago.Gateway
 
             _request = new TransactionRequest(merchantId, merchantKey);
 
-            CaptureOrReturn captureOrReturn = new CaptureOrReturn();
+            var captureOrReturn = new CaptureOrReturn();
             _request.Order.Return = captureOrReturn;
 
             captureOrReturn.OrderId = orderID;
@@ -519,7 +523,7 @@ namespace MaxiPago.Gateway
 
             _request = new TransactionRequest(merchantId, merchantKey);
 
-            Void voidTransaction = new Void();
+            var voidTransaction = new Void();
             _request.Order.Void = voidTransaction;
 
             voidTransaction.IpAddress = ipAddress;
@@ -544,11 +548,11 @@ namespace MaxiPago.Gateway
                 , failureThreshold, currencyCode);
             //ATENCAO: installments é o campo a ser usado (numberOfInstallments é referente ao Parcelamento)
 
-            TransactionDetail detail = _request.Order.RecurringPayment.TransactionDetail;
+            var detail = _request.Order.RecurringPayment.TransactionDetail;
 
-            PayType payType = detail.PayType;
+            var payType = detail.PayType;
 
-            CreditCard creditCard = new CreditCard();
+            var creditCard = new CreditCard();
             payType.CreditCard = creditCard;
 
             creditCard.CvvInd = cvvInd;
@@ -574,10 +578,10 @@ namespace MaxiPago.Gateway
                     , chargeInterest, ipAddress, action, startDate, frequency, period, installments
                     , failureThreshold, currencyCode);
 
-            TransactionDetail detail = _request.Order.RecurringPayment.TransactionDetail;
-            PayType payType = detail.PayType;
+            var detail = _request.Order.RecurringPayment.TransactionDetail;
+            var payType = detail.PayType;
 
-            OnFile onFile = new OnFile();
+            var onFile = new OnFile();
             payType.OnFile = onFile;
 
             onFile.CustomerId = customerId;
@@ -598,15 +602,15 @@ namespace MaxiPago.Gateway
 
             _request = new TransactionRequest(merchantId, merchantKey);
 
-            Order order = _request.Order;
-            RequestBase recurringPayment = new RequestBase();
+            var order = _request.Order;
+            var recurringPayment = new RequestBase();
             order.RecurringPayment = recurringPayment;
 
             recurringPayment.ReferenceNum = referenceNum;
             recurringPayment.ProcessorId = processorId;
             recurringPayment.IpAddress = ipAddress;
 
-            Payment payment = new Payment();
+            var payment = new Payment();
             recurringPayment.Payment = payment;
             payment.ChargeTotal = chargeTotal;
             payment.CurrencyCode = currencyCode;
@@ -614,17 +618,19 @@ namespace MaxiPago.Gateway
             if (string.IsNullOrEmpty(numberOfInstallments))
                 numberOfInstallments = "0";
 
-            int tranInstallments = int.Parse(numberOfInstallments);
+            var tranInstallments = int.Parse(numberOfInstallments);
 
             //Verifica se vai precisar criar o nó de parcelas e juros.
             if (!string.IsNullOrEmpty(chargeInterest) && tranInstallments > 1)
             {
-                payment.CreditInstallment = new CreditInstallment();
-                payment.CreditInstallment.ChargeInterest = chargeInterest.ToUpper();
-                payment.CreditInstallment.NumberOfInstallments = numberOfInstallments;
+                payment.CreditInstallment = new CreditInstallment
+                {
+                    ChargeInterest = chargeInterest.ToUpper(), 
+                    NumberOfInstallments = numberOfInstallments
+                };
             }
 
-            Recurring recurring = new Recurring();
+            var recurring = new Recurring();
             recurringPayment.Recurring = recurring;
 
             recurring.Action = action;
@@ -642,8 +648,8 @@ namespace MaxiPago.Gateway
 
             _request = new TransactionRequest(merchantId, merchantKey);
 
-            Order order = _request.Order;
-            RequestBase sale = new RequestBase();
+            var order = _request.Order;
+            var sale = new RequestBase();
             order.Sale = sale;
 
             sale.ReferenceNum = referenceNum;
@@ -651,14 +657,14 @@ namespace MaxiPago.Gateway
             sale.IpAddress = ipAddress;
             sale.CustomerIdExt = customerIdExt;
 
-            Payment payment = new Payment();
+            var payment = new Payment();
             sale.Payment = payment;
             payment.ChargeTotal = chargeTotal;
 
-            TransactionDetail detail = sale.TransactionDetail;
-            PayType payType = detail.PayType;
+            var detail = sale.TransactionDetail;
+            var payType = detail.PayType;
 
-            OnlineDebit debit = new OnlineDebit();
+            var debit = new OnlineDebit();
             payType.OnlineDebit = debit;
 
             if (parametersUrl == null)

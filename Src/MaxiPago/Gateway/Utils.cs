@@ -21,12 +21,12 @@ namespace MaxiPago.Gateway
             if (request == null)
                 throw new Exception("The Request can not be null or empty");
 
-            string xml = ToXml(request);
+            var xml = ToXml(request);
 
             // Gets environment URL
-            string url = GetUrl(request, environment);
+            var url = GetUrl(request, environment);
 
-            string responseContent = Post(xml, url);
+            var responseContent = Post(xml, url);
 
             // Parses response XML
             return ParseResponse(responseContent);
@@ -92,42 +92,37 @@ namespace MaxiPago.Gateway
         private string ToXml<T>(T request)
         {
 
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
-            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            var serializer = new XmlSerializer(typeof(T));
+            var ns = new XmlSerializerNamespaces();
             ns.Add("", "");
 
-            using (StringWriter writer = new StringWriter())
-            {
-                serializer.Serialize(writer, request, ns);
-                string result = writer.ToString();
+            using var writer = new StringWriter();
+            serializer.Serialize(writer, request, ns);
+            var result = writer.ToString();
 
-                result = result.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", null);
+            result = result.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", null);
 
-                return result;
-            }
+            return result;
         }
 
         /// Posts data to maxiPago!
         private string Post(string xml, string url)
         {
-
-            HttpWebRequest req = null;
-            WebResponse rsp = null;
-            req = (System.Net.HttpWebRequest)HttpWebRequest.Create(url);
+            var req = (HttpWebRequest)WebRequest.Create(url);
             req.Method = "POST";
             req.ContentType = "text/xml; charset=UTF-8";
 
             req.Timeout = 99999;
 
-            using (StreamWriter writer = new StreamWriter(req.GetRequestStream()))
+            using (var writer = new StreamWriter(req.GetRequestStream()))
             {
                 writer.Write(xml);
             }
 
-            rsp = req.GetResponse();
+            var rsp = req.GetResponse();
 
-            string responseContent = null;
-            using (System.IO.StreamReader reader = new System.IO.StreamReader(rsp.GetResponseStream()))
+            string responseContent;
+            using (var reader = new StreamReader(rsp.GetResponseStream() ?? throw new InvalidOperationException()))
             {
                 responseContent = reader.ReadToEnd();
             }
@@ -139,7 +134,7 @@ namespace MaxiPago.Gateway
         private T Serialize<T>(string xml)
         {
 
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            var serializer = new XmlSerializer(typeof(T));
             return (T)serializer.Deserialize(new MemoryStream(Encoding.UTF8.GetBytes(xml)));
 
         }

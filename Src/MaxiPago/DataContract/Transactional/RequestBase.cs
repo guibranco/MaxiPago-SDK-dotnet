@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Transactional {
-    
-    [Serializable]
-    public class RequestBase {
+namespace MaxiPago.DataContract.Transactional
+{
 
-        public RequestBase() {
-            this.Payment = new Payment();
-            this.TransactionDetail = new TransactionDetail();
+    [Serializable]
+    public class RequestBase
+    {
+
+        public RequestBase()
+        {
+            Payment = new Payment();
+            TransactionDetail = new TransactionDetail();
         }
 
         [XmlElement("processorID")]
@@ -26,18 +29,18 @@ namespace MaxiPago.DataContract.Transactional {
         [XmlElement("fraudCheck")]
         public string FraudCheck { get; set; }
         // Verifica se o valor da propriedade é nulo, se sim, não serializa esse campo no xml
-        public bool ShouldSerializeFraudCheck() { return this.FraudCheck != null; }
+        public bool ShouldSerializeFraudCheck() { return FraudCheck != null; }
 
         //[XmlElement("invoiceNumber")]
         //public string InvoiceNumber { get; set; }
 
         [XmlElement("billing")]
         public Billing Billing { get; set; }
-        public bool ShouldSerializeBilling() { return this.Billing != null; }
+        public bool ShouldSerializeBilling() { return Billing != null; }
 
         [XmlElement("shipping")]
         public Shipping Shipping { get; set; }
-        public bool ShouldSerializeShipping() { return this.Shipping != null; }
+        public bool ShouldSerializeShipping() { return Shipping != null; }
 
         [XmlElement("transactionDetail")]
         public TransactionDetail TransactionDetail { get; set; }
@@ -53,7 +56,7 @@ namespace MaxiPago.DataContract.Transactional {
 
         [XmlElement("customerIdExt")]
         public string CustomerIdExt { get; set; }
-        public bool ShouldSerializeCustomerIdExt() { return !string.IsNullOrEmpty(this.CustomerIdExt); }
+        public bool ShouldSerializeCustomerIdExt() { return !string.IsNullOrEmpty(CustomerIdExt); }
 
     }
 }

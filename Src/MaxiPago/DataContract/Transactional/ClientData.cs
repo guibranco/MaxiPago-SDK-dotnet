@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Transactional {
+namespace MaxiPago.DataContract.Transactional
+{
 
     [Serializable]
-    [XmlRoot( ElementName = "clientData")]
-    public class ClientData {
+    [XmlRoot(ElementName = "clientData")]
+    public class ClientData
+    {
 
-        public ClientData() {
+        public ClientData()
+        {
             _comments = ".NetPlugin v1.1";
         }
 
@@ -29,8 +32,10 @@ namespace MaxiPago.DataContract.Transactional {
         private string _comments;
 
         [XmlElement("comments")]
-        public string Comments {
+        public string Comments
+        {
             get => _comments;
+            // ReSharper disable once ValueParameterNotUsed
             set { }
         }
 
