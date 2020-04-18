@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using MaxiPago.DataContract;
-using System.Xml.Serialization;
-using System.IO;
-using System.Net;
 using System.Threading;
 using MaxiPago.DataContract.Transactional;
 
