@@ -10,7 +10,7 @@ namespace MaxiPago.DataContract.Transactional {
         [XmlElement("creditInstallment")]
         public CreditInstallment CreditInstallment { get; set; }
 
-        public bool ShouldSerializeCreditInstallment() { return this.CreditInstallment != null; }
+        public bool ShouldSerializeCreditInstallment() { return CreditInstallment != null; }
 
         [XmlElement("chargeTotal")]
         public decimal ChargeTotal { get; set; }
@@ -18,17 +18,17 @@ namespace MaxiPago.DataContract.Transactional {
         [XmlElement("currencyCode")]
         public string CurrencyCode { get; set; }
 
-        public bool ShouldSerializeCurrencyCode() { return this.CurrencyCode != null; }
-		
-		[XmlElement("softDescriptor")]
+        public bool ShouldSerializeCurrencyCode() { return CurrencyCode != null; }
+        
+        [XmlElement("softDescriptor")]
         public string SoftDescriptor { get; set; }
         /// Verifica se o valor da propriedade é nulo, se sim, não serializa esse campo no xml
-        public bool ShouldSerializeSoftDescriptor() { return this.SoftDescriptor != null; }
+        public bool ShouldSerializeSoftDescriptor() { return SoftDescriptor != null; }
 
         [XmlElement("iataFee")]
         public decimal? IataFee { get; set; }
         /// Verifica se o valor da propriedade é nulo, se sim, não serializa esse campo no xml
-        public bool ShouldSerializeIataFee() { return this.IataFee != null; }
+        public bool ShouldSerializeIataFee() { return IataFee != null; }
 
     }
 }

@@ -8,17 +8,19 @@ namespace MaxiPago.DataContract.Transactional
     public class TransactionRequest
     {
 
-        public TransactionRequest() {
-            this.Verification = new Verification();
-            this.Order = new Order();
-            this.Version = "3.1.1.15";
+        public TransactionRequest()
+        {
+            Verification = new Verification();
+            Order = new Order();
+            Version = "3.1.1.15";
         }
 
 
-        public TransactionRequest(string merchantId, string merchantKey) {
-            this.Verification = new Verification(merchantId, merchantKey);
-            this.Order = new Order();
-            this.Version = "3.1.1.15";
+        public TransactionRequest(string merchantId, string merchantKey)
+        {
+            Verification = new Verification(merchantId, merchantKey);
+            Order = new Order();
+            Version = "3.1.1.15";
         }
 
         [XmlElement("version")]

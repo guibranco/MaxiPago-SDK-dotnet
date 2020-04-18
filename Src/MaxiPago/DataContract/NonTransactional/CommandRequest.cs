@@ -1,11 +1,13 @@
 using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.NonTransactional {
-    
+namespace MaxiPago.DataContract.NonTransactional
+{
+
     [Serializable]
     [XmlRoot(ElementName = "request")]
-    public class CommandRequest {
+    public class CommandRequest
+    {
 
         [XmlElement("customerId")]
         public string CustomerId { get; set; }
@@ -112,8 +114,8 @@ namespace MaxiPago.DataContract.NonTransactional {
         public bool ShouldSerializeBillingEmail() { return !string.IsNullOrEmpty(BillingEmail); }
 
         [XmlElement("orderID")]
-        public string orderID { get; set; }
-        public bool ShouldSerializeOrderID() { return !string.IsNullOrEmpty(orderID); }
+        public string OrderID { get; set; }
+        public bool ShouldSerializeOrderID() { return !string.IsNullOrEmpty(OrderID); }
 
         [XmlElement("token")]
         public string Token { get; set; }

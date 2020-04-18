@@ -7,7 +7,7 @@ namespace MaxiPago.DataContract.Transactional {
     public class CaptureOrReturn {
 
         public CaptureOrReturn() {
-            this.Payment = new Payment();
+            Payment = new Payment();
         }
 
         [XmlElement("orderID")]

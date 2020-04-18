@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Transactional {
+namespace MaxiPago.DataContract.Transactional
+{
 
     [Serializable]
-    [XmlRoot( ElementName = "clientData")]
-    public class ClientData {
+    [XmlRoot(ElementName = "clientData")]
+    public class ClientData
+    {
 
-        public ClientData() {
-            this.comments = ".NetPlugin v1.1";
+        public ClientData()
+        {
+            _comments = ".NetPlugin v1.1";
         }
 
         [XmlElement("customField1")]
@@ -26,11 +29,13 @@ namespace MaxiPago.DataContract.Transactional {
         [XmlElement("customField5")]
         public string CustomField5 { get; set; }
 
-        private string comments;
+        private string _comments;
 
         [XmlElement("comments")]
-        public string Comments {
-            get { return this.comments; }
+        public string Comments
+        {
+            get => _comments;
+            // ReSharper disable once ValueParameterNotUsed
             set { }
         }
 

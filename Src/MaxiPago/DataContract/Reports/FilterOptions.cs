@@ -1,53 +1,55 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Reports {
-    
+namespace MaxiPago.DataContract.Reports
+{
+
     [Serializable]
     [XmlRoot(ElementName = "filterOptions")]
-    public class FilterOptions {
+    public class FilterOptions
+    {
 
         [XmlElement("transactionId")]
-        public String TransactionId { get; set; }
+        public string TransactionId { get; set; }
 
         [XmlElement("orderId")]
-        public String OrderId { get; set; }
+        public string OrderId { get; set; }
 
         [XmlElement("period")]
-        public String Period { get; set; }
+        public string Period { get; set; }
 
         [XmlElement("pageSize")]
-        public String PageSize { get; set; }
+        public string PageSize { get; set; }
 
         [XmlElement("startDate")]
-        public String StartDate { get; set; }
+        public string StartDate { get; set; }
 
         [XmlElement("endDate")]
-        public String EndDate { get; set; }
+        public string EndDate { get; set; }
 
         [XmlElement("startTime")]
-        public String StartTime { get; set; }
+        public string StartTime { get; set; }
 
         [XmlElement("endTime")]
-        public String EndTime { get; set; }
+        public string EndTime { get; set; }
 
         [XmlElement("orderByName")]
-        public String OrderByName { get; set; }
+        public string OrderByName { get; set; }
 
         [XmlElement("orderByDirection")]
-        public String OrderByDirection { get; set; }
+        public string OrderByDirection { get; set; }
 
         [XmlElement("startRecordNumber")]
-        public String StartRecordNumber { get; set; }
+        public string StartRecordNumber { get; set; }
 
         [XmlElement("endRecordNumber")]
-        public String EndRecordNumber { get; set; }
+        public string EndRecordNumber { get; set; }
 
         [XmlElement("pageNumber")]
-        public String PageNumber { get; set; }
+        public string PageNumber { get; set; }
 
         [XmlElement("pageToken")]
-        public String PageToken { get; set; }
+        public string PageToken { get; set; }
 
     }
 }

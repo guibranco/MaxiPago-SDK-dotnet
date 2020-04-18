@@ -1,151 +1,158 @@
-﻿using System;
-using MaxiPago.DataContract;
-using System.Threading;
+﻿using MaxiPago.DataContract;
 using MaxiPago.DataContract.Transactional;
+using System.Threading;
 
-namespace MaxiPago.Gateway {
+namespace MaxiPago.Gateway
+{
 
-    public class Transaction : ServiceBase {
+    public class Transaction : ServiceBase
+    {
 
-        public Transaction() {
-            this.Environment = "TEST";
+        public Transaction()
+        {
+            Environment = "TEST";
         }
 
-        private TransactionRequest request;
+        private TransactionRequest _request;
 
         /// <summary>
         /// Faz uma autorização com captura.
         /// </summary>
-        public ResponseBase Sale(String merchantId, String merchantKey, String referenceNum, decimal chargeTotal, String creditCardNumber
-                , String expMonth, String expYear, String cvvInd, String cvvNumber, String authentication, String processorId
-                , String numberOfInstallments, String chargeInterest, String ipAddress, String customerIdExt, String currencyCode
-                , String fraudCheck, String softDescriptor, decimal? iataFee) {
+        public ResponseBase Sale(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
+                , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
+                , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string currencyCode
+                , string fraudCheck, string softDescriptor, decimal? iataFee)
+        {
 
-            this.FillRequestBase("sale", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
+            FillRequestBase("sale", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
                 , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments, chargeInterest
                 , ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
         /// <summary>
         /// Popula o objeto RequestBase em comum a todos.
         /// </summary>
-        private void FillRequestBase(String operation, String merchantId, String merchantKey, String referenceNum, decimal chargeTotal, String creditCardNumber
-                , String expMonth, String expYear, String cvvInd, String cvvNumber, String authentication, String processorId
-                , String numberOfInstallments, String chargeInterest, String ipAddress, String customerIdExt, String currencyCode
-                , String fraudCheck, String softDescriptor, decimal? iataFee) {
+        private void FillRequestBase(string operation, string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
+                , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
+                , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string currencyCode
+                , string fraudCheck, string softDescriptor, decimal? iataFee)
+        {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
-
-            Order order = this.request.Order;
-            RequestBase rBase = new RequestBase();
-
-            if (operation.Equals("sale"))
-                order.Sale = rBase;
-            else if (operation.Equals("auth"))
-                order.Auth = rBase;
-
-            rBase.ReferenceNum = referenceNum;
-            rBase.ProcessorId = processorId;
-            rBase.Authentication = authentication;
-            rBase.IpAddress = ipAddress;
-            rBase.CustomerIdExt = customerIdExt;
-            rBase.FraudCheck = fraudCheck;
-
+            _request = new TransactionRequest(merchantId, merchantKey);
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-            Payment payment = new Payment();
-            rBase.Payment = payment;
-            payment.ChargeTotal = chargeTotal;
-            payment.CurrencyCode = currencyCode;
-            payment.SoftDescriptor = softDescriptor;
-            payment.IataFee = iataFee;
+            var rBase = new RequestBase
+            {
+                ReferenceNum = referenceNum,
+                ProcessorId = processorId,
+                Authentication = authentication,
+                IpAddress = ipAddress,
+                CustomerIdExt = customerIdExt,
+                FraudCheck = fraudCheck,
+                Payment = new Payment
+                {
+                    ChargeTotal = chargeTotal,
+                    CurrencyCode = currencyCode,
+                    SoftDescriptor = softDescriptor,
+                    IataFee = iataFee
+                }
+            };
 
-            if (String.IsNullOrEmpty(numberOfInstallments))
+            rBase.TransactionDetail.PayType.CreditCard = new CreditCard
+            {
+                CvvInd = cvvInd,
+                CvvNumber = cvvNumber,
+                ExpMonth = expMonth,
+                ExpYear = expYear,
+                Number = creditCardNumber
+            };
+
+            if (string.IsNullOrEmpty(numberOfInstallments))
                 numberOfInstallments = "0";
 
-            int tranInstallments = int.Parse(numberOfInstallments);
+            var tranInstallments = int.Parse(numberOfInstallments);
 
             //Verifica se vai precisar criar o nó de parcelas e juros.
-            if (!String.IsNullOrEmpty(chargeInterest) && tranInstallments > 1) {
-                payment.CreditInstallment = new CreditInstallment();
-                payment.CreditInstallment.ChargeInterest = chargeInterest.ToUpper();
-                payment.CreditInstallment.NumberOfInstallments = numberOfInstallments;
+            if (!string.IsNullOrEmpty(chargeInterest) && tranInstallments > 1)
+            {
+                rBase.Payment.CreditInstallment = new CreditInstallment
+                {
+                    ChargeInterest = chargeInterest.ToUpper(),
+                    NumberOfInstallments = numberOfInstallments
+                };
             }
 
-            TransactionDetail detail = rBase.TransactionDetail;
-            PayType payType = detail.PayType;
+            if (operation.Equals("sale"))
+                _request.Order.Sale = rBase;
+            else if (operation.Equals("auth"))
+                _request.Order.Auth = rBase;
 
-            CreditCard creditCard = new CreditCard();
-            payType.CreditCard = creditCard;
-
-            creditCard.CvvInd = cvvInd;
-            creditCard.CvvNumber = cvvNumber;
-            creditCard.ExpMonth = expMonth;
-            creditCard.ExpYear = expYear;
-            creditCard.Number = creditCardNumber;
 
         }
 
         /// <summary>
         /// Faz uma autorização com captura.
         /// </summary>
-        public ResponseBase Sale(String merchantId, String merchantKey, String referenceNum, decimal chargeTotal, String creditCardNumber
-                , String expMonth, String expYear, String cvvInd, String cvvNumber, String authentication, String processorId
-                , String numberOfInstallments, String chargeInterest, String ipAddress, String customerIdExt, String billingName
-                , String billingAddress, String billingAddress2, String billingCity, String billingState, String billingPostalCode
-                , String billingCountry, String billingPhone, String billingEmail, String shippingName, String shippingAddress
-                , String shippingAddress2, String shippingCity, String shippingState, String shippingPostalCode
-                , String shippingCountry, String shippingPhone, String shippingEmail, String currencyCode, String fraudCheck
-                , String softDescriptor, decimal? iataFee) {
+        public ResponseBase Sale(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
+                , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
+                , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string billingName
+                , string billingAddress, string billingAddress2, string billingCity, string billingState, string billingPostalCode
+                , string billingCountry, string billingPhone, string billingEmail, string shippingName, string shippingAddress
+                , string shippingAddress2, string shippingCity, string shippingState, string shippingPostalCode
+                , string shippingCountry, string shippingPhone, string shippingEmail, string currencyCode, string fraudCheck
+                , string softDescriptor, decimal? iataFee)
+        {
 
 
-            this.FillRequestBase("sale", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
+            FillRequestBase("sale", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
                     , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments, chargeInterest
                     , ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
 
-            RequestBase sale = this.request.Order.Sale;
+            var sale = _request.Order.Sale;
 
-            Billing billing = new Billing();
-            sale.Billing = billing;
+            sale.Billing = new Billing
+            {
+                Address1 = billingAddress,
+                Address2 = billingAddress2,
+                City = billingCity,
+                Country = billingCountry,
+                Email = billingEmail,
+                Name = billingName,
+                Phone = billingPhone,
+                Postalcode = billingPostalCode,
+                State = billingState
+            };
 
-            billing.Address1 = billingAddress;
-            billing.Address2 = billingAddress2;
-            billing.City = billingCity;
-            billing.Country = billingCountry;
-            billing.Email = billingEmail;
-            billing.Name = billingName;
-            billing.Phone = billingPhone;
-            billing.Postalcode = billingPostalCode;
-            billing.State = billingState;
 
-            Shipping shipping = new Shipping();
-            sale.Shipping = shipping;
+            sale.Shipping = new Shipping
+            {
+                Address1 = shippingAddress,
+                Address2 = shippingAddress2,
+                City = shippingCity,
+                Country = shippingCountry,
+                Email = shippingEmail,
+                Name = shippingName,
+                Phone = shippingPhone,
+                Postalcode = shippingPostalCode,
+                State = shippingState
+            };
 
-            shipping.Address1 = shippingAddress;
-            shipping.Address2 = shippingAddress2;
-            shipping.City = shippingCity;
-            shipping.Country = shippingCountry;
-            shipping.Email = shippingEmail;
-            shipping.Name = shippingName;
-            shipping.Phone = shippingPhone;
-            shipping.Postalcode = shippingPostalCode;
-            shipping.State = shippingState;
-
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
         /// <summary>
         /// Faz uma autorização com captura passando o token do cartão já salvo na base.
         /// </summary>
-        public ResponseBase Sale(String merchantId, String merchantKey, String referenceNum, decimal chargeTotal, String processorId
-                                , String token, String customerId, String numberOfInstallments, String chargeInterest, String ipAddress, String currencyCode
-                                , String fraudCheck, String softDescriptor, decimal? iataFee) {
+        public ResponseBase Sale(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string processorId
+                                , string token, string customerId, string numberOfInstallments, string chargeInterest, string ipAddress, string currencyCode
+                                , string fraudCheck, string softDescriptor, decimal? iataFee)
+        {
 
 
-            return this.PayWithToken("sale", merchantId, merchantKey, referenceNum, chargeTotal, processorId, token, customerId
+            return PayWithToken("sale", merchantId, merchantKey, referenceNum, chargeTotal, processorId, token, customerId
                                     , numberOfInstallments, chargeInterest, ipAddress, currencyCode, fraudCheck, softDescriptor, iataFee);
 
         }
@@ -153,14 +160,15 @@ namespace MaxiPago.Gateway {
         /// <summary>
         /// Faz uma autorização com captura salvando o número de cartão automaticamente.
         /// </summary>
-        public ResponseBase Sale(String merchantId, String merchantKey, String referenceNum, decimal chargeTotal
-                                   , String creditCardNumber, String expMonth, String expYear, String cvvInd, String cvvNumber
-                                   , String processorId, String numberOfInstallments, String chargeInterest, String ipAddress
-                                   , String customerToken, String onFileEndDate, String onFilePermission, String onFileComment
-                                   , String onFileMaxChargeAmount, String billingName, String billingAddress, String billingAddress2
-                                   , String billingCity, String billingState, String billingPostalCode, String billingCountry
-                                   , String billingPhone, String billingEmail, String currencyCode, String fraudCheck
-                                   , String softDescriptor, decimal? iataFee) {
+        public ResponseBase Sale(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
+                                   , string creditCardNumber, string expMonth, string expYear, string cvvInd, string cvvNumber
+                                   , string processorId, string numberOfInstallments, string chargeInterest, string ipAddress
+                                   , string customerToken, string onFileEndDate, string onFilePermission, string onFileComment
+                                   , string onFileMaxChargeAmount, string billingName, string billingAddress, string billingAddress2
+                                   , string billingCity, string billingState, string billingPostalCode, string billingCountry
+                                   , string billingPhone, string billingEmail, string currencyCode, string fraudCheck
+                                   , string softDescriptor, decimal? iataFee)
+        {
 
             return PaySavingCreditCardAutomatically("sale", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
                                                     , cvvInd, cvvNumber, processorId, numberOfInstallments, chargeInterest, ipAddress, customerToken
@@ -173,75 +181,80 @@ namespace MaxiPago.Gateway {
         /// <summary>
         /// Faz uma Autorização.
         /// </summary>
-        public ResponseBase Auth(String merchantId, String merchantKey, String referenceNum, decimal chargeTotal, String creditCardNumber
-                , String expMonth, String expYear, String cvvInd, String cvvNumber, String authentication, String processorId
-                , String numberOfInstallments, String chargeInterest, String ipAddress, String customerIdExt, String currencyCode
-                , String fraudCheck, String softDescriptor, decimal? iataFee) {
+        public ResponseBase Auth(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
+                , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
+                , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string currencyCode
+                , string fraudCheck, string softDescriptor, decimal? iataFee)
+        {
 
-            this.FillRequestBase("auth", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
+            FillRequestBase("auth", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
                     , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments
                     , chargeInterest, ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
         /// <summary>
         /// Faz uma Autorização.
         /// </summary>
-        public ResponseBase Auth(String merchantId, String merchantKey, String referenceNum, decimal chargeTotal, String creditCardNumber
-                , String expMonth, String expYear, String cvvInd, String cvvNumber, String authentication, String processorId
-                , String numberOfInstallments, String chargeInterest, String ipAddress, String customerIdExt, String billingName
-                , String billingAddress, String billingAddress2, String billingCity, String billingState, String billingPostalCode
-                , String billingCountry, String billingPhone, String billingEmail, String shippingName, String shippingAddress
-                , String shippingAddress2, String shippingCity, String shippingState, String shippingPostalCode, String shippingCountry
-                , String shippingPhone, String shippingEmail, String currencyCode, String fraudCheck, String softDescriptor, decimal? iataFee) {
+        public ResponseBase Auth(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
+                , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
+                , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string billingName
+                , string billingAddress, string billingAddress2, string billingCity, string billingState, string billingPostalCode
+                , string billingCountry, string billingPhone, string billingEmail, string shippingName, string shippingAddress
+                , string shippingAddress2, string shippingCity, string shippingState, string shippingPostalCode, string shippingCountry
+                , string shippingPhone, string shippingEmail, string currencyCode, string fraudCheck, string softDescriptor, decimal? iataFee)
+        {
 
-            this.FillRequestBase("auth", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
+            FillRequestBase("auth", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
                     , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments
                     , chargeInterest, ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
 
-            RequestBase auth = this.request.Order.Auth;
+            var auth = _request.Order.Auth;
 
-            Billing billing = new Billing();
-            auth.Billing = billing;
+            auth.Billing = new Billing
+            {
+                Address1 = billingAddress,
+                Address2 = billingAddress2,
+                City = billingCity,
+                Country = billingCountry,
+                Email = billingEmail,
+                Name = billingName,
+                Phone = billingPhone,
+                Postalcode = billingPostalCode,
+                State = billingState
+            };
 
-            billing.Address1 = billingAddress;
-            billing.Address2 = billingAddress2;
-            billing.City = billingCity;
-            billing.Country = billingCountry;
-            billing.Email = billingEmail;
-            billing.Name = billingName;
-            billing.Phone = billingPhone;
-            billing.Postalcode = billingPostalCode;
-            billing.State = billingState;
 
-            Shipping shipping = new Shipping();
-            auth.Shipping = shipping;
+            auth.Shipping = new Shipping
+            {
+                Address1 = shippingAddress,
+                Address2 = shippingAddress2,
+                City = shippingCity,
+                Country = shippingCountry,
+                Email = shippingEmail,
+                Name = shippingName,
+                Phone = shippingPhone,
+                Postalcode = shippingPostalCode,
+                State = shippingState
+            };
 
-            shipping.Address1 = shippingAddress;
-            shipping.Address2 = shippingAddress2;
-            shipping.City = shippingCity;
-            shipping.Country = shippingCountry;
-            shipping.Email = shippingEmail;
-            shipping.Name = shippingName;
-            shipping.Phone = shippingPhone;
-            shipping.Postalcode = shippingPostalCode;
-            shipping.State = shippingState;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
         /// <summary>
         /// Faz uma autorização passando o token do cartão já salvo na base.
         /// </summary>
-        public ResponseBase Auth(String merchantId, String merchantKey, String referenceNum, decimal chargeTotal, String processorId
-                                , String token, String customerId, String numberOfInstallments, String chargeInterest, String ipAddress, String currencyCode
-                                , String fraudCheck, String softDescriptor, decimal? iataFee) {
+        public ResponseBase Auth(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string processorId
+                                , string token, string customerId, string numberOfInstallments, string chargeInterest, string ipAddress, string currencyCode
+                                , string fraudCheck, string softDescriptor, decimal? iataFee)
+        {
 
 
-            return this.PayWithToken("auth", merchantId, merchantKey, referenceNum, chargeTotal, processorId, token, customerId
+            return PayWithToken("auth", merchantId, merchantKey, referenceNum, chargeTotal, processorId, token, customerId
                                     , numberOfInstallments, chargeInterest, ipAddress, currencyCode, fraudCheck, softDescriptor, iataFee);
 
         }
@@ -249,14 +262,15 @@ namespace MaxiPago.Gateway {
         /// <summary>
         /// Faz uma autorização salvando o número de cartão automaticamente.
         /// </summary>
-        public ResponseBase Auth(String merchantId, String merchantKey, String referenceNum, decimal chargeTotal
-                                   , String creditCardNumber, String expMonth, String expYear, String cvvInd, String cvvNumber
-                                   , String processorId, String numberOfInstallments, String chargeInterest, String ipAddress
-                                   , String customerToken, String onFileEndDate, String onFilePermission, String onFileComment
-                                   , String onFileMaxChargeAmount, String billingName, String billingAddress, String billingAddress2
-                                   , String billingCity, String billingState, String billingPostalCode, String billingCountry
-                                   , String billingPhone, String billingEmail, String currencyCode, String fraudCheck
-                                   , String softDescriptor, decimal? iataFee) {
+        public ResponseBase Auth(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
+                                   , string creditCardNumber, string expMonth, string expYear, string cvvInd, string cvvNumber
+                                   , string processorId, string numberOfInstallments, string chargeInterest, string ipAddress
+                                   , string customerToken, string onFileEndDate, string onFilePermission, string onFileComment
+                                   , string onFileMaxChargeAmount, string billingName, string billingAddress, string billingAddress2
+                                   , string billingCity, string billingState, string billingPostalCode, string billingCountry
+                                   , string billingPhone, string billingEmail, string currencyCode, string fraudCheck
+                                   , string softDescriptor, decimal? iataFee)
+        {
 
             return PaySavingCreditCardAutomatically("auth", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
                                                     , cvvInd, cvvNumber, processorId, numberOfInstallments, chargeInterest, ipAddress, customerToken
@@ -269,382 +283,372 @@ namespace MaxiPago.Gateway {
         /// <summary>
         /// Faz uma requisição de boleto.
         /// </summary>
-        public ResponseBase Boleto(String merchantId, String merchantKey, String referenceNum, decimal chargeTotal, String processorId
-                                 , String ipAddress, String customerIdExt, String expirationDate, String number, String instructions
-                                 , String billingName, String billingAddress, String billingAddress2, String billingCity, String billingState
-                                 , String billingPostalCode, String billingCountry, String billingPhone, String billingEmail) {
+        public ResponseBase Boleto(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string processorId
+                                 , string ipAddress, string customerIdExt, string expirationDate, string number, string instructions
+                                 , string billingName, string billingAddress, string billingAddress2, string billingCity, string billingState
+                                 , string billingPostalCode, string billingCountry, string billingPhone, string billingEmail)
+        {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey);
 
-            Order order = this.request.Order;
-            RequestBase sale = new RequestBase();
-            order.Sale = sale;
-            sale.ReferenceNum = referenceNum;
-            sale.ProcessorId = processorId;
-            sale.IpAddress = ipAddress;
-            sale.CustomerIdExt = customerIdExt;
-
-            Billing billing = new Billing();
-            sale.Billing = billing;
-
-            billing.Address1 = billingAddress;
-            billing.Address2 = billingAddress2;
-            billing.City = billingCity;
-            billing.Country = billingCountry;
-            billing.Email = billingEmail;
-            billing.Name = billingName;
-            billing.Phone = billingPhone;
-            billing.Postalcode = billingPostalCode;
-            billing.State = billingState;
-
+            var order = _request.Order;
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-            Payment payment = new Payment();
-            sale.Payment = payment;
-            payment.ChargeTotal = chargeTotal;
+            order.Sale = new RequestBase
+            {
+                ReferenceNum = referenceNum,
+                ProcessorId = processorId,
+                IpAddress = ipAddress,
+                CustomerIdExt = customerIdExt,
+                Billing = new Billing
+                {
+                    Address1 = billingAddress,
+                    Address2 = billingAddress2,
+                    City = billingCity,
+                    Country = billingCountry,
+                    Email = billingEmail,
+                    Name = billingName,
+                    Phone = billingPhone,
+                    Postalcode = billingPostalCode,
+                    State = billingState
+                },
+                Payment = new Payment { ChargeTotal = chargeTotal }
+            };
+            order.Sale.TransactionDetail.PayType.Boleto = new Boleto { ExpirationDate = expirationDate, Instructions = instructions, Number = number };
 
-            TransactionDetail detail = sale.TransactionDetail;
-            PayType payType = detail.PayType;
-
-            Boleto boleto = new Boleto();
-            payType.Boleto = boleto;
-
-            boleto.ExpirationDate = expirationDate;
-            boleto.Instructions = instructions;
-            boleto.Number = number;
-
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
         /// <summary>
         /// Faz a transação passando o token do cartão já salvo na base.
         /// </summary>
-        private ResponseBase PayWithToken(String operation, String merchantId, String merchantKey, String referenceNum, decimal chargeTotal, String processorId
-                                , String token, String customerId, String numberOfInstallments, String chargeInterest, String ipAddress, String currencyCode
-                                , String fraudCheck, String softDescriptor, decimal? iataFee) {
+        private ResponseBase PayWithToken(string operation, string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string processorId
+                                , string token, string customerId, string numberOfInstallments, string chargeInterest, string ipAddress, string currencyCode
+                                , string fraudCheck, string softDescriptor, decimal? iataFee)
+        {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
-
-            Order order = this.request.Order;
-            RequestBase rBase = new RequestBase();
-
-            if (operation.Equals("sale"))
-                order.Sale = rBase;
-            else if (operation.Equals("auth"))
-                order.Auth = rBase;
-
-            rBase.ReferenceNum = referenceNum;
-            rBase.ProcessorId = processorId;
-            rBase.IpAddress = ipAddress;
-            rBase.FraudCheck = fraudCheck;
-
+            _request = new TransactionRequest(merchantId, merchantKey);
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-            Payment payment = new Payment();
-            rBase.Payment = payment;
-            payment.ChargeTotal = chargeTotal;
-            payment.CurrencyCode = currencyCode;
-            payment.SoftDescriptor = softDescriptor;
-            payment.IataFee = iataFee;
 
-            if (String.IsNullOrEmpty(numberOfInstallments))
+            var rBase = new RequestBase
+            {
+                ReferenceNum = referenceNum,
+                ProcessorId = processorId,
+                IpAddress = ipAddress,
+                FraudCheck = fraudCheck,
+                Payment = new Payment
+                {
+                    ChargeTotal = chargeTotal,
+                    CurrencyCode = currencyCode,
+                    SoftDescriptor = softDescriptor,
+                    IataFee = iataFee
+                }
+            };
+
+            if (string.IsNullOrEmpty(numberOfInstallments))
                 numberOfInstallments = "0";
 
-            int tranInstallments = int.Parse(numberOfInstallments);
+            var tranInstallments = int.Parse(numberOfInstallments);
 
             //Verifica se vai precisar criar o nó de parcelas e juros.
-            if (!String.IsNullOrEmpty(chargeInterest) && tranInstallments > 1)
+            if (!string.IsNullOrEmpty(chargeInterest) && tranInstallments > 1)
             {
-                payment.CreditInstallment = new CreditInstallment();
-                payment.CreditInstallment.ChargeInterest = chargeInterest.ToUpper();
-                payment.CreditInstallment.NumberOfInstallments = numberOfInstallments;
+                rBase.Payment.CreditInstallment = new CreditInstallment
+                {
+                    ChargeInterest = chargeInterest.ToUpper(),
+                    NumberOfInstallments = numberOfInstallments
+                };
             }
 
-            TransactionDetail detail = rBase.TransactionDetail;
-            PayType payType = detail.PayType;
-
-            payType.OnFile = new OnFile();
-            payType.OnFile.CustomerId = customerId;
-            payType.OnFile.Token = token;
-
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            rBase.TransactionDetail.PayType.OnFile = new OnFile { CustomerId = customerId, Token = token };
+            if (operation.Equals("sale"))
+                _request.Order.Sale = rBase;
+            else if (operation.Equals("auth"))
+                _request.Order.Auth = rBase;
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
         /// <summary>
         /// Passa uma transação salvando o número de cartão automaticamente.
         /// </summary>
-        private ResponseBase PaySavingCreditCardAutomatically(String operation, String merchantId, String merchantKey, String referenceNum, decimal chargeTotal
-                                                            , String creditCardNumber, String expMonth, String expYear, String cvvInd, String cvvNumber
-                                                            , String processorId, String numberOfInstallments, String chargeInterest, String ipAddress
-                                                            , String customerToken, String onFileEndDate, String onFilePermission, String onFileComment
-                                                            , String onFileMaxChargeAmount, String billingName, String billingAddress, String billingAddress2
-                                                            , String billingCity, String billingState, String billingPostalCode, String billingCountry
-                                                            , String billingPhone, String billingEmail, String currencyCode, String fraudCheck, String softDescriptor
-                                                            , decimal? iataFee) {
+        private ResponseBase PaySavingCreditCardAutomatically(string operation, string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
+                                                            , string creditCardNumber, string expMonth, string expYear, string cvvInd, string cvvNumber
+                                                            , string processorId, string numberOfInstallments, string chargeInterest, string ipAddress
+                                                            , string customerToken, string onFileEndDate, string onFilePermission, string onFileComment
+                                                            , string onFileMaxChargeAmount, string billingName, string billingAddress, string billingAddress2
+                                                            , string billingCity, string billingState, string billingPostalCode, string billingCountry
+                                                            , string billingPhone, string billingEmail, string currencyCode, string fraudCheck, string softDescriptor
+                                                            , decimal? iataFee)
+        {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
-
-            Order order = this.request.Order;
-            RequestBase rBase = new RequestBase();
-
-            if (operation.Equals("sale"))
-                order.Sale = rBase;
-            else if (operation.Equals("auth"))
-                order.Auth = rBase;
-
-            rBase.ReferenceNum = referenceNum;
-            rBase.ProcessorId = processorId;
-            rBase.IpAddress = ipAddress;
-            rBase.FraudCheck = fraudCheck;
-
-            Billing billing = new Billing();
-            rBase.Billing = billing;
-
-            billing.Address1 = billingAddress;
-            billing.Address2 = billingAddress2;
-            billing.City = billingCity;
-            billing.Country = billingCountry;
-            billing.Email = billingEmail;
-            billing.Name = billingName;
-            billing.Phone = billingPhone;
-            billing.Postalcode = billingPostalCode;
-            billing.State = billingState;
-
+            _request = new TransactionRequest(merchantId, merchantKey);
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-            Payment payment = new Payment();
-            rBase.Payment = payment;
-            payment.ChargeTotal = chargeTotal;
-            payment.CurrencyCode = currencyCode;
-            payment.SoftDescriptor = softDescriptor;
-            payment.IataFee = iataFee;
 
-            if (String.IsNullOrEmpty(numberOfInstallments))
+            var rBase = new RequestBase
+            {
+                ReferenceNum = referenceNum,
+                ProcessorId = processorId,
+                IpAddress = ipAddress,
+                FraudCheck = fraudCheck,
+                Billing = new Billing
+                {
+                    Address1 = billingAddress,
+                    Address2 = billingAddress2,
+                    City = billingCity,
+                    Country = billingCountry,
+                    Email = billingEmail,
+                    Name = billingName,
+                    Phone = billingPhone,
+                    Postalcode = billingPostalCode,
+                    State = billingState
+                },
+                Payment = new Payment
+                {
+                    ChargeTotal = chargeTotal,
+                    CurrencyCode = currencyCode,
+                    SoftDescriptor = softDescriptor,
+                    IataFee = iataFee
+                },
+                SaveOnFile = new SaveOnFile
+                {
+                    CustomerToken = customerToken,
+                    OnFileComment = onFileComment,
+                    OnFileEndDate = onFileEndDate,
+                    OnFileMaxChargeAmount = onFileMaxChargeAmount,
+                    OnFilePermission = onFilePermission
+                }
+            };
+
+            rBase.TransactionDetail.PayType.CreditCard = new CreditCard
+            {
+                CvvInd = cvvInd,
+                CvvNumber = cvvNumber,
+                ExpMonth = expMonth,
+                ExpYear = expYear,
+                Number = creditCardNumber
+            };
+
+            if (string.IsNullOrEmpty(numberOfInstallments))
                 numberOfInstallments = "0";
 
-            int tranInstallments = int.Parse(numberOfInstallments);
+            var tranInstallments = int.Parse(numberOfInstallments);
 
             //Verifica se vai precisar criar o nó de parcelas e juros.
-            if (!String.IsNullOrEmpty(chargeInterest) && tranInstallments > 1)
+            if (!string.IsNullOrEmpty(chargeInterest) && tranInstallments > 1)
             {
-                payment.CreditInstallment = new CreditInstallment();
-                payment.CreditInstallment.ChargeInterest = chargeInterest.ToUpper();
-                payment.CreditInstallment.NumberOfInstallments = numberOfInstallments;
+                rBase.Payment.CreditInstallment = new CreditInstallment
+                {
+                    ChargeInterest = chargeInterest.ToUpper(),
+                    NumberOfInstallments = numberOfInstallments
+                };
             }
 
-            TransactionDetail detail = rBase.TransactionDetail;
-            PayType payType = detail.PayType;
+            if (operation.Equals("sale"))
+                _request.Order.Sale = rBase;
+            else if (operation.Equals("auth"))
+                _request.Order.Auth = rBase;
 
-            CreditCard creditCard = new CreditCard();
-            payType.CreditCard = creditCard;
-
-            creditCard.CvvInd = cvvInd;
-            creditCard.CvvNumber = cvvNumber;
-            creditCard.ExpMonth = expMonth;
-            creditCard.ExpYear = expYear;
-            creditCard.Number = creditCardNumber;
-
-            rBase.SaveOnFile = new SaveOnFile();
-            rBase.SaveOnFile.CustomerToken = customerToken;
-            rBase.SaveOnFile.OnFileComment = onFileComment;
-            rBase.SaveOnFile.OnFileEndDate = onFileEndDate;
-            rBase.SaveOnFile.OnFileMaxChargeAmount = onFileMaxChargeAmount;
-            rBase.SaveOnFile.OnFilePermission = onFilePermission;
-
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
         /// <summary>
         /// Faz uma Captura.
         /// </summary>
-        public ResponseBase Capture(String merchantId, String merchantKey, String orderID, String referenceNum, decimal chargeTotal) {
+        public ResponseBase Capture(string merchantId, string merchantKey, string orderID, string referenceNum, decimal chargeTotal)
+        {
 
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey)
+            {
+                Order =
+                {
+                    Capture = new CaptureOrReturn
+                    {
+                        OrderId = orderID,
+                        ReferenceNum = referenceNum,
+                        Payment = {ChargeTotal = chargeTotal}
+                    }
+                }
+            };
 
-            CaptureOrReturn capture = new CaptureOrReturn();
-            this.request.Order.Capture = capture;
 
-            capture.OrderId = orderID;
-            capture.ReferenceNum = referenceNum;
-            capture.Payment.ChargeTotal = chargeTotal;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
         /// <summary>
         /// Faz um Estorno.
         /// </summary>
-        public ResponseBase Return(String merchantId, String merchantKey, String orderID, String referenceNum, decimal chargeTotal) {
+        public ResponseBase Return(string merchantId, string merchantKey, string orderID, string referenceNum, decimal chargeTotal)
+        {
 
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey)
+            {
+                Order =
+                {
+                    Return = new CaptureOrReturn
+                    {
+                        OrderId = orderID,
+                        ReferenceNum = referenceNum,
+                        Payment = {ChargeTotal = chargeTotal}
+                    }
+                }
+            };
 
-            CaptureOrReturn _return = new CaptureOrReturn();
-            this.request.Order.Return = _return;
 
-            _return.OrderId = orderID;
-            _return.ReferenceNum = referenceNum;
-            _return.Payment.ChargeTotal = chargeTotal;
 
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
         /// <summary>
         /// Faz um Cancelamento.
         /// </summary>
-        public ResponseBase Void(String merchantId, String merchantKey, String transactionID, String ipAddress) {
+        public ResponseBase Void(string merchantId, string merchantKey, string transactionID, string ipAddress)
+        {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey)
+            {
+                Order =
+                {
+                    Void = new Void
+                    {
+                        IpAddress = ipAddress,
+                        TransactionId = transactionID
+                    }
+                }
+            };
 
-            MaxiPago.DataContract.Transactional.Void _void = new MaxiPago.DataContract.Transactional.Void();
-            this.request.Order.Void = _void;
 
-            _void.IpAddress = ipAddress;
-            _void.TransactionId = transactionID;
-
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
         /// <summary>
         /// Faz uma recorrência.
         /// </summary>
-        public ResponseBase Recurring(String merchantId, String merchantKey, String referenceNum, decimal chargeTotal
-            , String creditCardNumber, String expMonth, String expYear, String cvvInd, String cvvNumber, String processorId
-            , String numberOfInstallments, String chargeInterest, String ipAddress, String action
-            , String startDate, String frequency, String period, String installments, String failureThreshold
-            , String currencyCode) {
+        public ResponseBase Recurring(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
+            , string creditCardNumber, string expMonth, string expYear, string cvvInd, string cvvNumber, string processorId
+            , string numberOfInstallments, string chargeInterest, string ipAddress, string action
+            , string startDate, string frequency, string period, string installments, string failureThreshold
+            , string currencyCode)
+        {
 
             FillRecurringBase(merchantId, merchantKey, referenceNum, chargeTotal, processorId, numberOfInstallments
                 , chargeInterest, ipAddress, action, startDate, frequency, period, installments
                 , failureThreshold, currencyCode);
-                            //ATENCAO: installments é o campo a ser usado (numberOfInstallments é referente ao Parcelamento)
+            //WARNING: installments é o campo a ser usado (numberOfInstallments é referente ao Parcelamento)
 
-            TransactionDetail detail = this.request.Order.RecurringPayment.TransactionDetail;
+            var detail = _request.Order.RecurringPayment.TransactionDetail;
 
-            PayType payType = detail.PayType;
+            detail.PayType.CreditCard = new CreditCard
+            {
+                CvvInd = cvvInd,
+                CvvNumber = cvvNumber,
+                ExpMonth = expMonth,
+                ExpYear = expYear,
+                Number = creditCardNumber
+            };
 
-            CreditCard creditCard = new CreditCard();
-            payType.CreditCard = creditCard;
 
-            creditCard.CvvInd = cvvInd;
-            creditCard.CvvNumber = cvvNumber;
-            creditCard.ExpMonth = expMonth;
-            creditCard.ExpYear = expYear;
-            creditCard.Number = creditCardNumber;
-
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
         }
 
         /// <summary>
         /// Faz uma recorrência com token.
         /// </summary>
-        public ResponseBase Recurring(String merchantId, String merchantKey, String referenceNum, decimal chargeTotal
-            , String customerId, String token, String processorId, String numberOfInstallments
-            , String chargeInterest, String ipAddress, String action, String startDate
-            , String frequency, String period, String installments, String failureThreshold
-            , String currencyCode) {
+        public ResponseBase Recurring(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
+            , string customerId, string token, string processorId, string numberOfInstallments
+            , string chargeInterest, string ipAddress, string action, string startDate
+            , string frequency, string period, string installments, string failureThreshold
+            , string currencyCode)
+        {
 
-            FillRecurringBase(merchantId, merchantKey, referenceNum, chargeTotal, processorId, numberOfInstallments
-                    , chargeInterest, ipAddress, action, startDate, frequency, period, installments
-                    , failureThreshold, currencyCode);
+            FillRecurringBase(merchantId, merchantKey, referenceNum, chargeTotal, processorId, numberOfInstallments,
+                              chargeInterest, ipAddress, action, startDate, frequency, period, installments,
+                              failureThreshold, currencyCode);
 
-            TransactionDetail detail = this.request.Order.RecurringPayment.TransactionDetail;
-            PayType payType = detail.PayType;
+            _request.Order.RecurringPayment.TransactionDetail.PayType.OnFile =
+                new OnFile { CustomerId = customerId, Token = token };
 
-            OnFile onFile = new OnFile();
-            payType.OnFile = onFile;
 
-            onFile.CustomerId = customerId;
-            onFile.Token = token;
-
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
         }
 
         /// <summary>
         /// Efetua o preenchimento comum aos métodos de Recorrente
         /// </summary>
-        private void FillRecurringBase(String merchantId, String merchantKey, String referenceNum, decimal chargeTotal
-            , String processorId, String numberOfInstallments, String chargeInterest
-            , String ipAddress, String action, String startDate
-            , String frequency, String period, String installments, String failureThreshold
-            , String currencyCode) {
+        private void FillRecurringBase(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
+            , string processorId, string numberOfInstallments, string chargeInterest
+            , string ipAddress, string action, string startDate
+            , string frequency, string period, string installments, string failureThreshold
+            , string currencyCode)
+        {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
-
-            Order order = this.request.Order;
-            RequestBase recurringPayment = new RequestBase();
-            order.RecurringPayment = recurringPayment;
-
-            recurringPayment.ReferenceNum = referenceNum;
-            recurringPayment.ProcessorId = processorId;
-            recurringPayment.IpAddress = ipAddress;
-
-            Payment payment = new Payment();
-            recurringPayment.Payment = payment;
-            payment.ChargeTotal = chargeTotal;
-            payment.CurrencyCode = currencyCode;
-
-            if (String.IsNullOrEmpty(numberOfInstallments))
+            if (string.IsNullOrEmpty(numberOfInstallments))
                 numberOfInstallments = "0";
 
-            int tranInstallments = int.Parse(numberOfInstallments);
+            var tranInstallments = int.Parse(numberOfInstallments);
+
+            _request = new TransactionRequest(merchantId, merchantKey);
+
+            var order = _request.Order;
+            order.RecurringPayment = new RequestBase
+            {
+                ReferenceNum = referenceNum,
+                ProcessorId = processorId,
+                IpAddress = ipAddress,
+                Payment = new Payment { ChargeTotal = chargeTotal, CurrencyCode = currencyCode },
+                Recurring = new Recurring
+                {
+                    Action = action,
+                    FailureThreshold = failureThreshold,
+                    Frequency = frequency,
+                    Installments = installments,
+                    Period = period,
+                    StartDate = startDate
+                }
+            };
 
             //Verifica se vai precisar criar o nó de parcelas e juros.
-            if (!String.IsNullOrEmpty(chargeInterest) && tranInstallments > 1)
+            if (!string.IsNullOrEmpty(chargeInterest) && tranInstallments > 1)
             {
-                payment.CreditInstallment = new CreditInstallment();
-                payment.CreditInstallment.ChargeInterest = chargeInterest.ToUpper();
-                payment.CreditInstallment.NumberOfInstallments = numberOfInstallments;
+                order.RecurringPayment.Payment.CreditInstallment = new CreditInstallment
+                {
+                    ChargeInterest = chargeInterest.ToUpper(),
+                    NumberOfInstallments = numberOfInstallments
+                };
             }
-
-            Recurring recurring = new Recurring();
-            recurringPayment.Recurring = recurring;
-
-            recurring.Action = action;
-            recurring.FailureThreshold = failureThreshold;
-            recurring.Frequency = frequency;
-            recurring.Installments = installments;
-            recurring.Period = period;
-            recurring.StartDate = startDate;
-
         }
 
-        public ResponseBase OnlineDebit(String merchantId, String merchantKey, String referenceNum, decimal chargeTotal
-                                    , String processorId, String parametersUrl, String ipAddress, String customerIdExt) {
+        public ResponseBase OnlineDebit(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
+                                    , string processorId, string parametersUrl, string ipAddress, string customerIdExt)
+        {
 
-            this.request = new TransactionRequest(merchantId, merchantKey);
+            _request = new TransactionRequest(merchantId, merchantKey)
+            {
+                Order =
+                {
+                    Sale = new RequestBase
+                    {
+                        ReferenceNum = referenceNum,
+                        ProcessorId = processorId,
+                        IpAddress = ipAddress,
+                        CustomerIdExt = customerIdExt,
+                        Payment = new Payment {ChargeTotal = chargeTotal},
+                    }
+                }
+            };
+            _request.Order.Sale.TransactionDetail.PayType.OnlineDebit =
+                new OnlineDebit { ParametersURL = parametersUrl ?? string.Empty };
 
-            Order order = this.request.Order;
-            RequestBase sale = new RequestBase();
-            order.Sale = sale;
-
-            sale.ReferenceNum = referenceNum;
-            sale.ProcessorId = processorId;
-            sale.IpAddress = ipAddress;
-            sale.CustomerIdExt = customerIdExt;
-
-            Payment payment = new Payment();
-            sale.Payment = payment;
-            payment.ChargeTotal = chargeTotal;
-
-            TransactionDetail detail = sale.TransactionDetail;
-            PayType payType = detail.PayType;
-
-            OnlineDebit debit = new OnlineDebit();
-            payType.OnlineDebit = debit;
-
-            if (parametersUrl == null)
-                parametersUrl = String.Empty;
-
-            debit.ParametersURL = parametersUrl;
-
-            return new Utils().SendRequest<TransactionRequest>(this.request, this.Environment);
+            return new Utils().SendRequest(_request, Environment);
 
         }
 
