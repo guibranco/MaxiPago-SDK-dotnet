@@ -7,11 +7,11 @@ skip_commits:
 
 environment:
   SONAR_TOKEN: 
-    secure: <secure token from Sonar Cloud>
+    secure: XXXaoQi+S0UVK1XFjcvx+PzOTOZ5WKgi5aStiqwlFXBlqY+9scWKb9tfOSqV//Hu
   GITHUB_TOKEN:
-    secure: <secure token from Github>
+    secure: VgYYJdvNLy/n9/uxxlaF0bMpIIrVxCb+dGr66U9nWfPWSN2ySdfuilO8klAw0uvF
   CODACY_PROJECT_TOKEN:
-    secure: <secure token from Codacy>
+    secure: 41XNXzpAgEGuVZI6glEm6XdAhgTKFTwTToUqtWCuEU9r/cmufwaeF2XkDKCyszgb
 
 dotnet_csproj: 
   patch: true 

@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{45AB621C-765
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A68EEB0C-5948-4DD9-9E75-293EE086828B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolutionName", "Src\SolutionName\SolutionName.csproj", "{607C5F01-7464-496C-A4E7-9DA6FE35234E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxiPago", "Src\MaxiPago\MaxiPago.csproj", "{607C5F01-7464-496C-A4E7-9DA6FE35234E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolutionName.Tests", "Tests\SolutionName.Tests\SolutionName.Tests.csproj", "{2F57B9CD-5505-4456-B9FE-F91DCB4476D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxiPago.Tests", "Tests\MaxiPago.Tests\MaxiPago.Tests.csproj", "{2F57B9CD-5505-4456-B9FE-F91DCB4476D6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7029F144-374E-4943-B530-B3D603991881}"
 	ProjectSection(SolutionItems) = preProject

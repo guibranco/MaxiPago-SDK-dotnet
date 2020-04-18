@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace SolutionName.Tests
+namespace MaxiPago.Tests
 {
     public class UnitTest1
     {
