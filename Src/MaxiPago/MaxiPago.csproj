@@ -7,7 +7,7 @@
     <Authors>Guilherme Branco Stracini</Authors>
     <Copyright>© 2020 Guilherme Branco Stracini. All rights reserved.</Copyright>
     <Description>The MaxiPago gateway SDK for .NET projects</Description>
-    <PackageProjectUrl>https://github.com/guibranco/MaxiPago-SDK-dotnet</PackageProjectUrl>
+    <PackageProjectUrl>https://guibranco.github.io/MaxiPago-SDK-dotnet/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/guibranco/MaxiPago-SDK-dotnet</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <PackageTags>maxipago maxi pago credit card debit bank bill boleto adquirente gateway payments recurring</PackageTags>
