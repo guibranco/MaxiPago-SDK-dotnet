@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
-using MaxiPago.DataContract;
 
-namespace MaxiPago.DataContract.Transactional {
+namespace MaxiPago.DataContract.Transactional
+{
 
     [Serializable]
-    [XmlRoot(ElementName="transaction-response")]
-    public class TransactionResponse : ResponseBase {
+    [XmlRoot(ElementName = "transaction-response")]
+    public class TransactionResponse : ResponseBase
+    {
 
         /// <summary>
         /// 
         /// </summary>
         [XmlElement("authCode")]
         public string AuthorizationCode { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>

@@ -1,27 +1,30 @@
-using System;
-using System.Text;
-using System.Xml.Serialization;
-using System.IO;
-using System.Net;
 using MaxiPago.DataContract;
+using MaxiPago.DataContract.NonTransactional;
 using MaxiPago.DataContract.Reports;
 using MaxiPago.DataContract.Transactional;
-using MaxiPago.DataContract.NonTransactional;
+using System;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Xml.Serialization;
 
-namespace MaxiPago.Gateway {
-    
-    internal class Utils {
+namespace MaxiPago.Gateway
+{
+
+    internal class Utils
+    {
 
         /// Sends the request
-        internal ResponseBase SendRequest<T>(T request, string environment) {
+        internal ResponseBase SendRequest<T>(T request, string environment)
+        {
 
             if (request == null)
                 throw new Exception("The Request can not be null or empty");
 
-            String xml = ToXml<T>(request);
+            string xml = ToXml<T>(request);
 
             // Gets environment URL
-            String url = GetUrl(request, environment);
+            string url = GetUrl(request, environment);
 
             string responseContent = Post(xml, url);
 
@@ -31,18 +34,23 @@ namespace MaxiPago.Gateway {
         }
 
         /// Parses response XML
-        private ResponseBase ParseResponse(string responseContent) {
+        private ResponseBase ParseResponse(string responseContent)
+        {
 
-            if (responseContent.Contains("transaction-response")) {
+            if (responseContent.Contains("transaction-response"))
+            {
                 return Serialize<TransactionResponse>(responseContent);
             }
-            else if (responseContent.Contains("rapi-response")) {
+            else if (responseContent.Contains("rapi-response"))
+            {
                 return Serialize<RapiResponse>(responseContent);
             }
-            else if (responseContent.Contains("api-error")) {
+            else if (responseContent.Contains("api-error"))
+            {
                 return Serialize<ErrorResponse>(responseContent);
             }
-            else if (responseContent.Contains("api-response")) {
+            else if (responseContent.Contains("api-response"))
+            {
                 return Serialize<ApiResponse>(responseContent);
             }
             else
@@ -51,25 +59,27 @@ namespace MaxiPago.Gateway {
         }
 
         /// Gets URL
-        private String GetUrl<T>(T request, string environment) {
+        private string GetUrl<T>(T request, string environment)
+        {
 
-            switch (environment) {
+            switch (environment)
+            {
                 case "LIVE":
 
-                    if(request is TransactionRequest)
+                    if (request is TransactionRequest)
                         return "https://api.maxipago.net/UniversalAPI/postXML";
                     else if (request is ApiRequest)
                         return "https://api.maxipago.net/UniversalAPI/postAPI";
-                     else if (request is RapiRequest)
+                    else if (request is RapiRequest)
                         return "https://api.maxipago.net/ReportsAPI/servlet/ReportsAPI";
                     break;
                 case "TEST":
 
-                    if(request is TransactionRequest)
+                    if (request is TransactionRequest)
                         return "https://testapi.maxipago.net/UniversalAPI/postXML";
                     else if (request is ApiRequest)
                         return "https://testapi.maxipago.net/UniversalAPI/postAPI";
-                     else if (request is RapiRequest)
+                    else if (request is RapiRequest)
                         return "https://testapi.maxipago.net/ReportsAPI/servlet/ReportsAPI";
                     break;
 
@@ -79,13 +89,15 @@ namespace MaxiPago.Gateway {
 
         }
 
-        private String ToXml<T>(T request) {
+        private string ToXml<T>(T request)
+        {
 
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
             ns.Add("", "");
 
-            using (StringWriter writer = new StringWriter()) {
+            using (StringWriter writer = new StringWriter())
+            {
                 serializer.Serialize(writer, request, ns);
                 string result = writer.ToString();
 
@@ -99,24 +111,27 @@ namespace MaxiPago.Gateway {
         }
 
         /// Posts data to maxiPago!
-        private string Post(string xml, string url) {
+        private string Post(string xml, string url)
+        {
 
             HttpWebRequest req = null;
             WebResponse rsp = null;
             req = (System.Net.HttpWebRequest)HttpWebRequest.Create(url);
             req.Method = "POST";
-	    req.ContentType = "text/xml; charset=UTF-8";
+            req.ContentType = "text/xml; charset=UTF-8";
 
             req.Timeout = 99999;
 
-            using (StreamWriter writer = new StreamWriter(req.GetRequestStream())) {
+            using (StreamWriter writer = new StreamWriter(req.GetRequestStream()))
+            {
                 writer.Write(xml);
             }
 
             rsp = req.GetResponse();
 
             string responseContent = null;
-            using (System.IO.StreamReader reader = new System.IO.StreamReader(rsp.GetResponseStream())) {
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(rsp.GetResponseStream()))
+            {
                 responseContent = reader.ReadToEnd();
             }
 
@@ -124,7 +139,8 @@ namespace MaxiPago.Gateway {
         }
 
         /// Serializes XML
-        private T Serialize<T>(string xml) {
+        private T Serialize<T>(string xml)
+        {
 
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             return (T)serializer.Deserialize(new MemoryStream(Encoding.UTF8.GetBytes(xml)));

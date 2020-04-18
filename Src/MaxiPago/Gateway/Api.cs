@@ -1,4 +1,3 @@
-using System;
 using MaxiPago.DataContract;
 using MaxiPago.DataContract.NonTransactional;
 
@@ -15,9 +14,9 @@ namespace MaxiPago.Gateway
 
         private ApiRequest request;
 
-        public ApiResponse AddConsumer(String merchantId, String merchantKey, String customerIdExt, String firstName, String lastName
-                                        , String address1, String address2, String city, String state, String zip, String phone, String email
-                                        , String dob, String ssn, String sex)
+        public ApiResponse AddConsumer(string merchantId, string merchantKey, string customerIdExt, string firstName, string lastName
+                                        , string address1, string address2, string city, string state, string zip, string phone, string email
+                                        , string dob, string ssn, string sex)
         {
 
 
@@ -44,7 +43,7 @@ namespace MaxiPago.Gateway
             return new Utils().SendRequest<ApiRequest>(request, Environment) as ApiResponse;
         }
 
-        public ApiResponse DeleteConsumer(String merchantId, String merchantKey, String customerId)
+        public ApiResponse DeleteConsumer(string merchantId, string merchantKey, string customerId)
         {
 
             request = new ApiRequest(merchantId, merchantKey);
@@ -59,9 +58,9 @@ namespace MaxiPago.Gateway
 
         }
 
-        public ApiResponse UpdateConsumer(String merchantId, String merchantKey, String customerId, String customerIdExt, String firstName
-                                        , String lastName, String address1, String address2, String city, String state, String zip, String phone
-                                        , String email, String dob, String ssn, String sex)
+        public ApiResponse UpdateConsumer(string merchantId, string merchantKey, string customerId, string customerIdExt, string firstName
+                                        , string lastName, string address1, string address2, string city, string state, string zip, string phone
+                                        , string email, string dob, string ssn, string sex)
         {
 
             request = new ApiRequest(merchantId, merchantKey);
@@ -89,10 +88,10 @@ namespace MaxiPago.Gateway
 
         }
 
-        public ApiResponse AddCardOnFile(String merchantId, String merchantKey, String customerId, String creditCardNumber, String expirationMonth
-                                        , String expirationYear, String billingName, String billingAddress1, String billingAddress2, String billingCity
-                                        , String billingState, String billingZip, String billingCountry, String billingPhone, String billingEmail
-                                        , String onFileEndDate, String onFilePermission, String onFileComment, String onFileMaxChargeAmount)
+        public ApiResponse AddCardOnFile(string merchantId, string merchantKey, string customerId, string creditCardNumber, string expirationMonth
+                                        , string expirationYear, string billingName, string billingAddress1, string billingAddress2, string billingCity
+                                        , string billingState, string billingZip, string billingCountry, string billingPhone, string billingEmail
+                                        , string onFileEndDate, string onFilePermission, string onFileComment, string onFileMaxChargeAmount)
         {
 
             request = new ApiRequest(merchantId, merchantKey);
@@ -123,7 +122,7 @@ namespace MaxiPago.Gateway
 
         }
 
-        public ApiResponse DeleteCardOnFile(String merchantId, String merchantKey, String customerId, String token)
+        public ApiResponse DeleteCardOnFile(string merchantId, string merchantKey, string customerId, string token)
         {
 
             request = new ApiRequest(merchantId, merchantKey);
@@ -139,14 +138,14 @@ namespace MaxiPago.Gateway
 
         }
 
-        public ApiResponse CancelRecurring(String merchantId, String merchantKey, String orderID)
+        public ApiResponse CancelRecurring(string merchantId, string merchantKey, string orderID)
         {
 
             request = new ApiRequest(merchantId, merchantKey);
 
             request.Command = "cancel-recurring";
             CommandRequest commandRequest = new CommandRequest();
-            commandRequest.orderID = orderID;
+            commandRequest.OrderID = orderID;
             request.CommandRequest = commandRequest;
 
             return new Utils().SendRequest<ApiRequest>(request, Environment) as ApiResponse;
