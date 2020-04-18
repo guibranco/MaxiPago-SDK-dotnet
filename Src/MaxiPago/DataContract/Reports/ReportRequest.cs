@@ -1,13 +1,16 @@
 using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Reports {
-    
+namespace MaxiPago.DataContract.Reports
+{
+
     [Serializable]
     [XmlRoot(ElementName = "request")]
-    public class ReportRequest {
+    public class ReportRequest
+    {
 
-        public ReportRequest() {
+        public ReportRequest()
+        {
             FilterOptions = new FilterOptions();
         }
 
@@ -15,8 +18,8 @@ namespace MaxiPago.DataContract.Reports {
         public FilterOptions FilterOptions { get; set; }
 
         [XmlElement("requestToken")]
-        public String RequestToken { get; set; }
-        
+        public string RequestToken { get; set; }
+
 
     }
 }

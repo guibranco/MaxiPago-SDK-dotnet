@@ -1,29 +1,28 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Reports {
+namespace MaxiPago.DataContract.Reports
+{
 
     [Serializable]
     [XmlRoot(ElementName = "resultSetInfo")]
-    public class ResultSetInfo {
+    public class ResultSetInfo
+    {
 
         [XmlElement("totalNumberOfRecords")]
-        public String TotalNumberOfRecords { get; set; }
+        public string TotalNumberOfRecords { get; set; }
 
         [XmlElement("pageToken")]
-        public String PageToken { get; set; }
+        public string PageToken { get; set; }
 
         [XmlElement("numberOfPages")]
-        public String NumberOfPages { get; set; }
+        public string NumberOfPages { get; set; }
 
         [XmlElement("pageNumber")]
-        public String PageNumber { get; set; }
+        public string PageNumber { get; set; }
 
         [XmlElement("processedTime")]
-        public String ProcessedTime { get; set; }
+        public string ProcessedTime { get; set; }
 
     }
 }

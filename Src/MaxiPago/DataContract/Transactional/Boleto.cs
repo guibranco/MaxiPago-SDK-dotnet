@@ -1,23 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Transactional {
+namespace MaxiPago.DataContract.Transactional
+{
 
     [Serializable]
     [XmlRoot(ElementName = "boleto")]
-    public class Boleto {
+    public class Boleto
+    {
 
         [XmlElement(ElementName = "expirationDate")]
-        public String ExpirationDate { get; set; }
+        public string ExpirationDate { get; set; }
 
         [XmlElement(ElementName = "number")]
-        public String Number { get; set; }
+        public string Number { get; set; }
 
         [XmlElement(ElementName = "instructions")]
-        public String Instructions { get; set; }
+        public string Instructions { get; set; }
 
     }
 }

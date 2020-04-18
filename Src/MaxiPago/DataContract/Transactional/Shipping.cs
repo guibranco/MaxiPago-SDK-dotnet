@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Transactional {
+namespace MaxiPago.DataContract.Transactional
+{
 
     [Serializable]
     [XmlRoot(ElementName = "shipping")]
-    public class Shipping : Address {
-
-
-
-    }
+    public class Shipping : Address { }
 }

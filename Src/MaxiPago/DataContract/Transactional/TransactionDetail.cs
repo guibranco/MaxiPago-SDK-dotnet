@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Transactional {
-    
+namespace MaxiPago.DataContract.Transactional
+{
+
     [Serializable]
     [XmlRoot(ElementName = "transactionDetail")]
-    public class TransactionDetail {
+    public class TransactionDetail
+    {
 
-        public TransactionDetail() {
-            this.PayType = new PayType();
+        public TransactionDetail()
+        {
+            PayType = new PayType();
         }
 
         [XmlElement("payType")]

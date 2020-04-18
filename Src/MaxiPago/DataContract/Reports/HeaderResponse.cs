@@ -1,23 +1,25 @@
 using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Reports {
+namespace MaxiPago.DataContract.Reports
+{
 
     [Serializable]
     [XmlRoot(ElementName = "header")]
-    public class HeaderResponse {
+    public class HeaderResponse
+    {
 
         [XmlElement("errorCode")]
-        public String ErrorCode { get; set; }
+        public string ErrorCode { get; set; }
 
         [XmlElement("errorMsg")]
-        public String ErrorMsg { get; set; }
+        public string ErrorMsg { get; set; }
 
         [XmlElement("command")]
-        public String Command { get; set; }
+        public string Command { get; set; }
 
         [XmlElement("time")]
-        public String Time { get; set; }
+        public string Time { get; set; }
 
     }
 }

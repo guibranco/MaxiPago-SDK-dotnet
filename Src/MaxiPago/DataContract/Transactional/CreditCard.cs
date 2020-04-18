@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Transactional {
-    
+namespace MaxiPago.DataContract.Transactional
+{
+
     [Serializable]
     [XmlRoot("creditCard")]
-    public class CreditCard {
+    public class CreditCard
+    {
 
-        public CreditCard() {
-            this.ecommInd = "eci";
+        public CreditCard()
+        {
+            _ecommInd = "eci";
         }
 
         [XmlElement("number")]
@@ -26,11 +29,13 @@ namespace MaxiPago.DataContract.Transactional {
         [XmlElement("cvvNumber")]
         public string CvvNumber { get; set; }
 
-        private string ecommInd;
+        private string _ecommInd;
 
         [XmlElement("eCommInd")]
-        public string ECommInd { 
-            get { return this.ecommInd; }
+        public string ECommInd
+        {
+            get => _ecommInd;
+            // ReSharper disable once ValueParameterNotUsed
             set { }
         }
 
