@@ -1,26 +1,29 @@
-using System;
-using MaxiPago.DataContract.Reports;
 using MaxiPago.DataContract;
+using MaxiPago.DataContract.Reports;
+using System;
 
-namespace MaxiPago.Gateway {
-    
-    public class Report : ServiceBase {
+namespace MaxiPago.Gateway
+{
 
-        public Report() {
-            this.Environment = "TEST";
+    public class Report : ServiceBase
+    {
+
+        public Report()
+        {
+            Environment = "TEST";
         }
 
         private RapiRequest request;
 
         /// Queries a list of transactions
-        public RapiResponse GetTransactionDetailReport(String merchantId, String merchantKey, String period, String pageSize, String startDate
-                                                     , String endDate, String startTime, String endTime, String orderByName, String orderByDirection
-                                                     , String startRecordNumber, String endRecordNumber) {
+        public RapiResponse GetTransactionDetailReport(string merchantId, string merchantKey, string period,
+            string pageSize, string startDate, string endDate, string startTime, string endTime, string orderByName,
+            string orderByDirection, string startRecordNumber, string endRecordNumber)
+        {
+            request = new RapiRequest(merchantId, merchantKey);
+            request.Command = "transactionDetailReport";
 
-            this.request = new RapiRequest(merchantId, merchantKey);
-            this.request.Command = "transactionDetailReport";
-
-            FilterOptions filter = this.request.ReportRequest.FilterOptions;
+            FilterOptions filter = request.ReportRequest.FilterOptions;
 
             filter.Period = period;
             filter.PageSize = pageSize;
@@ -33,56 +36,60 @@ namespace MaxiPago.Gateway {
             filter.StartRecordNumber = startRecordNumber;
             filter.EndRecordNumber = endRecordNumber;
 
-            return new Utils().SendRequest<RapiRequest>(this.request, this.Environment) as RapiResponse;
+            return new Utils().SendRequest(request, Environment) as RapiResponse;
         }
 
         /// Queries one transaction
-        public RapiResponse GetTransactionDetailReport(String merchantId, String merchantKey, String transactionId) {
+        public RapiResponse GetTransactionDetailReport(string merchantId, string merchantKey, string transactionId)
+        {
 
-            this.request = new RapiRequest(merchantId, merchantKey);
-            this.request.Command = "transactionDetailReport";
+            request = new RapiRequest(merchantId, merchantKey);
+            request.Command = "transactionDetailReport";
 
-            FilterOptions filter = this.request.ReportRequest.FilterOptions;
+            FilterOptions filter = request.ReportRequest.FilterOptions;
             filter.TransactionId = transactionId;
 
-            return new Utils().SendRequest<RapiRequest>(this.request, this.Environment) as RapiResponse;
+            return new Utils().SendRequest(request, Environment) as RapiResponse;
         }
 
         /// Queries one or more transactions by orderId.
-        public RapiResponse GetTransactionDetailReportByOrderId(String merchantId, String merchantKey, String orderId) {
+        public RapiResponse GetTransactionDetailReportByOrderId(string merchantId, string merchantKey, string orderId)
+        {
 
-            this.request = new RapiRequest(merchantId, merchantKey);
-            this.request.Command = "transactionDetailReport";
+            request = new RapiRequest(merchantId, merchantKey);
+            request.Command = "transactionDetailReport";
 
-            FilterOptions filter = this.request.ReportRequest.FilterOptions;
+            FilterOptions filter = request.ReportRequest.FilterOptions;
             filter.OrderId = orderId;
 
-            return new Utils().SendRequest<RapiRequest>(this.request, this.Environment) as RapiResponse;
+            return new Utils().SendRequest(request, Environment) as RapiResponse;
         }
 
         /// Flips through report pages
-        public RapiResponse GetTransactionDetailReport(String merchantId, String merchantKey, String pageToken, String pageNumber) {
+        public RapiResponse GetTransactionDetailReport(string merchantId, string merchantKey, string pageToken, string pageNumber)
+        {
 
-            this.request = new RapiRequest(merchantId, merchantKey);
-            this.request.Command = "transactionDetailReport";
+            request = new RapiRequest(merchantId, merchantKey);
+            request.Command = "transactionDetailReport";
 
-            FilterOptions filter = this.request.ReportRequest.FilterOptions;
+            FilterOptions filter = request.ReportRequest.FilterOptions;
 
             filter.PageToken = pageToken;
             filter.PageNumber = pageNumber;
 
-            return new Utils().SendRequest<RapiRequest>(this.request, this.Environment) as RapiResponse;
+            return new Utils().SendRequest(request, Environment) as RapiResponse;
         }
 
         /// Queries the status of a pending report
-        public RapiResponse CheckRequestStatus(String merchantId, String merchantKey, String requestToken) {
+        public RapiResponse CheckRequestStatus(string merchantId, string merchantKey, string requestToken)
+        {
 
-            this.request = new RapiRequest(merchantId, merchantKey);
-            this.request.Command = "checkRequestStatus";
+            request = new RapiRequest(merchantId, merchantKey);
+            request.Command = "checkRequestStatus";
 
-            this.request.ReportRequest.RequestToken = requestToken;
+            request.ReportRequest.RequestToken = requestToken;
 
-            return new Utils().SendRequest<RapiRequest>(this.request, this.Environment) as RapiResponse;
+            return new Utils().SendRequest(request, Environment) as RapiResponse;
 
         }
 

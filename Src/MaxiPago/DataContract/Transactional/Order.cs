@@ -8,7 +8,7 @@ namespace MaxiPago.DataContract.Transactional
     public class Order
     {
         public Order() {
-            this.ClientData = new ClientData();
+            ClientData = new ClientData();
         }
 
         [XmlElement("sale")]

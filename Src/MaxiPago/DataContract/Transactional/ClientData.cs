@@ -8,7 +8,7 @@ namespace MaxiPago.DataContract.Transactional {
     public class ClientData {
 
         public ClientData() {
-            this.comments = ".NetPlugin v1.1";
+            _comments = ".NetPlugin v1.1";
         }
 
         [XmlElement("customField1")]
@@ -26,11 +26,11 @@ namespace MaxiPago.DataContract.Transactional {
         [XmlElement("customField5")]
         public string CustomField5 { get; set; }
 
-        private string comments;
+        private string _comments;
 
         [XmlElement("comments")]
         public string Comments {
-            get { return this.comments; }
+            get => _comments;
             set { }
         }
 

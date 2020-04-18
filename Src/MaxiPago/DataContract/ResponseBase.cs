@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MaxiPago.DataContract.Reports;
+﻿using MaxiPago.DataContract.Reports;
 using MaxiPago.DataContract.Transactional;
 using MaxiPago.DataContract.NonTransactional;
 

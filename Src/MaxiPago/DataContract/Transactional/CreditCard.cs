@@ -8,7 +8,7 @@ namespace MaxiPago.DataContract.Transactional {
     public class CreditCard {
 
         public CreditCard() {
-            this.ecommInd = "eci";
+            _ecommInd = "eci";
         }
 
         [XmlElement("number")]
@@ -26,11 +26,11 @@ namespace MaxiPago.DataContract.Transactional {
         [XmlElement("cvvNumber")]
         public string CvvNumber { get; set; }
 
-        private string ecommInd;
+        private string _ecommInd;
 
         [XmlElement("eCommInd")]
         public string ECommInd { 
-            get { return this.ecommInd; }
+            get => _ecommInd;
             set { }
         }
 

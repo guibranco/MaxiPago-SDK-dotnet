@@ -12,7 +12,7 @@ namespace MaxiPago.Gateway
             Environment = "TEST";
         }
 
-        private ApiRequest request;
+        private ApiRequest _request;
 
         public ApiResponse AddConsumer(string merchantId, string merchantKey, string customerIdExt, string firstName, string lastName
                                         , string address1, string address2, string city, string state, string zip, string phone, string email
@@ -20,11 +20,11 @@ namespace MaxiPago.Gateway
         {
 
 
-            request = new ApiRequest(merchantId, merchantKey);
+            _request = new ApiRequest(merchantId, merchantKey);
 
-            request.Command = "add-consumer";
+            _request.Command = "add-consumer";
             CommandRequest commandRequest = new CommandRequest();
-            request.CommandRequest = commandRequest;
+            _request.CommandRequest = commandRequest;
 
             commandRequest.CustomerIdExt = customerIdExt;
             commandRequest.FirstName = firstName;
@@ -40,21 +40,21 @@ namespace MaxiPago.Gateway
             commandRequest.Ssn = ssn;
             commandRequest.Sex = sex;
 
-            return new Utils().SendRequest<ApiRequest>(request, Environment) as ApiResponse;
+            return new Utils().SendRequest(_request, Environment) as ApiResponse;
         }
 
         public ApiResponse DeleteConsumer(string merchantId, string merchantKey, string customerId)
         {
 
-            request = new ApiRequest(merchantId, merchantKey);
+            _request = new ApiRequest(merchantId, merchantKey);
 
-            request.Command = "delete-consumer";
+            _request.Command = "delete-consumer";
             CommandRequest commandRequest = new CommandRequest();
-            request.CommandRequest = commandRequest;
+            _request.CommandRequest = commandRequest;
 
             commandRequest.CustomerId = customerId;
 
-            return new Utils().SendRequest<ApiRequest>(request, Environment) as ApiResponse;
+            return new Utils().SendRequest(_request, Environment) as ApiResponse;
 
         }
 
@@ -63,11 +63,11 @@ namespace MaxiPago.Gateway
                                         , string email, string dob, string ssn, string sex)
         {
 
-            request = new ApiRequest(merchantId, merchantKey);
+            _request = new ApiRequest(merchantId, merchantKey);
 
-            request.Command = "update-consumer";
+            _request.Command = "update-consumer";
             CommandRequest commandRequest = new CommandRequest();
-            request.CommandRequest = commandRequest;
+            _request.CommandRequest = commandRequest;
 
             commandRequest.CustomerId = customerId;
             commandRequest.CustomerIdExt = customerIdExt;
@@ -84,7 +84,7 @@ namespace MaxiPago.Gateway
             commandRequest.Ssn = ssn;
             commandRequest.Sex = sex;
 
-            return new Utils().SendRequest<ApiRequest>(request, Environment) as ApiResponse;
+            return new Utils().SendRequest(_request, Environment) as ApiResponse;
 
         }
 
@@ -94,11 +94,11 @@ namespace MaxiPago.Gateway
                                         , string onFileEndDate, string onFilePermission, string onFileComment, string onFileMaxChargeAmount)
         {
 
-            request = new ApiRequest(merchantId, merchantKey);
+            _request = new ApiRequest(merchantId, merchantKey);
 
-            request.Command = "add-card-onfile";
+            _request.Command = "add-card-onfile";
             CommandRequest commandRequest = new CommandRequest();
-            request.CommandRequest = commandRequest;
+            _request.CommandRequest = commandRequest;
 
             commandRequest.CustomerId = customerId;
             commandRequest.CreditCardNumber = creditCardNumber;
@@ -118,37 +118,37 @@ namespace MaxiPago.Gateway
             commandRequest.OnFileComment = onFileComment;
             commandRequest.OnFileMaxChargeAmount = onFileMaxChargeAmount;
 
-            return new Utils().SendRequest<ApiRequest>(request, Environment) as ApiResponse;
+            return new Utils().SendRequest(_request, Environment) as ApiResponse;
 
         }
 
         public ApiResponse DeleteCardOnFile(string merchantId, string merchantKey, string customerId, string token)
         {
 
-            request = new ApiRequest(merchantId, merchantKey);
+            _request = new ApiRequest(merchantId, merchantKey);
 
-            request.Command = "delete-card-onfile";
+            _request.Command = "delete-card-onfile";
             CommandRequest commandRequest = new CommandRequest();
-            request.CommandRequest = commandRequest;
+            _request.CommandRequest = commandRequest;
 
             commandRequest.CustomerId = customerId;
             commandRequest.Token = token;
 
-            return new Utils().SendRequest<ApiRequest>(request, Environment) as ApiResponse;
+            return new Utils().SendRequest(_request, Environment) as ApiResponse;
 
         }
 
         public ApiResponse CancelRecurring(string merchantId, string merchantKey, string orderID)
         {
 
-            request = new ApiRequest(merchantId, merchantKey);
+            _request = new ApiRequest(merchantId, merchantKey);
 
-            request.Command = "cancel-recurring";
+            _request.Command = "cancel-recurring";
             CommandRequest commandRequest = new CommandRequest();
             commandRequest.OrderID = orderID;
-            request.CommandRequest = commandRequest;
+            _request.CommandRequest = commandRequest;
 
-            return new Utils().SendRequest<ApiRequest>(request, Environment) as ApiResponse;
+            return new Utils().SendRequest(_request, Environment) as ApiResponse;
 
         }
 
