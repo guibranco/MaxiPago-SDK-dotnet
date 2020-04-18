@@ -2,7 +2,7 @@
 
 The MaxiPago gateway SDK for .NET projects
 
-![MaxiPago](https://raw.githubguibrancocontent.com/guibranco/MaxiPago-SDK-dotnet/master/logo.png)
+![MaxiPago](https://raw.githubusercontent.com/guibranco/MaxiPago-SDK-dotnet/master/logo.png)
 
 ## CI/CD
 
