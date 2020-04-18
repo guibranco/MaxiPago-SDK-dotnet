@@ -10,7 +10,7 @@
     <PackageProjectUrl>https://github.com/guibranco/MaxiPago-SDK-dotnet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/guibranco/MaxiPago-SDK-dotnet</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
-    <PackageTags>boilerplate</PackageTags>
+    <PackageTags>maxipago maxi pago credit card debit bank bill boleto adquirente gateway payments recurring</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/guibranco/MaxiPago-SDK-dotnet/master/packageLogo.png</PackageIconUrl>
     <PackageIcon>packageLogo.png</PackageIcon>
     <Version>1.0.0</Version>
