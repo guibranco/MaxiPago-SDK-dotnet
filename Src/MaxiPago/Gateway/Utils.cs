@@ -34,64 +34,47 @@ namespace MaxiPago.Gateway
         }
 
         /// Parses response XML
-        private ResponseBase ParseResponse(string responseContent)
+        private static ResponseBase ParseResponse(string responseContent)
         {
-
             if (responseContent.Contains("transaction-response"))
-            {
                 return Serialize<TransactionResponse>(responseContent);
-            }
-            else if (responseContent.Contains("rapi-response"))
-            {
+            if (responseContent.Contains("rapi-response"))
                 return Serialize<RapiResponse>(responseContent);
-            }
-            else if (responseContent.Contains("api-error"))
-            {
+            if (responseContent.Contains("api-error"))
                 return Serialize<ErrorResponse>(responseContent);
-            }
-            else if (responseContent.Contains("api-response"))
-            {
+            if (responseContent.Contains("api-response"))
                 return Serialize<ApiResponse>(responseContent);
-            }
-            else
-                throw new Exception("Unexpected response was received.");
-
+            throw new Exception("Unexpected response was received.");
         }
 
         /// Gets URL
-        private string GetUrl<T>(T request, string environment)
+        private static string GetUrl<T>(T request, string environment)
         {
-
             switch (environment)
             {
                 case "LIVE":
-
                     if (request is TransactionRequest)
                         return "https://api.maxipago.net/UniversalAPI/postXML";
-                    else if (request is ApiRequest)
+                    if (request is ApiRequest)
                         return "https://api.maxipago.net/UniversalAPI/postAPI";
-                    else if (request is RapiRequest)
+                    if (request is RapiRequest)
                         return "https://api.maxipago.net/ReportsAPI/servlet/ReportsAPI";
                     break;
                 case "TEST":
-
                     if (request is TransactionRequest)
                         return "https://testapi.maxipago.net/UniversalAPI/postXML";
-                    else if (request is ApiRequest)
+                    if (request is ApiRequest)
                         return "https://testapi.maxipago.net/UniversalAPI/postAPI";
-                    else if (request is RapiRequest)
+                    if (request is RapiRequest)
                         return "https://testapi.maxipago.net/ReportsAPI/servlet/ReportsAPI";
                     break;
-
             }
-
             throw new Exception("You must to inform the environment. (TEST or LIVE)");
 
         }
 
-        private string ToXml<T>(T request)
+        private static string ToXml<T>(T request)
         {
-
             var serializer = new XmlSerializer(typeof(T));
             var ns = new XmlSerializerNamespaces();
             ns.Add("", "");
@@ -99,14 +82,12 @@ namespace MaxiPago.Gateway
             using var writer = new StringWriter();
             serializer.Serialize(writer, request, ns);
             var result = writer.ToString();
-
             result = result.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", null);
-
             return result;
         }
 
         /// Posts data to maxiPago!
-        private string Post(string xml, string url)
+        private static string Post(string xml, string url)
         {
             var req = (HttpWebRequest)WebRequest.Create(url);
             req.Method = "POST";
@@ -115,31 +96,21 @@ namespace MaxiPago.Gateway
             req.Timeout = 99999;
 
             using (var writer = new StreamWriter(req.GetRequestStream()))
-            {
                 writer.Write(xml);
-            }
 
             var rsp = req.GetResponse();
 
             string responseContent;
             using (var reader = new StreamReader(rsp.GetResponseStream() ?? throw new InvalidOperationException()))
-            {
                 responseContent = reader.ReadToEnd();
-            }
-
             return responseContent;
         }
 
         /// Serializes XML
-        private T Serialize<T>(string xml)
+        private static T Serialize<T>(string xml)
         {
-
             var serializer = new XmlSerializer(typeof(T));
             return (T)serializer.Deserialize(new MemoryStream(Encoding.UTF8.GetBytes(xml)));
-
         }
-
-
-
     }
 }

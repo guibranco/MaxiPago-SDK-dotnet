@@ -1,26 +1,19 @@
-﻿using MaxiPago.DataContract.Reports;
+﻿using MaxiPago.DataContract.NonTransactional;
+using MaxiPago.DataContract.Reports;
 using MaxiPago.DataContract.Transactional;
-using MaxiPago.DataContract.NonTransactional;
 
-namespace MaxiPago.DataContract {
-    
-    public abstract class ResponseBase {
+namespace MaxiPago.DataContract
+{
 
-        public bool IsTransactionResponse {
-            get { return this is TransactionResponse; }
-        }
+    public abstract class ResponseBase
+    {
 
-        public bool IsErrorResponse {
-            get { return this is ErrorResponse; }
-        }
+        public bool IsTransactionResponse => this is TransactionResponse;
 
-        public bool IsApiResponse {
-            get { return this is ApiResponse; }
-        }
+        public bool IsErrorResponse => this is ErrorResponse;
 
-        public bool IsReportResponse {
-            get { return this is RapiResponse; }
-        }
+        public bool IsApiResponse => this is ApiResponse;
 
+        public bool IsReportResponse => this is RapiResponse;
     }
 }

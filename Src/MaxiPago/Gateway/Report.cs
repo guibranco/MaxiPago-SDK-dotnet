@@ -19,7 +19,7 @@ namespace MaxiPago.Gateway
             string pageSize, string startDate, string endDate, string startTime, string endTime, string orderByName,
             string orderByDirection, string startRecordNumber, string endRecordNumber)
         {
-            _request = new RapiRequest(merchantId, merchantKey) {Command = "transactionDetailReport"};
+            _request = new RapiRequest(merchantId, merchantKey) { Command = "transactionDetailReport" };
 
             var filter = _request.ReportRequest.FilterOptions;
 
@@ -41,10 +41,8 @@ namespace MaxiPago.Gateway
         public RapiResponse GetTransactionDetailReport(string merchantId, string merchantKey, string transactionId)
         {
 
-            _request = new RapiRequest(merchantId, merchantKey) {Command = "transactionDetailReport"};
-
-            var filter = _request.ReportRequest.FilterOptions;
-            filter.TransactionId = transactionId;
+            _request = new RapiRequest(merchantId, merchantKey) { Command = "transactionDetailReport" };
+            _request.ReportRequest.FilterOptions.TransactionId = transactionId;
 
             return new Utils().SendRequest(_request, Environment) as RapiResponse;
         }
@@ -53,10 +51,8 @@ namespace MaxiPago.Gateway
         public RapiResponse GetTransactionDetailReportByOrderId(string merchantId, string merchantKey, string orderId)
         {
 
-            _request = new RapiRequest(merchantId, merchantKey) {Command = "transactionDetailReport"};
-
-            var filter = _request.ReportRequest.FilterOptions;
-            filter.OrderId = orderId;
+            _request = new RapiRequest(merchantId, merchantKey) { Command = "transactionDetailReport" };
+            _request.ReportRequest.FilterOptions.OrderId = orderId;
 
             return new Utils().SendRequest(_request, Environment) as RapiResponse;
         }
@@ -65,12 +61,9 @@ namespace MaxiPago.Gateway
         public RapiResponse GetTransactionDetailReport(string merchantId, string merchantKey, string pageToken, string pageNumber)
         {
 
-            _request = new RapiRequest(merchantId, merchantKey) {Command = "transactionDetailReport"};
-
-            var filter = _request.ReportRequest.FilterOptions;
-
-            filter.PageToken = pageToken;
-            filter.PageNumber = pageNumber;
+            _request = new RapiRequest(merchantId, merchantKey) { Command = "transactionDetailReport" };
+            _request.ReportRequest.FilterOptions.PageToken = pageToken;
+            _request.ReportRequest.FilterOptions.PageNumber = pageNumber;
 
             return new Utils().SendRequest(_request, Environment) as RapiResponse;
         }
@@ -81,7 +74,8 @@ namespace MaxiPago.Gateway
 
             _request = new RapiRequest(merchantId, merchantKey)
             {
-                Command = "checkRequestStatus", ReportRequest = {RequestToken = requestToken}
+                Command = "checkRequestStatus",
+                ReportRequest = { RequestToken = requestToken }
             };
 
 

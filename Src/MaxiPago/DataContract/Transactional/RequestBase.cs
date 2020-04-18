@@ -28,7 +28,7 @@ namespace MaxiPago.DataContract.Transactional
 
         [XmlElement("fraudCheck")]
         public string FraudCheck { get; set; }
-        // Verifica se o valor da propriedade é nulo, se sim, não serializa esse campo no xml
+        // Verifica se o valor da propriedade é nulo, se sim, não serialize esse campo no xml
         public bool ShouldSerializeFraudCheck() { return FraudCheck != null; }
 
         //[XmlElement("invoiceNumber")]
