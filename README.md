@@ -56,21 +56,17 @@ Install-Package MaxiPago
 
 Implements all features of MaxiPago API available at [Integration Documentation](https://www.maxipago.com/docs/maxiPago_API_Latest.pdf)
 
-- Feature #1
-- Feature #2
-- Feature #3
-- Feature #N
+- 
 
 ---
 
 ## Usage
 
+Samp
+
 ```cs
 
-//sample CSharp code showing how to use the lib
-var client = new MaxiPagoClient();
-client.CallSomeMethod();
+
+
 
 ```
-
----
