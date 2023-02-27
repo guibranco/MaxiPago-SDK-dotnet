@@ -51,10 +51,10 @@ build_script:
 }'
 - ps: 'if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) {
         $Params."d:sonar.branch.name"="$env:APPVEYOR_REPO_BRANCH"
-    }'
+}'
 - ps: 'if ($env:APPVEYOR_PULL_REQUEST_NUMBER) {
         $Params."d:sonar.pullrequest.key"="$env:APPVEYOR_PULL_REQUEST_NUMBER"
-    }'
+}'
 - ps: 'dotnet sonarscanner begin @Params'
 - dotnet build %SOLUTION_NAME%.sln
 - dotnet test .\Tests\%SOLUTION_NAME%.Tests\%SOLUTION_NAME%.Tests.csproj 
