@@ -2,29 +2,42 @@
 
   <PropertyGroup>
     <ProjectGuid>607C5F01-7464-496C-A4E7-9DA6FE35234E</ProjectGuid>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Guilherme Branco Stracini</Authors>
-    <Copyright>© 2020 Guilherme Branco Stracini. All rights reserved.</Copyright>
+    <Copyright>© 2023 Guilherme Branco Stracini. All rights reserved.</Copyright>
     <Description>The MaxiPago gateway SDK for .NET projects</Description>
     <PackageProjectUrl>https://guibranco.github.io/MaxiPago-SDK-dotnet/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/guibranco/MaxiPago-SDK-dotnet</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <PackageTags>maxipago maxi pago credit card debit bank bill boleto adquirente gateway payments recurring</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/guibranco/MaxiPago-SDK-dotnet/master/packageLogo.png</PackageIconUrl>
-    <PackageIcon>packageLogo.png</PackageIcon>
+    <PackageIcon>logo.png</PackageIcon>
     <Version>1.0.0</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Company>Guilherme Branco Stracini ME</Company>
+    <PackageReleaseNotes>Add support to .NET Standard 2.0</PackageReleaseNotes>
+    <PackageReadmeFile>README.nuget.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />    
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="../../LICENSE" Pack="true" PackagePath="\"/>
-    <None Include="../../packageLogo.png" Pack="true" PackagePath="\"/>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\README.nuget.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 </Project>
