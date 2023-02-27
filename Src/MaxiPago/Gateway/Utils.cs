@@ -79,11 +79,13 @@ namespace MaxiPago.Gateway
             var ns = new XmlSerializerNamespaces();
             ns.Add("", "");
 
-            using var writer = new StringWriter();
-            serializer.Serialize(writer, request, ns);
-            var result = writer.ToString();
-            result = result.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", null);
-            return result;
+            using (var writer = new StringWriter())
+            {
+                serializer.Serialize(writer, request, ns);
+                var result = writer.ToString();
+                result = result.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", null);
+                return result;
+            }
         }
 
         /// Posts data to maxiPago!
