@@ -39,13 +39,13 @@ build:
   verbosity: normal
 
 build_script:
-- ps: '$Params = @ { 
+- ps: '$Params = @{
   "k"="$env:SONAR_PROJECT",
   "o"=$env:SONAR_ORGANIZATION",
   "d:sonar.host.url"="https://sonarcloud.io",
   "d:sonar.login"="$env:SONAR_TOKEN",
   "v"="$env:APPVEYOR_BUILD_NUMBER",
-  "d:sonar.exclusions"="**/bin/**/*,**/obj/**/*" ,
+  "d:sonar.exclusions"="**/bin/**/*,**/obj/**/*",
   "d:sonar.coverage.exclusions"="**/$env:SOLUTION_NAME.Tests/**,**/*Tests.cs",
   "d:sonar.cs.opencover.reportsPaths"="$env:CD\Tests\$env:SOLUTION_NAME.Tests\coverage.opencover.xml"
 }'
