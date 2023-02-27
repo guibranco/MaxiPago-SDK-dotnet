@@ -3,7 +3,6 @@
 The [MaxiPago gateway](https://www.maxipago.com/developers/) SDK for .NET projects
 
 [![GitHub license](https://img.shields.io/github/license/guibranco/MaxiPago-SDK-dotnet)](https://github.com/guibranco/MaxiPago-SDK-dotnet)
-[![Time tracker](https://wakatime.com/badge/github/guibranco/MaxiPago-SDK-dotnet.svg)](https://wakatime.com/badge/github/guibranco/MaxiPago-SDK-dotnet)
 
 ![MaxiPago](https://raw.githubusercontent.com/guibranco/MaxiPago-SDK-dotnet/main/logo.png)
 
@@ -31,22 +30,6 @@ The [MaxiPago gateway](https://www.maxipago.com/developers/) SDK for .NET projec
 
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=guibranco_MaxiPago-SDK-dotnet&metric=bugs)](https://sonarcloud.io/dashboard?id=guibranco_MaxiPago-SDK-dotnet)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=guibranco_MaxiPago-SDK-dotnet&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=guibranco_MaxiPago-SDK-dotnet)
-
----
-
-## Installation
-
-### Github Releases
-
-[![GitHub last release](https://img.shields.io/github/release-date/guibranco/MaxiPago-SDK-dotnet.svg?style=flat)](https://github.com/guibranco/MaxiPago-SDK-dotnet) [![Github All Releases](https://img.shields.io/github/downloads/guibranco/MaxiPago-SDK-dotnet/total.svg?style=flat)](https://github.com/guibranco/MaxiPago-SDK-dotnet)
-
-Download the latest zip file from the [Release](https://github.com/guibranco/MaxiPago-SDK-dotnet/releases) page.
-
-### Nuget package manager
-
-| Package | Version | Downloads |
-|------------------|:-------:|:-------:|
-| **MaxiPago** | [![MaxiPago NuGet Version](https://img.shields.io/nuget/v/MaxiPago.svg?style=flat)](https://www.nuget.org/packages/MaxiPago/) | [![MaxiPago NuGet Downloads](https://img.shields.io/nuget/dt/MaxiPago.svg?style=flat)](https://www.nuget.org/packages/MaxiPago/) |
 
 ---
 
