@@ -6,7 +6,7 @@ skip_commits:
   message: /(Create|Update) .*\.(png|jpg|jpeg|bmp|gif|md)/
 
 environment:
-  SOLUTION_NAME: CrispyWaffle 
+  SOLUTION_NAME: MaxiPago 
   SONAR_TOKEN: 
     secure: aO2YuD74LfrMguO9cY857CJ+qMnrDNgxgK5rNaCojpc4pwBVWhUoSYGWNay7CKVN
   GITHUB_TOKEN:
