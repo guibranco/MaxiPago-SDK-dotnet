@@ -1,23 +1,67 @@
-﻿using MaxiPago.DataContract;
+﻿// ***********************************************************************
+// Assembly         : MaxiPago
+// Author           : Guilherme Branco Stracini
+// Created          : 16/01/2023
+//
+// Last Modified By : Guilherme Branco Stracini
+// Last Modified On : 16/01/2023
+// ***********************************************************************
+// <copyright file="Transaction.cs" company="Guilherme Branco Stracini ME">
+//     © 2023 Guilherme Branco Stracini. All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using MaxiPago.DataContract;
 using MaxiPago.DataContract.Transactional;
 using System.Threading;
 
 namespace MaxiPago.Gateway
 {
 
+    /// <summary>
+    /// Class Transaction.
+    /// Implements the <see cref="ServiceBase" />
+    /// </summary>
+    /// <seealso cref="ServiceBase" />
     public class Transaction : ServiceBase
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Transaction"/> class.
+        /// </summary>
         public Transaction()
         {
             Environment = "TEST";
         }
 
+        /// <summary>
+        /// The request
+        /// </summary>
         private TransactionRequest _request;
 
         /// <summary>
         /// Faz uma autorização com captura.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="creditCardNumber">The credit card number.</param>
+        /// <param name="expMonth">The exp month.</param>
+        /// <param name="expYear">The exp year.</param>
+        /// <param name="cvvInd">The CVV ind.</param>
+        /// <param name="cvvNumber">The CVV number.</param>
+        /// <param name="authentication">The authentication.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="customerIdExt">The customer identifier ext.</param>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <param name="fraudCheck">The fraud check.</param>
+        /// <param name="softDescriptor">The soft descriptor.</param>
+        /// <param name="iataFee">The iata fee.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Sale(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
                 , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
                 , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string currencyCode
@@ -35,6 +79,26 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Popula o objeto RequestBase em comum a todos.
         /// </summary>
+        /// <param name="operation">The operation.</param>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="creditCardNumber">The credit card number.</param>
+        /// <param name="expMonth">The exp month.</param>
+        /// <param name="expYear">The exp year.</param>
+        /// <param name="cvvInd">The CVV ind.</param>
+        /// <param name="cvvNumber">The CVV number.</param>
+        /// <param name="authentication">The authentication.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="customerIdExt">The customer identifier ext.</param>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <param name="fraudCheck">The fraud check.</param>
+        /// <param name="softDescriptor">The soft descriptor.</param>
+        /// <param name="iataFee">The iata fee.</param>
         private void FillRequestBase(string operation, string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
                 , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
                 , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string currencyCode
@@ -95,6 +159,44 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz uma autorização com captura.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="creditCardNumber">The credit card number.</param>
+        /// <param name="expMonth">The exp month.</param>
+        /// <param name="expYear">The exp year.</param>
+        /// <param name="cvvInd">The CVV ind.</param>
+        /// <param name="cvvNumber">The CVV number.</param>
+        /// <param name="authentication">The authentication.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="customerIdExt">The customer identifier ext.</param>
+        /// <param name="billingName">Name of the billing.</param>
+        /// <param name="billingAddress">The billing address.</param>
+        /// <param name="billingAddress2">The billing address2.</param>
+        /// <param name="billingCity">The billing city.</param>
+        /// <param name="billingState">State of the billing.</param>
+        /// <param name="billingPostalCode">The billing postal code.</param>
+        /// <param name="billingCountry">The billing country.</param>
+        /// <param name="billingPhone">The billing phone.</param>
+        /// <param name="billingEmail">The billing email.</param>
+        /// <param name="shippingName">Name of the shipping.</param>
+        /// <param name="shippingAddress">The shipping address.</param>
+        /// <param name="shippingAddress2">The shipping address2.</param>
+        /// <param name="shippingCity">The shipping city.</param>
+        /// <param name="shippingState">State of the shipping.</param>
+        /// <param name="shippingPostalCode">The shipping postal code.</param>
+        /// <param name="shippingCountry">The shipping country.</param>
+        /// <param name="shippingPhone">The shipping phone.</param>
+        /// <param name="shippingEmail">The shipping email.</param>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <param name="fraudCheck">The fraud check.</param>
+        /// <param name="softDescriptor">The soft descriptor.</param>
+        /// <param name="iataFee">The iata fee.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Sale(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
                 , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
                 , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string billingName
@@ -146,6 +248,21 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz uma autorização com captura passando o token do cartão já salvo na base.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="token">The token.</param>
+        /// <param name="customerId">The customer identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <param name="fraudCheck">The fraud check.</param>
+        /// <param name="softDescriptor">The soft descriptor.</param>
+        /// <param name="iataFee">The iata fee.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Sale(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string processorId
                                 , string token, string customerId, string numberOfInstallments, string chargeInterest, string ipAddress, string currencyCode
                                 , string fraudCheck, string softDescriptor, decimal? iataFee)
@@ -160,6 +277,38 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz uma autorização com captura salvando o número de cartão automaticamente.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="creditCardNumber">The credit card number.</param>
+        /// <param name="expMonth">The exp month.</param>
+        /// <param name="expYear">The exp year.</param>
+        /// <param name="cvvInd">The CVV ind.</param>
+        /// <param name="cvvNumber">The CVV number.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="customerToken">The customer token.</param>
+        /// <param name="onFileEndDate">The on file end date.</param>
+        /// <param name="onFilePermission">The on file permission.</param>
+        /// <param name="onFileComment">The on file comment.</param>
+        /// <param name="onFileMaxChargeAmount">The on file maximum charge amount.</param>
+        /// <param name="billingName">Name of the billing.</param>
+        /// <param name="billingAddress">The billing address.</param>
+        /// <param name="billingAddress2">The billing address2.</param>
+        /// <param name="billingCity">The billing city.</param>
+        /// <param name="billingState">State of the billing.</param>
+        /// <param name="billingPostalCode">The billing postal code.</param>
+        /// <param name="billingCountry">The billing country.</param>
+        /// <param name="billingPhone">The billing phone.</param>
+        /// <param name="billingEmail">The billing email.</param>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <param name="fraudCheck">The fraud check.</param>
+        /// <param name="softDescriptor">The soft descriptor.</param>
+        /// <param name="iataFee">The iata fee.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Sale(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
                                    , string creditCardNumber, string expMonth, string expYear, string cvvInd, string cvvNumber
                                    , string processorId, string numberOfInstallments, string chargeInterest, string ipAddress
@@ -181,6 +330,26 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz uma Autorização.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="creditCardNumber">The credit card number.</param>
+        /// <param name="expMonth">The exp month.</param>
+        /// <param name="expYear">The exp year.</param>
+        /// <param name="cvvInd">The CVV ind.</param>
+        /// <param name="cvvNumber">The CVV number.</param>
+        /// <param name="authentication">The authentication.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="customerIdExt">The customer identifier ext.</param>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <param name="fraudCheck">The fraud check.</param>
+        /// <param name="softDescriptor">The soft descriptor.</param>
+        /// <param name="iataFee">The iata fee.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Auth(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
                 , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
                 , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string currencyCode
@@ -198,6 +367,44 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz uma Autorização.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="creditCardNumber">The credit card number.</param>
+        /// <param name="expMonth">The exp month.</param>
+        /// <param name="expYear">The exp year.</param>
+        /// <param name="cvvInd">The CVV ind.</param>
+        /// <param name="cvvNumber">The CVV number.</param>
+        /// <param name="authentication">The authentication.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="customerIdExt">The customer identifier ext.</param>
+        /// <param name="billingName">Name of the billing.</param>
+        /// <param name="billingAddress">The billing address.</param>
+        /// <param name="billingAddress2">The billing address2.</param>
+        /// <param name="billingCity">The billing city.</param>
+        /// <param name="billingState">State of the billing.</param>
+        /// <param name="billingPostalCode">The billing postal code.</param>
+        /// <param name="billingCountry">The billing country.</param>
+        /// <param name="billingPhone">The billing phone.</param>
+        /// <param name="billingEmail">The billing email.</param>
+        /// <param name="shippingName">Name of the shipping.</param>
+        /// <param name="shippingAddress">The shipping address.</param>
+        /// <param name="shippingAddress2">The shipping address2.</param>
+        /// <param name="shippingCity">The shipping city.</param>
+        /// <param name="shippingState">State of the shipping.</param>
+        /// <param name="shippingPostalCode">The shipping postal code.</param>
+        /// <param name="shippingCountry">The shipping country.</param>
+        /// <param name="shippingPhone">The shipping phone.</param>
+        /// <param name="shippingEmail">The shipping email.</param>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <param name="fraudCheck">The fraud check.</param>
+        /// <param name="softDescriptor">The soft descriptor.</param>
+        /// <param name="iataFee">The iata fee.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Auth(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
                 , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
                 , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string billingName
@@ -248,6 +455,21 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz uma autorização passando o token do cartão já salvo na base.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="token">The token.</param>
+        /// <param name="customerId">The customer identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <param name="fraudCheck">The fraud check.</param>
+        /// <param name="softDescriptor">The soft descriptor.</param>
+        /// <param name="iataFee">The iata fee.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Auth(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string processorId
                                 , string token, string customerId, string numberOfInstallments, string chargeInterest, string ipAddress, string currencyCode
                                 , string fraudCheck, string softDescriptor, decimal? iataFee)
@@ -262,6 +484,38 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz uma autorização salvando o número de cartão automaticamente.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="creditCardNumber">The credit card number.</param>
+        /// <param name="expMonth">The exp month.</param>
+        /// <param name="expYear">The exp year.</param>
+        /// <param name="cvvInd">The CVV ind.</param>
+        /// <param name="cvvNumber">The CVV number.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="customerToken">The customer token.</param>
+        /// <param name="onFileEndDate">The on file end date.</param>
+        /// <param name="onFilePermission">The on file permission.</param>
+        /// <param name="onFileComment">The on file comment.</param>
+        /// <param name="onFileMaxChargeAmount">The on file maximum charge amount.</param>
+        /// <param name="billingName">Name of the billing.</param>
+        /// <param name="billingAddress">The billing address.</param>
+        /// <param name="billingAddress2">The billing address2.</param>
+        /// <param name="billingCity">The billing city.</param>
+        /// <param name="billingState">State of the billing.</param>
+        /// <param name="billingPostalCode">The billing postal code.</param>
+        /// <param name="billingCountry">The billing country.</param>
+        /// <param name="billingPhone">The billing phone.</param>
+        /// <param name="billingEmail">The billing email.</param>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <param name="fraudCheck">The fraud check.</param>
+        /// <param name="softDescriptor">The soft descriptor.</param>
+        /// <param name="iataFee">The iata fee.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Auth(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
                                    , string creditCardNumber, string expMonth, string expYear, string cvvInd, string cvvNumber
                                    , string processorId, string numberOfInstallments, string chargeInterest, string ipAddress
@@ -283,6 +537,26 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz uma requisição de boleto.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="customerIdExt">The customer identifier ext.</param>
+        /// <param name="expirationDate">The expiration date.</param>
+        /// <param name="number">The number.</param>
+        /// <param name="instructions">The instructions.</param>
+        /// <param name="billingName">Name of the billing.</param>
+        /// <param name="billingAddress">The billing address.</param>
+        /// <param name="billingAddress2">The billing address2.</param>
+        /// <param name="billingCity">The billing city.</param>
+        /// <param name="billingState">State of the billing.</param>
+        /// <param name="billingPostalCode">The billing postal code.</param>
+        /// <param name="billingCountry">The billing country.</param>
+        /// <param name="billingPhone">The billing phone.</param>
+        /// <param name="billingEmail">The billing email.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Boleto(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string processorId
                                  , string ipAddress, string customerIdExt, string expirationDate, string number, string instructions
                                  , string billingName, string billingAddress, string billingAddress2, string billingCity, string billingState
@@ -322,6 +596,22 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz a transação passando o token do cartão já salvo na base.
         /// </summary>
+        /// <param name="operation">The operation.</param>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="token">The token.</param>
+        /// <param name="customerId">The customer identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <param name="fraudCheck">The fraud check.</param>
+        /// <param name="softDescriptor">The soft descriptor.</param>
+        /// <param name="iataFee">The iata fee.</param>
+        /// <returns>ResponseBase.</returns>
         private ResponseBase PayWithToken(string operation, string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string processorId
                                 , string token, string customerId, string numberOfInstallments, string chargeInterest, string ipAddress, string currencyCode
                                 , string fraudCheck, string softDescriptor, decimal? iataFee)
@@ -372,6 +662,39 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Passa uma transação salvando o número de cartão automaticamente.
         /// </summary>
+        /// <param name="operation">The operation.</param>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="creditCardNumber">The credit card number.</param>
+        /// <param name="expMonth">The exp month.</param>
+        /// <param name="expYear">The exp year.</param>
+        /// <param name="cvvInd">The CVV ind.</param>
+        /// <param name="cvvNumber">The CVV number.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="customerToken">The customer token.</param>
+        /// <param name="onFileEndDate">The on file end date.</param>
+        /// <param name="onFilePermission">The on file permission.</param>
+        /// <param name="onFileComment">The on file comment.</param>
+        /// <param name="onFileMaxChargeAmount">The on file maximum charge amount.</param>
+        /// <param name="billingName">Name of the billing.</param>
+        /// <param name="billingAddress">The billing address.</param>
+        /// <param name="billingAddress2">The billing address2.</param>
+        /// <param name="billingCity">The billing city.</param>
+        /// <param name="billingState">State of the billing.</param>
+        /// <param name="billingPostalCode">The billing postal code.</param>
+        /// <param name="billingCountry">The billing country.</param>
+        /// <param name="billingPhone">The billing phone.</param>
+        /// <param name="billingEmail">The billing email.</param>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <param name="fraudCheck">The fraud check.</param>
+        /// <param name="softDescriptor">The soft descriptor.</param>
+        /// <param name="iataFee">The iata fee.</param>
+        /// <returns>ResponseBase.</returns>
         private ResponseBase PaySavingCreditCardAutomatically(string operation, string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
                                                             , string creditCardNumber, string expMonth, string expYear, string cvvInd, string cvvNumber
                                                             , string processorId, string numberOfInstallments, string chargeInterest, string ipAddress
@@ -456,6 +779,12 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz uma Captura.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="orderID">The order identifier.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Capture(string merchantId, string merchantKey, string orderID, string referenceNum, decimal chargeTotal)
         {
 
@@ -483,6 +812,12 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz um Estorno.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="orderID">The order identifier.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Return(string merchantId, string merchantKey, string orderID, string referenceNum, decimal chargeTotal)
         {
 
@@ -510,6 +845,11 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz um Cancelamento.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="transactionID">The transaction identifier.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Void(string merchantId, string merchantKey, string transactionID, string ipAddress)
         {
 
@@ -533,6 +873,27 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz uma recorrência.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="creditCardNumber">The credit card number.</param>
+        /// <param name="expMonth">The exp month.</param>
+        /// <param name="expYear">The exp year.</param>
+        /// <param name="cvvInd">The CVV ind.</param>
+        /// <param name="cvvNumber">The CVV number.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="frequency">The frequency.</param>
+        /// <param name="period">The period.</param>
+        /// <param name="installments">The installments.</param>
+        /// <param name="failureThreshold">The failure threshold.</param>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Recurring(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
             , string creditCardNumber, string expMonth, string expYear, string cvvInd, string cvvNumber, string processorId
             , string numberOfInstallments, string chargeInterest, string ipAddress, string action
@@ -563,6 +924,24 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Faz uma recorrência com token.
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="customerId">The customer identifier.</param>
+        /// <param name="token">The token.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="frequency">The frequency.</param>
+        /// <param name="period">The period.</param>
+        /// <param name="installments">The installments.</param>
+        /// <param name="failureThreshold">The failure threshold.</param>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase Recurring(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
             , string customerId, string token, string processorId, string numberOfInstallments
             , string chargeInterest, string ipAddress, string action, string startDate
@@ -584,6 +963,21 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Efetua o preenchimento comum aos métodos de Recorrente
         /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="numberOfInstallments">The number of installments.</param>
+        /// <param name="chargeInterest">The charge interest.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="frequency">The frequency.</param>
+        /// <param name="period">The period.</param>
+        /// <param name="installments">The installments.</param>
+        /// <param name="failureThreshold">The failure threshold.</param>
+        /// <param name="currencyCode">The currency code.</param>
         private void FillRecurringBase(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
             , string processorId, string numberOfInstallments, string chargeInterest
             , string ipAddress, string action, string startDate
@@ -627,6 +1021,18 @@ namespace MaxiPago.Gateway
             }
         }
 
+        /// <summary>
+        /// Called when [debit].
+        /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="merchantKey">The merchant key.</param>
+        /// <param name="referenceNum">The reference number.</param>
+        /// <param name="chargeTotal">The charge total.</param>
+        /// <param name="processorId">The processor identifier.</param>
+        /// <param name="parametersUrl">The parameters URL.</param>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="customerIdExt">The customer identifier ext.</param>
+        /// <returns>ResponseBase.</returns>
         public ResponseBase OnlineDebit(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
                                     , string processorId, string parametersUrl, string ipAddress, string customerIdExt)
         {
