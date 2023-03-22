@@ -1,3 +1,16 @@
+// ***********************************************************************
+// Assembly         : MaxiPago
+// Author           : Guilherme Branco Stracini
+// Created          : 16/01/2023
+//
+// Last Modified By : Guilherme Branco Stracini
+// Last Modified On : 28/02/2023
+// ***********************************************************************
+// <copyright file="Utils.cs" company="Guilherme Branco Stracini ME">
+//     © 2023 Guilherme Branco Stracini. All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using MaxiPago.DataContract;
 using MaxiPago.DataContract.NonTransactional;
 using MaxiPago.DataContract.Reports;
@@ -11,9 +24,20 @@ using System.Xml.Serialization;
 namespace MaxiPago.Gateway
 {
 
+    /// <summary>
+    /// Class Utils.
+    /// </summary>
     internal class Utils
     {
 
+        /// <summary>
+        /// Sends the request.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="request">The request.</param>
+        /// <param name="environment">The environment.</param>
+        /// <returns>ResponseBase.</returns>
+        /// <exception cref="System.Exception">The Request can not be null or empty</exception>
         /// Sends the request
         internal ResponseBase SendRequest<T>(T request, string environment)
         {
@@ -33,6 +57,12 @@ namespace MaxiPago.Gateway
 
         }
 
+        /// <summary>
+        /// Parses the response.
+        /// </summary>
+        /// <param name="responseContent">Content of the response.</param>
+        /// <returns>ResponseBase.</returns>
+        /// <exception cref="System.Exception">Unexpected response was received.</exception>
         /// Parses response XML
         private static ResponseBase ParseResponse(string responseContent)
         {
@@ -47,6 +77,14 @@ namespace MaxiPago.Gateway
             throw new Exception("Unexpected response was received.");
         }
 
+        /// <summary>
+        /// Gets the URL.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="request">The request.</param>
+        /// <param name="environment">The environment.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception">You must to inform the environment. (TEST or LIVE)</exception>
         /// Gets URL
         private static string GetUrl<T>(T request, string environment)
         {
@@ -69,10 +107,16 @@ namespace MaxiPago.Gateway
                         return "https://testapi.maxipago.net/ReportsAPI/servlet/ReportsAPI";
                     break;
             }
-            throw new Exception("You must to inform the environment. (TEST or LIVE)");
+            throw new Exception("You must inform the environment. (TEST or LIVE)");
 
         }
 
+        /// <summary>
+        /// Converts to xml.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="request">The request.</param>
+        /// <returns>System.String.</returns>
         private static string ToXml<T>(T request)
         {
             var serializer = new XmlSerializer(typeof(T));
@@ -88,6 +132,13 @@ namespace MaxiPago.Gateway
             }
         }
 
+        /// <summary>
+        /// Posts the specified XML.
+        /// </summary>
+        /// <param name="xml">The XML.</param>
+        /// <param name="url">The URL.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.InvalidOperationException"></exception>
         /// Posts data to maxiPago!
         private static string Post(string xml, string url)
         {
@@ -108,6 +159,12 @@ namespace MaxiPago.Gateway
             return responseContent;
         }
 
+        /// <summary>
+        /// Serializes the specified XML.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="xml">The XML.</param>
+        /// <returns>T.</returns>
         /// Serializes XML
         private static T Serialize<T>(string xml)
         {
