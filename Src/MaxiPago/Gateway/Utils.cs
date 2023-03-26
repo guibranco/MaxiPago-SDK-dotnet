@@ -91,20 +91,28 @@ namespace MaxiPago.Gateway
             switch (environment)
             {
                 case "LIVE":
-                    if (request is TransactionRequest)
-                        return "https://api.maxipago.net/UniversalAPI/postXML";
-                    if (request is ApiRequest)
-                        return "https://api.maxipago.net/UniversalAPI/postAPI";
-                    if (request is RapiRequest)
-                        return "https://api.maxipago.net/ReportsAPI/servlet/ReportsAPI";
+                    switch (request)
+                    {
+                        case TransactionRequest _:
+                            return "https://api.maxipago.net/UniversalAPI/postXML";
+                        case ApiRequest _:
+                            return "https://api.maxipago.net/UniversalAPI/postAPI";
+                        case RapiRequest _:
+                            return "https://api.maxipago.net/ReportsAPI/servlet/ReportsAPI";
+                    }
+
                     break;
                 case "TEST":
-                    if (request is TransactionRequest)
-                        return "https://testapi.maxipago.net/UniversalAPI/postXML";
-                    if (request is ApiRequest)
-                        return "https://testapi.maxipago.net/UniversalAPI/postAPI";
-                    if (request is RapiRequest)
-                        return "https://testapi.maxipago.net/ReportsAPI/servlet/ReportsAPI";
+                    switch (request)
+                    {
+                        case TransactionRequest _:
+                            return "https://testapi.maxipago.net/UniversalAPI/postXML";
+                        case ApiRequest _:
+                            return "https://testapi.maxipago.net/UniversalAPI/postAPI";
+                        case RapiRequest _:
+                            return "https://testapi.maxipago.net/ReportsAPI/servlet/ReportsAPI";
+                    }
+
                     break;
             }
             throw new Exception("You must inform the environment. (TEST or LIVE)");
