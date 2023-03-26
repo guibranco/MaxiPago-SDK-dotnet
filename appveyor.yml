@@ -83,6 +83,7 @@ artifacts:
   name: Coverage
 
 deploy:
+
 - provider: Environment
   name: NuGet
   on:
