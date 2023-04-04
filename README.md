@@ -18,7 +18,9 @@ The [MaxiPago gateway](https://www.maxipago.com/developers/) SDK for .NET projec
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/608c4d2f8af3473a853c470bce9d1f24)](https://www.codacy.com/gh/guibranco/MaxiPago-SDK-dotnet/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=guibranco/MaxiPago-SDK-dotnet&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/608c4d2f8af3473a853c470bce9d1f24)](https://www.codacy.com/gh/guibranco/MaxiPago-SDK-dotnet/dashboard?utm_source=github.com&utm_medium=referral&utm_content=guibranco/MaxiPago-SDK-dotnet&utm_campaign=Badge_Coverage)
+
 [![codecov](https://codecov.io/gh/guibranco/MaxiPago-SDK-dotnet/branch/main/graph/badge.svg)](https://codecov.io/gh/guibranco/MaxiPago-SDK-dotnet)
+[![CodeFactor](https://www.codefactor.io/repository/github/guibranco/MaxiPago-SDK-dotnet/badge)](https://www.codefactor.io/repository/github/guibranco/MaxiPago-SDK-dotnet)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/a44b6678c996e71c95d2/maintainability)](https://codeclimate.com/github/guibranco/MaxiPago-SDK-dotnet/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a44b6678c996e71c95d2/test_coverage)](https://codeclimate.com/github/guibranco/MaxiPago-SDK-dotnet/test_coverage)
