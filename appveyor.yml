@@ -14,16 +14,7 @@ environment:
   CODECLIMATE_TOKEN:
     secure: n/VjTBZ72BBbORNn5afNhu6iU7/Zu41zAb06DAh/kD70C/AyHlMjjQPlLpspuPvBm1Hi5WSOMTievSMhErlKcBoR/ZZ6Z91R47L0kVa9BTc=
 
-dotnet_csproj: 
-  patch: true 
-  file: '**\*.csproj' 
-  version: '{version}' 
-  package_version: '{version}' 
-  assembly_version: '{version}' 
-  file_version: '{version}' 
-  informational_version: '{version}'
-
-dotnet_csproj: 
+dotnet_csproj:
   patch: true
   file: '**\*.csproj'
   version: '{version}'
