@@ -13,13 +13,11 @@
 // ***********************************************************************
 namespace MaxiPago.DataContract
 {
-
     /// <summary>
     /// Class ServiceBase.
     /// </summary>
     public class ServiceBase
     {
-
         /// <summary>
         /// Gets or sets the environment.
         /// </summary>

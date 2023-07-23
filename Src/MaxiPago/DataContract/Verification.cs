@@ -14,7 +14,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract 
+namespace MaxiPago.DataContract
 {
     /// <summary>
     /// Class Verification.
@@ -23,7 +23,6 @@ namespace MaxiPago.DataContract
     [XmlRoot(ElementName = "verification")]
     public class Verification
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Verification"/> class.
         /// </summary>
@@ -34,7 +33,8 @@ namespace MaxiPago.DataContract
         /// </summary>
         /// <param name="merchantId">The merchant identifier.</param>
         /// <param name="merchantKey">The merchant key.</param>
-        public Verification(string merchantId, string merchantKey) {
+        public Verification(string merchantId, string merchantKey)
+        {
             MerchantId = merchantId;
             MerchantKey = merchantKey;
         }
@@ -52,6 +52,5 @@ namespace MaxiPago.DataContract
         /// <value>The merchant key.</value>
         [XmlElement("merchantKey")]
         public string MerchantKey { get; set; }
-
     }
 }

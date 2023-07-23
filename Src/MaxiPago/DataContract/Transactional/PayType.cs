@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Transactional
 {
-
     /// <summary>
     /// Class PayType.
     /// </summary>
@@ -24,18 +23,21 @@ namespace MaxiPago.DataContract.Transactional
     [XmlRoot(ElementName = "payType")]
     public class PayType
     {
-
         /// <summary>
         /// Gets or sets the credit card.
         /// </summary>
         /// <value>The credit card.</value>
         [XmlElement("creditCard")]
         public CreditCard CreditCard { get; set; }
+
         /// <summary>
         /// Shoulds the serialize credit card.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool ShouldSerializeCreditCard() { return CreditCard != null; }
+        public bool ShouldSerializeCreditCard()
+        {
+            return CreditCard != null;
+        }
 
         /// <summary>
         /// Gets or sets the on file.
@@ -43,11 +45,15 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The on file.</value>
         [XmlElement("onFile")]
         public OnFile OnFile { get; set; }
+
         /// <summary>
         /// Shoulds the serialize on file.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool ShouldSerializeOnFile() { return OnFile != null; }
+        public bool ShouldSerializeOnFile()
+        {
+            return OnFile != null;
+        }
 
         /// <summary>
         /// Gets or sets the boleto.
@@ -55,11 +61,15 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The boleto.</value>
         [XmlElement("boleto")]
         public Boleto Boleto { get; set; }
+
         /// <summary>
         /// Shoulds the serialize boleto.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool ShouldSerializeBoleto() { return Boleto != null; }
+        public bool ShouldSerializeBoleto()
+        {
+            return Boleto != null;
+        }
 
         /// <summary>
         /// Gets or sets the online debit.
@@ -67,11 +77,14 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The online debit.</value>
         [XmlElement("onlineDebit")]
         public OnlineDebit OnlineDebit { get; set; }
+
         /// <summary>
         /// Shoulds the serialize online debit.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool ShouldSerializeOnlineDebit() { return OnlineDebit != null; }
-
+        public bool ShouldSerializeOnlineDebit()
+        {
+            return OnlineDebit != null;
+        }
     }
 }

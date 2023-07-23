@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Reports
 {
-
     /// <summary>
     /// Class HeaderResponse.
     /// </summary>
@@ -24,7 +23,6 @@ namespace MaxiPago.DataContract.Reports
     [XmlRoot(ElementName = "header")]
     public class HeaderResponse
     {
-
         /// <summary>
         /// Gets or sets the error code.
         /// </summary>
@@ -52,6 +50,5 @@ namespace MaxiPago.DataContract.Reports
         /// <value>The time.</value>
         [XmlElement("time")]
         public string Time { get; set; }
-
     }
 }

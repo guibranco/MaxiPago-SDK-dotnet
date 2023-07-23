@@ -15,13 +15,11 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.NonTransactional
 {
-
     /// <summary>
     /// Class ApiResult.
     /// </summary>
     public class ApiResult
     {
-
         /// <summary>
         /// Gets or sets the customer identifier.
         /// </summary>
@@ -35,6 +33,5 @@ namespace MaxiPago.DataContract.NonTransactional
         /// <value>The token.</value>
         [XmlElement(ElementName = "token")]
         public string Token { get; set; }
-
     }
 }

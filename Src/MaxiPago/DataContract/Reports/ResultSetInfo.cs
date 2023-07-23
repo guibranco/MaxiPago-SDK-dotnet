@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Reports
 {
-
     /// <summary>
     /// Class ResultSetInfo.
     /// </summary>
@@ -24,7 +23,6 @@ namespace MaxiPago.DataContract.Reports
     [XmlRoot(ElementName = "resultSetInfo")]
     public class ResultSetInfo
     {
-
         /// <summary>
         /// Gets or sets the total number of records.
         /// </summary>
@@ -59,6 +57,5 @@ namespace MaxiPago.DataContract.Reports
         /// <value>The processed time.</value>
         [XmlElement("processedTime")]
         public string ProcessedTime { get; set; }
-
     }
 }

@@ -14,8 +14,8 @@
 using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.NonTransactional {
-
+namespace MaxiPago.DataContract.NonTransactional
+{
     /// <summary>
     /// Class ApiResponse.
     /// Implements the <see cref="MaxiPago.DataContract.ResponseBase" />
@@ -23,8 +23,8 @@ namespace MaxiPago.DataContract.NonTransactional {
     /// <seealso cref="MaxiPago.DataContract.ResponseBase" />
     [Serializable]
     [XmlRoot(ElementName = "api-response")]
-    public class ApiResponse : ResponseBase {
-
+    public class ApiResponse : ResponseBase
+    {
         /// <summary>
         /// Gets or sets the error code.
         /// </summary>
@@ -59,6 +59,5 @@ namespace MaxiPago.DataContract.NonTransactional {
         /// <value>The result.</value>
         [XmlElement("result")]
         public ApiResult Result { get; set; }
-
     }
 }

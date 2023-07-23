@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Transactional
 {
-
     /// <summary>
     /// Class Boleto.
     /// </summary>
@@ -24,7 +23,6 @@ namespace MaxiPago.DataContract.Transactional
     [XmlRoot(ElementName = "boleto")]
     public class Boleto
     {
-
         /// <summary>
         /// Gets or sets the expiration date.
         /// </summary>
@@ -45,6 +43,5 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The instructions.</value>
         [XmlElement(ElementName = "instructions")]
         public string Instructions { get; set; }
-
     }
 }

@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Transactional
 {
-
     /// <summary>
     /// Class Shipping.
     /// Implements the <see cref="MaxiPago.DataContract.Transactional.Address" />

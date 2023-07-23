@@ -23,7 +23,6 @@ namespace MaxiPago.DataContract.Transactional
     [XmlRoot(ElementName = "transaction-request")]
     public class TransactionRequest
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionRequest"/> class.
         /// </summary>
@@ -33,7 +32,6 @@ namespace MaxiPago.DataContract.Transactional
             Order = new Order();
             Version = "3.1.1.15";
         }
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionRequest"/> class.
@@ -67,6 +65,5 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The order.</value>
         [XmlElement("order")]
         public Order Order { get; set; }
-
     }
 }

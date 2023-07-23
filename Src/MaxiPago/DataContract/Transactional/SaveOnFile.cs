@@ -14,20 +14,20 @@
 using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Transactional {
-
+namespace MaxiPago.DataContract.Transactional
+{
     /// <summary>
     /// Class SaveOnFile.
     /// </summary>
     [Serializable]
     [XmlRoot(ElementName = "saveOnFile")]
-    public class SaveOnFile {
-
+    public class SaveOnFile
+    {
         /// <summary>
         /// ID único do cadastro, retornado quando o cliente foi adicionado à base (customerId).
         /// </summary>
         /// <value>The customer token.</value>
-        [XmlElement(ElementName="customerToken")]
+        [XmlElement(ElementName = "customerToken")]
         public string CustomerToken { get; set; }
 
         /// <summary>
@@ -57,6 +57,5 @@ namespace MaxiPago.DataContract.Transactional {
         /// <value>The on file maximum charge amount.</value>
         [XmlElement(ElementName = "onFileMaxChargeAmount")]
         public string OnFileMaxChargeAmount { get; set; }
-
     }
 }

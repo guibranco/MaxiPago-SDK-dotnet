@@ -16,14 +16,12 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Transactional
 {
-
     /// <summary>
     /// Class RequestBase.
     /// </summary>
     [Serializable]
     public class RequestBase
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestBase"/> class.
         /// </summary>
@@ -67,12 +65,16 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The fraud check.</value>
         [XmlElement("fraudCheck")]
         public string FraudCheck { get; set; }
+
         // Verifica se o valor da propriedade é nulo, se sim, não serialize esse campo no xml
         /// <summary>
         /// Shoulds the serialize fraud check.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool ShouldSerializeFraudCheck() { return FraudCheck != null; }
+        public bool ShouldSerializeFraudCheck()
+        {
+            return FraudCheck != null;
+        }
 
         //[XmlElement("invoiceNumber")]
         //public string InvoiceNumber { get; set; }
@@ -83,11 +85,15 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The billing.</value>
         [XmlElement("billing")]
         public Billing Billing { get; set; }
+
         /// <summary>
         /// Shoulds the serialize billing.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool ShouldSerializeBilling() { return Billing != null; }
+        public bool ShouldSerializeBilling()
+        {
+            return Billing != null;
+        }
 
         /// <summary>
         /// Gets or sets the shipping.
@@ -95,11 +101,15 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The shipping.</value>
         [XmlElement("shipping")]
         public Shipping Shipping { get; set; }
+
         /// <summary>
         /// Shoulds the serialize shipping.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool ShouldSerializeShipping() { return Shipping != null; }
+        public bool ShouldSerializeShipping()
+        {
+            return Shipping != null;
+        }
 
         /// <summary>
         /// Gets or sets the transaction detail.
@@ -135,11 +145,14 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The customer identifier ext.</value>
         [XmlElement("customerIdExt")]
         public string CustomerIdExt { get; set; }
+
         /// <summary>
         /// Shoulds the serialize customer identifier ext.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool ShouldSerializeCustomerIdExt() { return !string.IsNullOrEmpty(CustomerIdExt); }
-
+        public bool ShouldSerializeCustomerIdExt()
+        {
+            return !string.IsNullOrEmpty(CustomerIdExt);
+        }
     }
 }

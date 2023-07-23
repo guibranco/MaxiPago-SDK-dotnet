@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Transactional
 {
-
     /// <summary>
     /// Class CreditCard.
     /// </summary>
@@ -24,7 +23,6 @@ namespace MaxiPago.DataContract.Transactional
     [XmlRoot("creditCard")]
     public class CreditCard
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CreditCard"/> class.
         /// </summary>
@@ -84,6 +82,5 @@ namespace MaxiPago.DataContract.Transactional
             // ReSharper disable once ValueParameterNotUsed
             set { }
         }
-
     }
 }

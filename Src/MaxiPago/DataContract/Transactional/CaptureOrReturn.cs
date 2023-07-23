@@ -14,18 +14,19 @@
 using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Transactional {
-
+namespace MaxiPago.DataContract.Transactional
+{
     /// <summary>
     /// Class CaptureOrReturn.
     /// </summary>
     [Serializable]
-    public class CaptureOrReturn {
-
+    public class CaptureOrReturn
+    {
         /// <summary>
         /// Initializes a new instance of the <see cref="CaptureOrReturn"/> class.
         /// </summary>
-        public CaptureOrReturn() {
+        public CaptureOrReturn()
+        {
             Payment = new Payment();
         }
 
@@ -49,6 +50,5 @@ namespace MaxiPago.DataContract.Transactional {
         /// <value>The payment.</value>
         [XmlElement("payment")]
         public Payment Payment { get; set; }
-
     }
 }

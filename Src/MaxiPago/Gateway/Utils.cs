@@ -23,13 +23,11 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.Gateway
 {
-
     /// <summary>
     /// Class Utils.
     /// </summary>
     internal class Utils
     {
-
         /// <summary>
         /// Sends the request.
         /// </summary>
@@ -41,7 +39,6 @@ namespace MaxiPago.Gateway
         /// Sends the request
         internal ResponseBase SendRequest<T>(T request, string environment)
         {
-
             if (request == null)
                 throw new Exception("The Request can not be null or empty");
 
@@ -54,7 +51,6 @@ namespace MaxiPago.Gateway
 
             // Parses response XML
             return ParseResponse(responseContent);
-
         }
 
         /// <summary>
@@ -116,7 +112,6 @@ namespace MaxiPago.Gateway
                     break;
             }
             throw new Exception("You must inform the environment. (TEST or LIVE)");
-
         }
 
         /// <summary>
@@ -162,7 +157,11 @@ namespace MaxiPago.Gateway
             var rsp = req.GetResponse();
 
             string responseContent;
-            using (var reader = new StreamReader(rsp.GetResponseStream() ?? throw new InvalidOperationException()))
+            using (
+                var reader = new StreamReader(
+                    rsp.GetResponseStream() ?? throw new InvalidOperationException()
+                )
+            )
                 responseContent = reader.ReadToEnd();
             return responseContent;
         }

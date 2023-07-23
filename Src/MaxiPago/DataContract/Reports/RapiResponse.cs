@@ -14,8 +14,8 @@
 using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Reports {
-
+namespace MaxiPago.DataContract.Reports
+{
     /// <summary>
     /// Class RapiResponse.
     /// Implements the <see cref="MaxiPago.DataContract.ResponseBase" />
@@ -23,8 +23,8 @@ namespace MaxiPago.DataContract.Reports {
     /// <seealso cref="MaxiPago.DataContract.ResponseBase" />
     [Serializable]
     [XmlRoot(ElementName = "rapi-response")]
-    public class RapiResponse : ResponseBase {
-
+    public class RapiResponse : ResponseBase
+    {
         /// <summary>
         /// Gets or sets the header.
         /// </summary>
@@ -38,7 +38,5 @@ namespace MaxiPago.DataContract.Reports {
         /// <value>The result.</value>
         [XmlElement("result")]
         public ReportResult Result { get; set; }
-
     }
-
 }

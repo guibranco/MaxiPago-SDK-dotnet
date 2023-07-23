@@ -14,19 +14,20 @@
 using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Reports {
-
+namespace MaxiPago.DataContract.Reports
+{
     /// <summary>
     /// Class RapiRequest.
     /// </summary>
     [Serializable]
     [XmlRoot(ElementName = "rapi-request")]
-    public class RapiRequest {
-
+    public class RapiRequest
+    {
         /// <summary>
         /// Initializes a new instance of the <see cref="RapiRequest"/> class.
         /// </summary>
-        public RapiRequest() {
+        public RapiRequest()
+        {
             Verification = new Verification();
             ReportRequest = new ReportRequest();
         }
@@ -36,7 +37,8 @@ namespace MaxiPago.DataContract.Reports {
         /// </summary>
         /// <param name="merchantId">The merchant identifier.</param>
         /// <param name="merchantKey">The merchant key.</param>
-        public RapiRequest(string merchantId, string merchantKey) {
+        public RapiRequest(string merchantId, string merchantKey)
+        {
             Verification = new Verification(merchantId, merchantKey);
             ReportRequest = new ReportRequest();
         }
@@ -61,7 +63,5 @@ namespace MaxiPago.DataContract.Reports {
         /// <value>The report request.</value>
         [XmlElement("request")]
         public ReportRequest ReportRequest { get; set; }
-
-
     }
 }

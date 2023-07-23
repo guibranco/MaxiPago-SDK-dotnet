@@ -16,7 +16,6 @@ using MaxiPago.DataContract.NonTransactional;
 
 namespace MaxiPago.Gateway
 {
-
     /// <summary>
     /// Class Api.
     /// Implements the <see cref="ServiceBase" />
@@ -24,7 +23,6 @@ namespace MaxiPago.Gateway
     /// <seealso cref="ServiceBase" />
     public class Api : ServiceBase
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Api"/> class.
         /// </summary>
@@ -57,12 +55,24 @@ namespace MaxiPago.Gateway
         /// <param name="ssn">The SSN.</param>
         /// <param name="sex">The sex.</param>
         /// <returns>ApiResponse.</returns>
-        public ApiResponse AddConsumer(string merchantId, string merchantKey, string customerIdExt, string firstName, string lastName
-                                        , string address1, string address2, string city, string state, string zip, string phone, string email
-                                        , string dob, string ssn, string sex)
+        public ApiResponse AddConsumer(
+            string merchantId,
+            string merchantKey,
+            string customerIdExt,
+            string firstName,
+            string lastName,
+            string address1,
+            string address2,
+            string city,
+            string state,
+            string zip,
+            string phone,
+            string email,
+            string dob,
+            string ssn,
+            string sex
+        )
         {
-
-
             _request = new ApiRequest(merchantId, merchantKey)
             {
                 Command = "add-consumer",
@@ -96,14 +106,12 @@ namespace MaxiPago.Gateway
         /// <returns>ApiResponse.</returns>
         public ApiResponse DeleteConsumer(string merchantId, string merchantKey, string customerId)
         {
-
             _request = new ApiRequest(merchantId, merchantKey)
             {
                 Command = "delete-consumer",
                 CommandRequest = new CommandRequest { CustomerId = customerId }
             };
             return new Utils().SendRequest(_request, Environment) as ApiResponse;
-
         }
 
         /// <summary>
@@ -126,11 +134,25 @@ namespace MaxiPago.Gateway
         /// <param name="ssn">The SSN.</param>
         /// <param name="sex">The sex.</param>
         /// <returns>ApiResponse.</returns>
-        public ApiResponse UpdateConsumer(string merchantId, string merchantKey, string customerId, string customerIdExt, string firstName
-                                        , string lastName, string address1, string address2, string city, string state, string zip, string phone
-                                        , string email, string dob, string ssn, string sex)
+        public ApiResponse UpdateConsumer(
+            string merchantId,
+            string merchantKey,
+            string customerId,
+            string customerIdExt,
+            string firstName,
+            string lastName,
+            string address1,
+            string address2,
+            string city,
+            string state,
+            string zip,
+            string phone,
+            string email,
+            string dob,
+            string ssn,
+            string sex
+        )
         {
-
             _request = new ApiRequest(merchantId, merchantKey)
             {
                 Command = "update-consumer",
@@ -153,7 +175,6 @@ namespace MaxiPago.Gateway
                 }
             };
             return new Utils().SendRequest(_request, Environment) as ApiResponse;
-
         }
 
         /// <summary>
@@ -179,12 +200,28 @@ namespace MaxiPago.Gateway
         /// <param name="onFileComment">The on file comment.</param>
         /// <param name="onFileMaxChargeAmount">The on file maximum charge amount.</param>
         /// <returns>ApiResponse.</returns>
-        public ApiResponse AddCardOnFile(string merchantId, string merchantKey, string customerId, string creditCardNumber, string expirationMonth
-                                        , string expirationYear, string billingName, string billingAddress1, string billingAddress2, string billingCity
-                                        , string billingState, string billingZip, string billingCountry, string billingPhone, string billingEmail
-                                        , string onFileEndDate, string onFilePermission, string onFileComment, string onFileMaxChargeAmount)
+        public ApiResponse AddCardOnFile(
+            string merchantId,
+            string merchantKey,
+            string customerId,
+            string creditCardNumber,
+            string expirationMonth,
+            string expirationYear,
+            string billingName,
+            string billingAddress1,
+            string billingAddress2,
+            string billingCity,
+            string billingState,
+            string billingZip,
+            string billingCountry,
+            string billingPhone,
+            string billingEmail,
+            string onFileEndDate,
+            string onFilePermission,
+            string onFileComment,
+            string onFileMaxChargeAmount
+        )
         {
-
             _request = new ApiRequest(merchantId, merchantKey)
             {
                 Command = "add-card-onfile",
@@ -210,7 +247,6 @@ namespace MaxiPago.Gateway
                 }
             };
             return new Utils().SendRequest(_request, Environment) as ApiResponse;
-
         }
 
         /// <summary>
@@ -221,20 +257,19 @@ namespace MaxiPago.Gateway
         /// <param name="customerId">The customer identifier.</param>
         /// <param name="token">The token.</param>
         /// <returns>ApiResponse.</returns>
-        public ApiResponse DeleteCardOnFile(string merchantId, string merchantKey, string customerId, string token)
+        public ApiResponse DeleteCardOnFile(
+            string merchantId,
+            string merchantKey,
+            string customerId,
+            string token
+        )
         {
-
             _request = new ApiRequest(merchantId, merchantKey)
             {
                 Command = "delete-card-onfile",
-                CommandRequest = new CommandRequest
-                {
-                    CustomerId = customerId,
-                    Token = token
-                }
+                CommandRequest = new CommandRequest { CustomerId = customerId, Token = token }
             };
             return new Utils().SendRequest(_request, Environment) as ApiResponse;
-
         }
 
         /// <summary>
@@ -253,6 +288,5 @@ namespace MaxiPago.Gateway
             };
             return new Utils().SendRequest(_request, Environment) as ApiResponse;
         }
-
     }
 }

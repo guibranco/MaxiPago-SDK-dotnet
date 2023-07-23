@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Transactional
 {
-
     /// <summary>
     /// Class TransactionDetail.
     /// </summary>
@@ -24,7 +23,6 @@ namespace MaxiPago.DataContract.Transactional
     [XmlRoot(ElementName = "transactionDetail")]
     public class TransactionDetail
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionDetail"/> class.
         /// </summary>
@@ -39,6 +37,5 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The type of the pay.</value>
         [XmlElement("payType")]
         public PayType PayType { get; set; }
-
     }
 }
