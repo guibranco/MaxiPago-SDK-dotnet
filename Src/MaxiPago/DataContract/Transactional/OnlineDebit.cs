@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Transactional
 {
-
     /// <summary>
     /// Class OnlineDebit.
     /// </summary>
@@ -24,13 +23,11 @@ namespace MaxiPago.DataContract.Transactional
     [XmlRoot(ElementName = "onlineDebit")]
     public class OnlineDebit
     {
-
         /// <summary>
         /// Gets or sets the parameters URL.
         /// </summary>
         /// <value>The parameters URL.</value>
         [XmlElement("parametersURL")]
         public string ParametersURL { get; set; }
-
     }
 }

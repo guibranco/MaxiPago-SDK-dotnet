@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Reports
 {
-
     /// <summary>
     /// Class ReportResult.
     /// </summary>
@@ -24,7 +23,6 @@ namespace MaxiPago.DataContract.Reports
     [XmlRoot(ElementName = "result")]
     public class ReportResult
     {
-
         /// <summary>
         /// Gets or sets the request token.
         /// </summary>
@@ -52,6 +50,5 @@ namespace MaxiPago.DataContract.Reports
         /// <value>The records.</value>
         [XmlElement("records")]
         public Records Records { get; set; }
-
     }
 }

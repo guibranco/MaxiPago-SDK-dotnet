@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Transactional
 {
-
     /// <summary>
     /// Class Void.
     /// </summary>
@@ -24,7 +23,6 @@ namespace MaxiPago.DataContract.Transactional
     [XmlRoot(ElementName = "void")]
     public class Void
     {
-
         /// <summary>
         /// Gets or sets the transaction identifier.
         /// </summary>
@@ -38,6 +36,5 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The ip address.</value>
         [XmlElement("ipAddress")]
         public string IpAddress { get; set; }
-
     }
 }

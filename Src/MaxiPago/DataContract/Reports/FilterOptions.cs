@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Reports
 {
-
     /// <summary>
     /// Class FilterOptions.
     /// </summary>
@@ -24,7 +23,6 @@ namespace MaxiPago.DataContract.Reports
     [XmlRoot(ElementName = "filterOptions")]
     public class FilterOptions
     {
-
         /// <summary>
         /// Gets or sets the transaction identifier.
         /// </summary>
@@ -122,6 +120,5 @@ namespace MaxiPago.DataContract.Reports
         /// <value>The page token.</value>
         [XmlElement("pageToken")]
         public string PageToken { get; set; }
-
     }
 }

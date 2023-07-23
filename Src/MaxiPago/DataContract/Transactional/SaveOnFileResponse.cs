@@ -14,15 +14,15 @@
 using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Transactional {
-
+namespace MaxiPago.DataContract.Transactional
+{
     /// <summary>
     /// Class SaveOnFileResponse.
     /// </summary>
     [Serializable]
     [XmlRoot(ElementName = "save-on-file")]
-    public class SaveOnFileResponse {
-
+    public class SaveOnFileResponse
+    {
         /// <summary>
         /// Gets or sets the error.
         /// </summary>
@@ -36,6 +36,5 @@ namespace MaxiPago.DataContract.Transactional {
         /// <value>The token.</value>
         [XmlElement("token")]
         public string Token { get; set; }
-
     }
 }

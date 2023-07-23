@@ -16,7 +16,6 @@ using MaxiPago.DataContract.Reports;
 
 namespace MaxiPago.Gateway
 {
-
     /// <summary>
     /// Class Report.
     /// Implements the <see cref="ServiceBase" />
@@ -24,7 +23,6 @@ namespace MaxiPago.Gateway
     /// <seealso cref="ServiceBase" />
     public class Report : ServiceBase
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Report"/> class.
         /// </summary>
@@ -55,11 +53,25 @@ namespace MaxiPago.Gateway
         /// <param name="endRecordNumber">The end record number.</param>
         /// <returns>RapiResponse.</returns>
         /// Queries a list of transactions
-        public RapiResponse GetTransactionDetailReport(string merchantId, string merchantKey, string period,
-            string pageSize, string startDate, string endDate, string startTime, string endTime, string orderByName,
-            string orderByDirection, string startRecordNumber, string endRecordNumber)
+        public RapiResponse GetTransactionDetailReport(
+            string merchantId,
+            string merchantKey,
+            string period,
+            string pageSize,
+            string startDate,
+            string endDate,
+            string startTime,
+            string endTime,
+            string orderByName,
+            string orderByDirection,
+            string startRecordNumber,
+            string endRecordNumber
+        )
         {
-            _request = new RapiRequest(merchantId, merchantKey) { Command = "transactionDetailReport" };
+            _request = new RapiRequest(merchantId, merchantKey)
+            {
+                Command = "transactionDetailReport"
+            };
 
             var filter = _request.ReportRequest.FilterOptions;
 
@@ -85,10 +97,16 @@ namespace MaxiPago.Gateway
         /// <param name="transactionId">The transaction identifier.</param>
         /// <returns>RapiResponse.</returns>
         /// Queries one transaction
-        public RapiResponse GetTransactionDetailReport(string merchantId, string merchantKey, string transactionId)
+        public RapiResponse GetTransactionDetailReport(
+            string merchantId,
+            string merchantKey,
+            string transactionId
+        )
         {
-
-            _request = new RapiRequest(merchantId, merchantKey) { Command = "transactionDetailReport" };
+            _request = new RapiRequest(merchantId, merchantKey)
+            {
+                Command = "transactionDetailReport"
+            };
             _request.ReportRequest.FilterOptions.TransactionId = transactionId;
 
             return new Utils().SendRequest(_request, Environment) as RapiResponse;
@@ -102,10 +120,16 @@ namespace MaxiPago.Gateway
         /// <param name="orderId">The order identifier.</param>
         /// <returns>RapiResponse.</returns>
         /// Queries one or more transactions by orderId.
-        public RapiResponse GetTransactionDetailReportByOrderId(string merchantId, string merchantKey, string orderId)
+        public RapiResponse GetTransactionDetailReportByOrderId(
+            string merchantId,
+            string merchantKey,
+            string orderId
+        )
         {
-
-            _request = new RapiRequest(merchantId, merchantKey) { Command = "transactionDetailReport" };
+            _request = new RapiRequest(merchantId, merchantKey)
+            {
+                Command = "transactionDetailReport"
+            };
             _request.ReportRequest.FilterOptions.OrderId = orderId;
 
             return new Utils().SendRequest(_request, Environment) as RapiResponse;
@@ -120,10 +144,17 @@ namespace MaxiPago.Gateway
         /// <param name="pageNumber">The page number.</param>
         /// <returns>RapiResponse.</returns>
         /// Flips through report pages
-        public RapiResponse GetTransactionDetailReport(string merchantId, string merchantKey, string pageToken, string pageNumber)
+        public RapiResponse GetTransactionDetailReport(
+            string merchantId,
+            string merchantKey,
+            string pageToken,
+            string pageNumber
+        )
         {
-
-            _request = new RapiRequest(merchantId, merchantKey) { Command = "transactionDetailReport" };
+            _request = new RapiRequest(merchantId, merchantKey)
+            {
+                Command = "transactionDetailReport"
+            };
             _request.ReportRequest.FilterOptions.PageToken = pageToken;
             _request.ReportRequest.FilterOptions.PageNumber = pageNumber;
 
@@ -138,19 +169,19 @@ namespace MaxiPago.Gateway
         /// <param name="requestToken">The request token.</param>
         /// <returns>RapiResponse.</returns>
         /// Queries the status of a pending report
-        public RapiResponse CheckRequestStatus(string merchantId, string merchantKey, string requestToken)
+        public RapiResponse CheckRequestStatus(
+            string merchantId,
+            string merchantKey,
+            string requestToken
+        )
         {
-
             _request = new RapiRequest(merchantId, merchantKey)
             {
                 Command = "checkRequestStatus",
                 ReportRequest = { RequestToken = requestToken }
             };
 
-
             return new Utils().SendRequest(_request, Environment) as RapiResponse;
-
         }
-
     }
 }

@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Transactional
 {
-
     /// <summary>
     /// Class OnFile.
     /// </summary>
@@ -24,7 +23,6 @@ namespace MaxiPago.DataContract.Transactional
     [XmlRoot(ElementName = "onFile")]
     public class OnFile
     {
-
         /// <summary>
         /// Gets or sets the customer identifier.
         /// </summary>
@@ -38,6 +36,5 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The token.</value>
         [XmlElement(ElementName = "token")]
         public string Token { get; set; }
-
     }
 }

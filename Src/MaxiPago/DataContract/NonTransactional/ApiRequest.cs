@@ -14,19 +14,20 @@
 using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.NonTransactional {
-
+namespace MaxiPago.DataContract.NonTransactional
+{
     /// <summary>
     /// Class ApiRequest.
     /// </summary>
     [Serializable]
     [XmlRoot(ElementName = "api-request")]
-    public class ApiRequest {
-
+    public class ApiRequest
+    {
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiRequest"/> class.
         /// </summary>
-        public ApiRequest() {
+        public ApiRequest()
+        {
             Verification = new Verification();
         }
 
@@ -35,7 +36,8 @@ namespace MaxiPago.DataContract.NonTransactional {
         /// </summary>
         /// <param name="merchantId">The merchant identifier.</param>
         /// <param name="merchantKey">The merchant key.</param>
-        public ApiRequest(string merchantId, string merchantKey) {
+        public ApiRequest(string merchantId, string merchantKey)
+        {
             Verification = new Verification(merchantId, merchantKey);
         }
 

@@ -17,7 +17,6 @@ using System.Threading;
 
 namespace MaxiPago.Gateway
 {
-
     /// <summary>
     /// Class Transaction.
     /// Implements the <see cref="ServiceBase" />
@@ -25,7 +24,6 @@ namespace MaxiPago.Gateway
     /// <seealso cref="ServiceBase" />
     public class Transaction : ServiceBase
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Transaction"/> class.
         /// </summary>
@@ -62,18 +60,52 @@ namespace MaxiPago.Gateway
         /// <param name="softDescriptor">The soft descriptor.</param>
         /// <param name="iataFee">The iata fee.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Sale(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
-                , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
-                , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string currencyCode
-                , string fraudCheck, string softDescriptor, decimal? iataFee)
+        public ResponseBase Sale(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string creditCardNumber,
+            string expMonth,
+            string expYear,
+            string cvvInd,
+            string cvvNumber,
+            string authentication,
+            string processorId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string customerIdExt,
+            string currencyCode,
+            string fraudCheck,
+            string softDescriptor,
+            decimal? iataFee
+        )
         {
-
-            FillRequestBase("sale", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
-                , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments, chargeInterest
-                , ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
+            FillRequestBase(
+                "sale",
+                merchantId,
+                merchantKey,
+                referenceNum,
+                chargeTotal,
+                creditCardNumber,
+                expMonth,
+                expYear,
+                cvvInd,
+                cvvNumber,
+                authentication,
+                processorId,
+                numberOfInstallments,
+                chargeInterest,
+                ipAddress,
+                customerIdExt,
+                currencyCode,
+                fraudCheck,
+                softDescriptor,
+                iataFee
+            );
 
             return new Utils().SendRequest(_request, Environment);
-
         }
 
         /// <summary>
@@ -99,12 +131,29 @@ namespace MaxiPago.Gateway
         /// <param name="fraudCheck">The fraud check.</param>
         /// <param name="softDescriptor">The soft descriptor.</param>
         /// <param name="iataFee">The iata fee.</param>
-        private void FillRequestBase(string operation, string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
-                , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
-                , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string currencyCode
-                , string fraudCheck, string softDescriptor, decimal? iataFee)
+        private void FillRequestBase(
+            string operation,
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string creditCardNumber,
+            string expMonth,
+            string expYear,
+            string cvvInd,
+            string cvvNumber,
+            string authentication,
+            string processorId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string customerIdExt,
+            string currencyCode,
+            string fraudCheck,
+            string softDescriptor,
+            decimal? iataFee
+        )
         {
-
             _request = new TransactionRequest(merchantId, merchantKey);
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             var rBase = new RequestBase
@@ -152,8 +201,6 @@ namespace MaxiPago.Gateway
                 _request.Order.Sale = rBase;
             else if (operation.Equals("auth"))
                 _request.Order.Auth = rBase;
-
-
         }
 
         /// <summary>
@@ -197,20 +244,68 @@ namespace MaxiPago.Gateway
         /// <param name="softDescriptor">The soft descriptor.</param>
         /// <param name="iataFee">The iata fee.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Sale(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
-                , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
-                , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string billingName
-                , string billingAddress, string billingAddress2, string billingCity, string billingState, string billingPostalCode
-                , string billingCountry, string billingPhone, string billingEmail, string shippingName, string shippingAddress
-                , string shippingAddress2, string shippingCity, string shippingState, string shippingPostalCode
-                , string shippingCountry, string shippingPhone, string shippingEmail, string currencyCode, string fraudCheck
-                , string softDescriptor, decimal? iataFee)
+        public ResponseBase Sale(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string creditCardNumber,
+            string expMonth,
+            string expYear,
+            string cvvInd,
+            string cvvNumber,
+            string authentication,
+            string processorId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string customerIdExt,
+            string billingName,
+            string billingAddress,
+            string billingAddress2,
+            string billingCity,
+            string billingState,
+            string billingPostalCode,
+            string billingCountry,
+            string billingPhone,
+            string billingEmail,
+            string shippingName,
+            string shippingAddress,
+            string shippingAddress2,
+            string shippingCity,
+            string shippingState,
+            string shippingPostalCode,
+            string shippingCountry,
+            string shippingPhone,
+            string shippingEmail,
+            string currencyCode,
+            string fraudCheck,
+            string softDescriptor,
+            decimal? iataFee
+        )
         {
-
-
-            FillRequestBase("sale", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
-                    , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments, chargeInterest
-                    , ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
+            FillRequestBase(
+                "sale",
+                merchantId,
+                merchantKey,
+                referenceNum,
+                chargeTotal,
+                creditCardNumber,
+                expMonth,
+                expYear,
+                cvvInd,
+                cvvNumber,
+                authentication,
+                processorId,
+                numberOfInstallments,
+                chargeInterest,
+                ipAddress,
+                customerIdExt,
+                currencyCode,
+                fraudCheck,
+                softDescriptor,
+                iataFee
+            );
 
             var sale = _request.Order.Sale;
 
@@ -227,7 +322,6 @@ namespace MaxiPago.Gateway
                 State = billingState
             };
 
-
             sale.Shipping = new Shipping
             {
                 Address1 = shippingAddress,
@@ -242,7 +336,6 @@ namespace MaxiPago.Gateway
             };
 
             return new Utils().SendRequest(_request, Environment);
-
         }
 
         /// <summary>
@@ -263,15 +356,40 @@ namespace MaxiPago.Gateway
         /// <param name="softDescriptor">The soft descriptor.</param>
         /// <param name="iataFee">The iata fee.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Sale(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string processorId
-                                , string token, string customerId, string numberOfInstallments, string chargeInterest, string ipAddress, string currencyCode
-                                , string fraudCheck, string softDescriptor, decimal? iataFee)
+        public ResponseBase Sale(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string processorId,
+            string token,
+            string customerId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string currencyCode,
+            string fraudCheck,
+            string softDescriptor,
+            decimal? iataFee
+        )
         {
-
-
-            return PayWithToken("sale", merchantId, merchantKey, referenceNum, chargeTotal, processorId, token, customerId
-                                    , numberOfInstallments, chargeInterest, ipAddress, currencyCode, fraudCheck, softDescriptor, iataFee);
-
+            return PayWithToken(
+                "sale",
+                merchantId,
+                merchantKey,
+                referenceNum,
+                chargeTotal,
+                processorId,
+                token,
+                customerId,
+                numberOfInstallments,
+                chargeInterest,
+                ipAddress,
+                currencyCode,
+                fraudCheck,
+                softDescriptor,
+                iataFee
+            );
         }
 
         /// <summary>
@@ -309,22 +427,74 @@ namespace MaxiPago.Gateway
         /// <param name="softDescriptor">The soft descriptor.</param>
         /// <param name="iataFee">The iata fee.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Sale(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
-                                   , string creditCardNumber, string expMonth, string expYear, string cvvInd, string cvvNumber
-                                   , string processorId, string numberOfInstallments, string chargeInterest, string ipAddress
-                                   , string customerToken, string onFileEndDate, string onFilePermission, string onFileComment
-                                   , string onFileMaxChargeAmount, string billingName, string billingAddress, string billingAddress2
-                                   , string billingCity, string billingState, string billingPostalCode, string billingCountry
-                                   , string billingPhone, string billingEmail, string currencyCode, string fraudCheck
-                                   , string softDescriptor, decimal? iataFee)
+        public ResponseBase Sale(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string creditCardNumber,
+            string expMonth,
+            string expYear,
+            string cvvInd,
+            string cvvNumber,
+            string processorId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string customerToken,
+            string onFileEndDate,
+            string onFilePermission,
+            string onFileComment,
+            string onFileMaxChargeAmount,
+            string billingName,
+            string billingAddress,
+            string billingAddress2,
+            string billingCity,
+            string billingState,
+            string billingPostalCode,
+            string billingCountry,
+            string billingPhone,
+            string billingEmail,
+            string currencyCode,
+            string fraudCheck,
+            string softDescriptor,
+            decimal? iataFee
+        )
         {
-
-            return PaySavingCreditCardAutomatically("sale", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
-                                                    , cvvInd, cvvNumber, processorId, numberOfInstallments, chargeInterest, ipAddress, customerToken
-                                                    , onFileEndDate, onFilePermission, onFileComment, onFileMaxChargeAmount, billingName, billingAddress
-                                                    , billingAddress2, billingCity, billingState, billingPostalCode, billingCountry, billingPhone, billingEmail
-                                                    , currencyCode, fraudCheck, softDescriptor, iataFee);
-
+            return PaySavingCreditCardAutomatically(
+                "sale",
+                merchantId,
+                merchantKey,
+                referenceNum,
+                chargeTotal,
+                creditCardNumber,
+                expMonth,
+                expYear,
+                cvvInd,
+                cvvNumber,
+                processorId,
+                numberOfInstallments,
+                chargeInterest,
+                ipAddress,
+                customerToken,
+                onFileEndDate,
+                onFilePermission,
+                onFileComment,
+                onFileMaxChargeAmount,
+                billingName,
+                billingAddress,
+                billingAddress2,
+                billingCity,
+                billingState,
+                billingPostalCode,
+                billingCountry,
+                billingPhone,
+                billingEmail,
+                currencyCode,
+                fraudCheck,
+                softDescriptor,
+                iataFee
+            );
         }
 
         /// <summary>
@@ -350,18 +520,52 @@ namespace MaxiPago.Gateway
         /// <param name="softDescriptor">The soft descriptor.</param>
         /// <param name="iataFee">The iata fee.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Auth(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
-                , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
-                , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string currencyCode
-                , string fraudCheck, string softDescriptor, decimal? iataFee)
+        public ResponseBase Auth(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string creditCardNumber,
+            string expMonth,
+            string expYear,
+            string cvvInd,
+            string cvvNumber,
+            string authentication,
+            string processorId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string customerIdExt,
+            string currencyCode,
+            string fraudCheck,
+            string softDescriptor,
+            decimal? iataFee
+        )
         {
-
-            FillRequestBase("auth", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
-                    , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments
-                    , chargeInterest, ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
+            FillRequestBase(
+                "auth",
+                merchantId,
+                merchantKey,
+                referenceNum,
+                chargeTotal,
+                creditCardNumber,
+                expMonth,
+                expYear,
+                cvvInd,
+                cvvNumber,
+                authentication,
+                processorId,
+                numberOfInstallments,
+                chargeInterest,
+                ipAddress,
+                customerIdExt,
+                currencyCode,
+                fraudCheck,
+                softDescriptor,
+                iataFee
+            );
 
             return new Utils().SendRequest(_request, Environment);
-
         }
 
         /// <summary>
@@ -405,18 +609,68 @@ namespace MaxiPago.Gateway
         /// <param name="softDescriptor">The soft descriptor.</param>
         /// <param name="iataFee">The iata fee.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Auth(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string creditCardNumber
-                , string expMonth, string expYear, string cvvInd, string cvvNumber, string authentication, string processorId
-                , string numberOfInstallments, string chargeInterest, string ipAddress, string customerIdExt, string billingName
-                , string billingAddress, string billingAddress2, string billingCity, string billingState, string billingPostalCode
-                , string billingCountry, string billingPhone, string billingEmail, string shippingName, string shippingAddress
-                , string shippingAddress2, string shippingCity, string shippingState, string shippingPostalCode, string shippingCountry
-                , string shippingPhone, string shippingEmail, string currencyCode, string fraudCheck, string softDescriptor, decimal? iataFee)
+        public ResponseBase Auth(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string creditCardNumber,
+            string expMonth,
+            string expYear,
+            string cvvInd,
+            string cvvNumber,
+            string authentication,
+            string processorId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string customerIdExt,
+            string billingName,
+            string billingAddress,
+            string billingAddress2,
+            string billingCity,
+            string billingState,
+            string billingPostalCode,
+            string billingCountry,
+            string billingPhone,
+            string billingEmail,
+            string shippingName,
+            string shippingAddress,
+            string shippingAddress2,
+            string shippingCity,
+            string shippingState,
+            string shippingPostalCode,
+            string shippingCountry,
+            string shippingPhone,
+            string shippingEmail,
+            string currencyCode,
+            string fraudCheck,
+            string softDescriptor,
+            decimal? iataFee
+        )
         {
-
-            FillRequestBase("auth", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
-                    , cvvInd, cvvNumber, authentication, processorId, numberOfInstallments
-                    , chargeInterest, ipAddress, customerIdExt, currencyCode, fraudCheck, softDescriptor, iataFee);
+            FillRequestBase(
+                "auth",
+                merchantId,
+                merchantKey,
+                referenceNum,
+                chargeTotal,
+                creditCardNumber,
+                expMonth,
+                expYear,
+                cvvInd,
+                cvvNumber,
+                authentication,
+                processorId,
+                numberOfInstallments,
+                chargeInterest,
+                ipAddress,
+                customerIdExt,
+                currencyCode,
+                fraudCheck,
+                softDescriptor,
+                iataFee
+            );
 
             var auth = _request.Order.Auth;
 
@@ -433,7 +687,6 @@ namespace MaxiPago.Gateway
                 State = billingState
             };
 
-
             auth.Shipping = new Shipping
             {
                 Address1 = shippingAddress,
@@ -447,9 +700,7 @@ namespace MaxiPago.Gateway
                 State = shippingState
             };
 
-
             return new Utils().SendRequest(_request, Environment);
-
         }
 
         /// <summary>
@@ -470,15 +721,40 @@ namespace MaxiPago.Gateway
         /// <param name="softDescriptor">The soft descriptor.</param>
         /// <param name="iataFee">The iata fee.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Auth(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string processorId
-                                , string token, string customerId, string numberOfInstallments, string chargeInterest, string ipAddress, string currencyCode
-                                , string fraudCheck, string softDescriptor, decimal? iataFee)
+        public ResponseBase Auth(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string processorId,
+            string token,
+            string customerId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string currencyCode,
+            string fraudCheck,
+            string softDescriptor,
+            decimal? iataFee
+        )
         {
-
-
-            return PayWithToken("auth", merchantId, merchantKey, referenceNum, chargeTotal, processorId, token, customerId
-                                    , numberOfInstallments, chargeInterest, ipAddress, currencyCode, fraudCheck, softDescriptor, iataFee);
-
+            return PayWithToken(
+                "auth",
+                merchantId,
+                merchantKey,
+                referenceNum,
+                chargeTotal,
+                processorId,
+                token,
+                customerId,
+                numberOfInstallments,
+                chargeInterest,
+                ipAddress,
+                currencyCode,
+                fraudCheck,
+                softDescriptor,
+                iataFee
+            );
         }
 
         /// <summary>
@@ -516,22 +792,74 @@ namespace MaxiPago.Gateway
         /// <param name="softDescriptor">The soft descriptor.</param>
         /// <param name="iataFee">The iata fee.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Auth(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
-                                   , string creditCardNumber, string expMonth, string expYear, string cvvInd, string cvvNumber
-                                   , string processorId, string numberOfInstallments, string chargeInterest, string ipAddress
-                                   , string customerToken, string onFileEndDate, string onFilePermission, string onFileComment
-                                   , string onFileMaxChargeAmount, string billingName, string billingAddress, string billingAddress2
-                                   , string billingCity, string billingState, string billingPostalCode, string billingCountry
-                                   , string billingPhone, string billingEmail, string currencyCode, string fraudCheck
-                                   , string softDescriptor, decimal? iataFee)
+        public ResponseBase Auth(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string creditCardNumber,
+            string expMonth,
+            string expYear,
+            string cvvInd,
+            string cvvNumber,
+            string processorId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string customerToken,
+            string onFileEndDate,
+            string onFilePermission,
+            string onFileComment,
+            string onFileMaxChargeAmount,
+            string billingName,
+            string billingAddress,
+            string billingAddress2,
+            string billingCity,
+            string billingState,
+            string billingPostalCode,
+            string billingCountry,
+            string billingPhone,
+            string billingEmail,
+            string currencyCode,
+            string fraudCheck,
+            string softDescriptor,
+            decimal? iataFee
+        )
         {
-
-            return PaySavingCreditCardAutomatically("auth", merchantId, merchantKey, referenceNum, chargeTotal, creditCardNumber, expMonth, expYear
-                                                    , cvvInd, cvvNumber, processorId, numberOfInstallments, chargeInterest, ipAddress, customerToken
-                                                    , onFileEndDate, onFilePermission, onFileComment, onFileMaxChargeAmount, billingName, billingAddress
-                                                    , billingAddress2, billingCity, billingState, billingPostalCode, billingCountry, billingPhone, billingEmail
-                                                    , currencyCode, fraudCheck, softDescriptor, iataFee);
-
+            return PaySavingCreditCardAutomatically(
+                "auth",
+                merchantId,
+                merchantKey,
+                referenceNum,
+                chargeTotal,
+                creditCardNumber,
+                expMonth,
+                expYear,
+                cvvInd,
+                cvvNumber,
+                processorId,
+                numberOfInstallments,
+                chargeInterest,
+                ipAddress,
+                customerToken,
+                onFileEndDate,
+                onFilePermission,
+                onFileComment,
+                onFileMaxChargeAmount,
+                billingName,
+                billingAddress,
+                billingAddress2,
+                billingCity,
+                billingState,
+                billingPostalCode,
+                billingCountry,
+                billingPhone,
+                billingEmail,
+                currencyCode,
+                fraudCheck,
+                softDescriptor,
+                iataFee
+            );
         }
 
         /// <summary>
@@ -557,12 +885,28 @@ namespace MaxiPago.Gateway
         /// <param name="billingPhone">The billing phone.</param>
         /// <param name="billingEmail">The billing email.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Boleto(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string processorId
-                                 , string ipAddress, string customerIdExt, string expirationDate, string number, string instructions
-                                 , string billingName, string billingAddress, string billingAddress2, string billingCity, string billingState
-                                 , string billingPostalCode, string billingCountry, string billingPhone, string billingEmail)
+        public ResponseBase Boleto(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string processorId,
+            string ipAddress,
+            string customerIdExt,
+            string expirationDate,
+            string number,
+            string instructions,
+            string billingName,
+            string billingAddress,
+            string billingAddress2,
+            string billingCity,
+            string billingState,
+            string billingPostalCode,
+            string billingCountry,
+            string billingPhone,
+            string billingEmail
+        )
         {
-
             _request = new TransactionRequest(merchantId, merchantKey);
 
             var order = _request.Order;
@@ -587,10 +931,14 @@ namespace MaxiPago.Gateway
                 },
                 Payment = new Payment { ChargeTotal = chargeTotal }
             };
-            order.Sale.TransactionDetail.PayType.Boleto = new Boleto { ExpirationDate = expirationDate, Instructions = instructions, Number = number };
+            order.Sale.TransactionDetail.PayType.Boleto = new Boleto
+            {
+                ExpirationDate = expirationDate,
+                Instructions = instructions,
+                Number = number
+            };
 
             return new Utils().SendRequest(_request, Environment);
-
         }
 
         /// <summary>
@@ -612,11 +960,24 @@ namespace MaxiPago.Gateway
         /// <param name="softDescriptor">The soft descriptor.</param>
         /// <param name="iataFee">The iata fee.</param>
         /// <returns>ResponseBase.</returns>
-        private ResponseBase PayWithToken(string operation, string merchantId, string merchantKey, string referenceNum, decimal chargeTotal, string processorId
-                                , string token, string customerId, string numberOfInstallments, string chargeInterest, string ipAddress, string currencyCode
-                                , string fraudCheck, string softDescriptor, decimal? iataFee)
+        private ResponseBase PayWithToken(
+            string operation,
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string processorId,
+            string token,
+            string customerId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string currencyCode,
+            string fraudCheck,
+            string softDescriptor,
+            decimal? iataFee
+        )
         {
-
             _request = new TransactionRequest(merchantId, merchantKey);
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
@@ -650,13 +1011,16 @@ namespace MaxiPago.Gateway
                 };
             }
 
-            rBase.TransactionDetail.PayType.OnFile = new OnFile { CustomerId = customerId, Token = token };
+            rBase.TransactionDetail.PayType.OnFile = new OnFile
+            {
+                CustomerId = customerId,
+                Token = token
+            };
             if (operation.Equals("sale"))
                 _request.Order.Sale = rBase;
             else if (operation.Equals("auth"))
                 _request.Order.Auth = rBase;
             return new Utils().SendRequest(_request, Environment);
-
         }
 
         /// <summary>
@@ -695,16 +1059,41 @@ namespace MaxiPago.Gateway
         /// <param name="softDescriptor">The soft descriptor.</param>
         /// <param name="iataFee">The iata fee.</param>
         /// <returns>ResponseBase.</returns>
-        private ResponseBase PaySavingCreditCardAutomatically(string operation, string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
-                                                            , string creditCardNumber, string expMonth, string expYear, string cvvInd, string cvvNumber
-                                                            , string processorId, string numberOfInstallments, string chargeInterest, string ipAddress
-                                                            , string customerToken, string onFileEndDate, string onFilePermission, string onFileComment
-                                                            , string onFileMaxChargeAmount, string billingName, string billingAddress, string billingAddress2
-                                                            , string billingCity, string billingState, string billingPostalCode, string billingCountry
-                                                            , string billingPhone, string billingEmail, string currencyCode, string fraudCheck, string softDescriptor
-                                                            , decimal? iataFee)
+        private ResponseBase PaySavingCreditCardAutomatically(
+            string operation,
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string creditCardNumber,
+            string expMonth,
+            string expYear,
+            string cvvInd,
+            string cvvNumber,
+            string processorId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string customerToken,
+            string onFileEndDate,
+            string onFilePermission,
+            string onFileComment,
+            string onFileMaxChargeAmount,
+            string billingName,
+            string billingAddress,
+            string billingAddress2,
+            string billingCity,
+            string billingState,
+            string billingPostalCode,
+            string billingCountry,
+            string billingPhone,
+            string billingEmail,
+            string currencyCode,
+            string fraudCheck,
+            string softDescriptor,
+            decimal? iataFee
+        )
         {
-
             _request = new TransactionRequest(merchantId, merchantKey);
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
@@ -773,7 +1162,6 @@ namespace MaxiPago.Gateway
                 _request.Order.Auth = rBase;
 
             return new Utils().SendRequest(_request, Environment);
-
         }
 
         /// <summary>
@@ -785,9 +1173,14 @@ namespace MaxiPago.Gateway
         /// <param name="referenceNum">The reference number.</param>
         /// <param name="chargeTotal">The charge total.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Capture(string merchantId, string merchantKey, string orderID, string referenceNum, decimal chargeTotal)
+        public ResponseBase Capture(
+            string merchantId,
+            string merchantKey,
+            string orderID,
+            string referenceNum,
+            decimal chargeTotal
+        )
         {
-
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             _request = new TransactionRequest(merchantId, merchantKey)
@@ -798,15 +1191,12 @@ namespace MaxiPago.Gateway
                     {
                         OrderId = orderID,
                         ReferenceNum = referenceNum,
-                        Payment = {ChargeTotal = chargeTotal}
+                        Payment = { ChargeTotal = chargeTotal }
                     }
                 }
             };
 
-
-
             return new Utils().SendRequest(_request, Environment);
-
         }
 
         /// <summary>
@@ -818,9 +1208,14 @@ namespace MaxiPago.Gateway
         /// <param name="referenceNum">The reference number.</param>
         /// <param name="chargeTotal">The charge total.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Return(string merchantId, string merchantKey, string orderID, string referenceNum, decimal chargeTotal)
+        public ResponseBase Return(
+            string merchantId,
+            string merchantKey,
+            string orderID,
+            string referenceNum,
+            decimal chargeTotal
+        )
         {
-
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             _request = new TransactionRequest(merchantId, merchantKey)
@@ -831,15 +1226,12 @@ namespace MaxiPago.Gateway
                     {
                         OrderId = orderID,
                         ReferenceNum = referenceNum,
-                        Payment = {ChargeTotal = chargeTotal}
+                        Payment = { ChargeTotal = chargeTotal }
                     }
                 }
             };
 
-
-
             return new Utils().SendRequest(_request, Environment);
-
         }
 
         /// <summary>
@@ -850,24 +1242,22 @@ namespace MaxiPago.Gateway
         /// <param name="transactionID">The transaction identifier.</param>
         /// <param name="ipAddress">The ip address.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Void(string merchantId, string merchantKey, string transactionID, string ipAddress)
+        public ResponseBase Void(
+            string merchantId,
+            string merchantKey,
+            string transactionID,
+            string ipAddress
+        )
         {
-
             _request = new TransactionRequest(merchantId, merchantKey)
             {
                 Order =
                 {
-                    Void = new Void
-                    {
-                        IpAddress = ipAddress,
-                        TransactionId = transactionID
-                    }
+                    Void = new Void { IpAddress = ipAddress, TransactionId = transactionID }
                 }
             };
 
-
             return new Utils().SendRequest(_request, Environment);
-
         }
 
         /// <summary>
@@ -894,16 +1284,46 @@ namespace MaxiPago.Gateway
         /// <param name="failureThreshold">The failure threshold.</param>
         /// <param name="currencyCode">The currency code.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Recurring(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
-            , string creditCardNumber, string expMonth, string expYear, string cvvInd, string cvvNumber, string processorId
-            , string numberOfInstallments, string chargeInterest, string ipAddress, string action
-            , string startDate, string frequency, string period, string installments, string failureThreshold
-            , string currencyCode)
+        public ResponseBase Recurring(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string creditCardNumber,
+            string expMonth,
+            string expYear,
+            string cvvInd,
+            string cvvNumber,
+            string processorId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string action,
+            string startDate,
+            string frequency,
+            string period,
+            string installments,
+            string failureThreshold,
+            string currencyCode
+        )
         {
-
-            FillRecurringBase(merchantId, merchantKey, referenceNum, chargeTotal, processorId, numberOfInstallments
-                , chargeInterest, ipAddress, action, startDate, frequency, period, installments
-                , failureThreshold, currencyCode);
+            FillRecurringBase(
+                merchantId,
+                merchantKey,
+                referenceNum,
+                chargeTotal,
+                processorId,
+                numberOfInstallments,
+                chargeInterest,
+                ipAddress,
+                action,
+                startDate,
+                frequency,
+                period,
+                installments,
+                failureThreshold,
+                currencyCode
+            );
             //WARNING: installments é o campo a ser usado (numberOfInstallments é referente ao Parcelamento)
 
             var detail = _request.Order.RecurringPayment.TransactionDetail;
@@ -916,7 +1336,6 @@ namespace MaxiPago.Gateway
                 ExpYear = expYear,
                 Number = creditCardNumber
             };
-
 
             return new Utils().SendRequest(_request, Environment);
         }
@@ -942,20 +1361,49 @@ namespace MaxiPago.Gateway
         /// <param name="failureThreshold">The failure threshold.</param>
         /// <param name="currencyCode">The currency code.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase Recurring(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
-            , string customerId, string token, string processorId, string numberOfInstallments
-            , string chargeInterest, string ipAddress, string action, string startDate
-            , string frequency, string period, string installments, string failureThreshold
-            , string currencyCode)
+        public ResponseBase Recurring(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string customerId,
+            string token,
+            string processorId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string action,
+            string startDate,
+            string frequency,
+            string period,
+            string installments,
+            string failureThreshold,
+            string currencyCode
+        )
         {
+            FillRecurringBase(
+                merchantId,
+                merchantKey,
+                referenceNum,
+                chargeTotal,
+                processorId,
+                numberOfInstallments,
+                chargeInterest,
+                ipAddress,
+                action,
+                startDate,
+                frequency,
+                period,
+                installments,
+                failureThreshold,
+                currencyCode
+            );
 
-            FillRecurringBase(merchantId, merchantKey, referenceNum, chargeTotal, processorId, numberOfInstallments,
-                              chargeInterest, ipAddress, action, startDate, frequency, period, installments,
-                              failureThreshold, currencyCode);
-
-            _request.Order.RecurringPayment.TransactionDetail.PayType.OnFile =
-                new OnFile { CustomerId = customerId, Token = token };
-
+            _request.Order.RecurringPayment.TransactionDetail.PayType.OnFile = new OnFile
+            {
+                CustomerId = customerId,
+                Token = token
+            };
 
             return new Utils().SendRequest(_request, Environment);
         }
@@ -978,13 +1426,24 @@ namespace MaxiPago.Gateway
         /// <param name="installments">The installments.</param>
         /// <param name="failureThreshold">The failure threshold.</param>
         /// <param name="currencyCode">The currency code.</param>
-        private void FillRecurringBase(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
-            , string processorId, string numberOfInstallments, string chargeInterest
-            , string ipAddress, string action, string startDate
-            , string frequency, string period, string installments, string failureThreshold
-            , string currencyCode)
+        private void FillRecurringBase(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string processorId,
+            string numberOfInstallments,
+            string chargeInterest,
+            string ipAddress,
+            string action,
+            string startDate,
+            string frequency,
+            string period,
+            string installments,
+            string failureThreshold,
+            string currencyCode
+        )
         {
-
             if (string.IsNullOrEmpty(numberOfInstallments))
                 numberOfInstallments = "0";
 
@@ -1033,10 +1492,17 @@ namespace MaxiPago.Gateway
         /// <param name="ipAddress">The ip address.</param>
         /// <param name="customerIdExt">The customer identifier ext.</param>
         /// <returns>ResponseBase.</returns>
-        public ResponseBase OnlineDebit(string merchantId, string merchantKey, string referenceNum, decimal chargeTotal
-                                    , string processorId, string parametersUrl, string ipAddress, string customerIdExt)
+        public ResponseBase OnlineDebit(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string processorId,
+            string parametersUrl,
+            string ipAddress,
+            string customerIdExt
+        )
         {
-
             _request = new TransactionRequest(merchantId, merchantKey)
             {
                 Order =
@@ -1047,17 +1513,16 @@ namespace MaxiPago.Gateway
                         ProcessorId = processorId,
                         IpAddress = ipAddress,
                         CustomerIdExt = customerIdExt,
-                        Payment = new Payment {ChargeTotal = chargeTotal},
+                        Payment = new Payment { ChargeTotal = chargeTotal },
                     }
                 }
             };
-            _request.Order.Sale.TransactionDetail.PayType.OnlineDebit =
-                new OnlineDebit { ParametersURL = parametersUrl ?? string.Empty };
+            _request.Order.Sale.TransactionDetail.PayType.OnlineDebit = new OnlineDebit
+            {
+                ParametersURL = parametersUrl ?? string.Empty
+            };
 
             return new Utils().SendRequest(_request, Environment);
-
         }
-
-
     }
 }

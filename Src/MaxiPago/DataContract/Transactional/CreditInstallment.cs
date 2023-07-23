@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Transactional
 {
-
     /// <summary>
     /// Class CreditInstallment.
     /// </summary>
@@ -24,7 +23,6 @@ namespace MaxiPago.DataContract.Transactional
     [XmlRoot("creditInstallment")]
     public class CreditInstallment
     {
-
         /// <summary>
         /// Gets or sets the number of installments.
         /// </summary>
@@ -38,8 +36,5 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The charge interest.</value>
         [XmlElement("chargeInterest")]
         public string ChargeInterest { get; set; }
-
     }
-
-
 }

@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Transactional
 {
-
     /// <summary>
     /// Class ClientData.
     /// </summary>
@@ -24,7 +23,6 @@ namespace MaxiPago.DataContract.Transactional
     [XmlRoot(ElementName = "clientData")]
     public class ClientData
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientData"/> class.
         /// </summary>
@@ -84,6 +82,5 @@ namespace MaxiPago.DataContract.Transactional
             // ReSharper disable once ValueParameterNotUsed
             set { }
         }
-
     }
 }

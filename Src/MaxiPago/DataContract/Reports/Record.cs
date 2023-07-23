@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Reports
 {
-
     /// <summary>
     /// Class Record.
     /// </summary>
@@ -24,7 +23,6 @@ namespace MaxiPago.DataContract.Reports
     [XmlRoot(ElementName = "record")]
     public class Record
     {
-
         /// <summary>
         /// Gets or sets the approval code.
         /// </summary>
@@ -346,9 +344,5 @@ namespace MaxiPago.DataContract.Reports
         /// <value>The charge interest.</value>
         [XmlElement("chargeInterest")]
         public string ChargeInterest { get; set; }
-
-
-
-
     }
 }

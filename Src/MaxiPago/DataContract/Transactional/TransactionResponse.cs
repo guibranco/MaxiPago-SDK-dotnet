@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Transactional
 {
-
     /// <summary>
     /// Class TransactionResponse.
     /// Implements the <see cref="MaxiPago.DataContract.ResponseBase" />
@@ -26,7 +25,6 @@ namespace MaxiPago.DataContract.Transactional
     [XmlRoot(ElementName = "transaction-response")]
     public class TransactionResponse : ResponseBase
     {
-
         /// <summary>
         /// Gets or sets the authorization code.
         /// </summary>
@@ -125,7 +123,6 @@ namespace MaxiPago.DataContract.Transactional
         [XmlElement("fraudScore")]
         public string FraudScore { get; set; }
 
-
         /// <summary>
         /// Gets or sets the error message.
         /// </summary>
@@ -163,7 +160,5 @@ namespace MaxiPago.DataContract.Transactional
 
         [XmlElement("onlineDebitUrl")]
         public string OnlineDebitUrl { get; set; }
-
     }
-
 }

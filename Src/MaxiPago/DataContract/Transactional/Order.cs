@@ -26,7 +26,8 @@ namespace MaxiPago.DataContract.Transactional
         /// <summary>
         /// Initializes a new instance of the <see cref="Order"/> class.
         /// </summary>
-        public Order() {
+        public Order()
+        {
             ClientData = new ClientData();
         }
 
@@ -78,6 +79,5 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The client data.</value>
         [XmlElement("clientData")]
         public ClientData ClientData { get; set; }
-
     }
 }

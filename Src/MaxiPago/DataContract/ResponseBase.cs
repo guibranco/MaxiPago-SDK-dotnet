@@ -17,13 +17,11 @@ using MaxiPago.DataContract.Transactional;
 
 namespace MaxiPago.DataContract
 {
-
     /// <summary>
     /// Class ResponseBase.
     /// </summary>
     public abstract class ResponseBase
     {
-
         /// <summary>
         /// Gets a value indicating whether this instance is transaction response.
         /// </summary>

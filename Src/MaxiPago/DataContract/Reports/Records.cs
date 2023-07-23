@@ -15,21 +15,20 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Reports {
-
+namespace MaxiPago.DataContract.Reports
+{
     /// <summary>
     /// Class Records.
     /// </summary>
     [Serializable]
     [XmlRoot(ElementName = "records")]
-    public class Records {
-
+    public class Records
+    {
         /// <summary>
         /// Gets or sets the record.
         /// </summary>
         /// <value>The record.</value>
         [XmlElement("record")]
         public List<Record> Record { get; set; }
-
     }
 }

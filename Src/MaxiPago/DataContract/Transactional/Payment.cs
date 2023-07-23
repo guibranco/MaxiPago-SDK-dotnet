@@ -14,15 +14,15 @@
 using System;
 using System.Xml.Serialization;
 
-namespace MaxiPago.DataContract.Transactional {
-
+namespace MaxiPago.DataContract.Transactional
+{
     /// <summary>
     /// Class Payment.
     /// </summary>
     [Serializable]
     [XmlRoot(ElementName = "payment")]
-    public class Payment {
-
+    public class Payment
+    {
         /// <summary>
         /// Gets or sets the credit installment.
         /// </summary>
@@ -34,7 +34,10 @@ namespace MaxiPago.DataContract.Transactional {
         /// Shoulds the serialize credit installment.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool ShouldSerializeCreditInstallment() { return CreditInstallment != null; }
+        public bool ShouldSerializeCreditInstallment()
+        {
+            return CreditInstallment != null;
+        }
 
         /// <summary>
         /// Gets or sets the charge total.
@@ -54,7 +57,10 @@ namespace MaxiPago.DataContract.Transactional {
         /// Shoulds the serialize currency code.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool ShouldSerializeCurrencyCode() { return CurrencyCode != null; }
+        public bool ShouldSerializeCurrencyCode()
+        {
+            return CurrencyCode != null;
+        }
 
         /// <summary>
         /// Gets or sets the soft descriptor.
@@ -62,12 +68,16 @@ namespace MaxiPago.DataContract.Transactional {
         /// <value>The soft descriptor.</value>
         [XmlElement("softDescriptor")]
         public string SoftDescriptor { get; set; }
+
         /// <summary>
         /// Shoulds the serialize soft descriptor.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// Verifica se o valor da propriedade � nulo, se sim, n�o serializa esse campo no xml
-        public bool ShouldSerializeSoftDescriptor() { return SoftDescriptor != null; }
+        public bool ShouldSerializeSoftDescriptor()
+        {
+            return SoftDescriptor != null;
+        }
 
         /// <summary>
         /// Gets or sets the iata fee.
@@ -75,12 +85,15 @@ namespace MaxiPago.DataContract.Transactional {
         /// <value>The iata fee.</value>
         [XmlElement("iataFee")]
         public decimal? IataFee { get; set; }
+
         /// <summary>
         /// Shoulds the serialize iata fee.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// Verifica se o valor da propriedade � nulo, se sim, n�o serializa esse campo no xml
-        public bool ShouldSerializeIataFee() { return IataFee != null; }
-
+        public bool ShouldSerializeIataFee()
+        {
+            return IataFee != null;
+        }
     }
 }

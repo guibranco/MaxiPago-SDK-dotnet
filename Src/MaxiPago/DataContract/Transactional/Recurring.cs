@@ -20,7 +20,6 @@ namespace MaxiPago.DataContract.Transactional
     /// </summary>
     public class Recurring
     {
-
         /// <summary>
         /// Gets or sets the action.
         /// </summary>
@@ -62,6 +61,5 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The failure threshold.</value>
         [XmlElement("failureThreshold")]
         public string FailureThreshold { get; set; }
-
     }
 }

@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 
 namespace MaxiPago.DataContract.Transactional
 {
-
     /// <summary>
     /// Class ErrorResponse.
     /// Implements the <see cref="MaxiPago.DataContract.ResponseBase" />
@@ -26,7 +25,6 @@ namespace MaxiPago.DataContract.Transactional
     [XmlRoot(ElementName = "api-error")]
     public class ErrorResponse : ResponseBase
     {
-
         /// <summary>
         /// Gets or sets the error code.
         /// </summary>
@@ -40,6 +38,5 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The error MSG.</value>
         [XmlElement("errorMsg")]
         public string ErrorMsg { get; set; }
-
     }
 }
