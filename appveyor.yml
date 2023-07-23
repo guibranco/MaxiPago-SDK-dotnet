@@ -69,7 +69,7 @@ build_script:
 - if %LOCAL_PR% EQU 1 codeclimate-test-reporter format-coverage -t lcov -o "Tests\%SOLUTION_NAME%.Tests\code-climate.json" "Tests\%SOLUTION_NAME%.Tests\coverage.info"
 - if %LOCAL_PR% EQU 1 codeclimate-test-reporter upload-coverage -i "Tests\%SOLUTION_NAME%.Tests\code-climate.json" -r %CODECLIMATE_TOKEN%
 - if %LOCAL_PR% EQU 1 java -jar ./codacy-test-reporter.jar report -l CSharp -t %CODACY_PROJECT_TOKEN% -r "Tests\%SOLUTION_NAME%.Tests\coverage.opencover.xml"
-- if %LOCAL_PR% EQU 1 dotnet sonarscanner end /d:sonar.token="%SONAR_TOKEN%
+- if %LOCAL_PR% EQU 1 dotnet sonarscanner end /d:sonar.token="%SONAR_TOKEN%"
 
 after_build:
 - xcopy Src\%SOLUTION_NAME%\bin\Release\netstandard2.0\*.* Build\2.0\
