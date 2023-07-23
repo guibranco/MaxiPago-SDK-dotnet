@@ -62,7 +62,6 @@ build_script:
            dotnet test $testProject /p:CollectCoverage=true /p:CoverletOutputFormat="$coverletFormat"
         }
     }
-        }
 - codecov -f "%CD%\Tests\%SOLUTION_NAME%.Tests\coverage.opencover.xml"
 - codeclimate-test-reporter format-coverage -t lcov -o "%CD%\Tests\%SOLUTION_NAME%.Tests\code-climate.json" "%CD%\Tests\%SOLUTION_NAME%.Tests\coverage.info"
 - ps: |
