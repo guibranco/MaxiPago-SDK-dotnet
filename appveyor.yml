@@ -21,6 +21,8 @@ dotnet_csproj:
   informational_version: '{version}'
   
 init:
+- ps: echo $env:APPVEYOR_PULL_REQUEST_HEAD_REPO_NAME
+- ps: echo $env:APPVEYOR_REPO_NAME
 - SET JAVA_HOME=C:\Program Files\Java\jdk19
 - SET PATH=%JAVA_HOME%\bin;%PATH%
 
@@ -42,7 +44,6 @@ build:
   verbosity: normal
 
 build_script:
-- ps: echo $env:APPVEYOR_PULL_REQUEST_HEAD_REPO_NAME
 - ps: $Params =  "/k:`"$env:SONAR_PROJECT`"", "/o:`"$env:SONAR_ORGANIZATION`"", "/v:`"$env:APPVEYOR_BUILD_NUMBER`""
 - ps: $Params += "/d:sonar.host.url=`"https://sonarcloud.io`"", "/d:sonar.login=`"$env:SONAR_TOKEN`""
 - ps: $Params += "/d:sonar.exclusions=`"**/bin/**/*,**/obj/**/*`"", "/d:sonar.coverage.exclusions=`"**/$env:SOLUTION_NAME.Tests/**,**/*Tests.cs`""
