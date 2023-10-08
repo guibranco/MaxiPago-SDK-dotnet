@@ -58,7 +58,7 @@ Download the latest zip file from the [Release](https://github.com/guibranco/Max
 
 ## Features
 
-Implements all features of MaxiPago API available at [Integration Documentation](https://www.maxipago.com/docs/maxiPago_API_Latest.pdf)
+Implements all features of MaxiPago API available at [Integration Documentation](https://www.maxipago.com/developers/apidocs/)
 
 - Add customer
 - Delete customer
