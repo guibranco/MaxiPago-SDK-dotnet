@@ -81,7 +81,7 @@ Implements all features of MaxiPago API available at [Integration Documentation]
 - Online Debit (Brazil only!)
 - Transactions report
 - Transaction detailed report
-- Transaction detailed report by order id
+- Transaction detailed report by order ID
 - Check request status
 
 ---
