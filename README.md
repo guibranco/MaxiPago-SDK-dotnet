@@ -11,10 +11,11 @@ The [MaxiPago gateway](https://www.maxipago.com/developers/) SDK for .NET projec
 
 ## CI/CD
 
-| Build status | Last commit | Tests | Coverage | Code Smells | LoC | 
-|--------------|-------------|-------|----------|-------------|-----|
-| [![Build status](https://ci.appveyor.com/api/projects/status/0rghu1mnaahlfi16/branch/main?svg=true)](https://ci.appveyor.com/project/guibranco/MaxiPago-SDK-dotnet/branch/main) | [![GitHub last commit](https://img.shields.io/github/last-commit/guibranco/MaxiPago-SDK-dotnet/main)](https://github.com/guibranco/MaxiPago-SDK-dotnet) | [![AppVeyor tests (branch)](https://img.shields.io/appveyor/tests/guibranco/MaxiPago-SDK-dotnet/main?compact_message)](https://ci.appveyor.com/project/guibranco/MaxiPago-SDK-dotnet/branch/main) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=guibranco_MaxiPago-SDK-dotnet&metric=coverage&branch=main)](https://sonarcloud.io/dashboard?id=guibranco_MaxiPago-SDK-dotnet) | [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=guibranco_MaxiPago-SDK-dotnet&metric=code_smells&branch=main)](https://sonarcloud.io/dashboard?id=guibranco_MaxiPago-SDK-dotnet) | [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=guibranco_MaxiPago-SDK-dotnet&metric=ncloc&branch=main)](https://sonarcloud.io/dashboard?id=guibranco_MaxiPago-SDK-dotnet) | 
-## Code Quality (main branch)
+| Build status | Last commit | Tests | Coverage | Code Smells | LoC |
+|:------------:|:-----------:|:-----:|:--------:|:-----------:|:---:|
+| [![Build status](https://ci.appveyor.com/api/projects/status/0rghu1mnaahlfi16/branch/main?svg=true)](https://ci.appveyor.com/project/guibranco/MaxiPago-SDK-dotnet/branch/main) | [![GitHub last commit](https://img.shields.io/github/last-commit/guibranco/MaxiPago-SDK-dotnet/main)](https://github.com/guibranco/MaxiPago-SDK-dotnet) | [![AppVeyor tests (branch)](https://img.shields.io/appveyor/tests/guibranco/MaxiPago-SDK-dotnet/main?compact_message)](https://ci.appveyor.com/project/guibranco/MaxiPago-SDK-dotnet/branch/main) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=guibranco_MaxiPago-SDK-dotnet&metric=coverage&branch=main)](https://sonarcloud.io/dashboard?id=guibranco_MaxiPago-SDK-dotnet) | [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=guibranco_MaxiPago-SDK-dotnet&metric=code_smells&branch=main)](https://sonarcloud.io/dashboard?id=guibranco_MaxiPago-SDK-dotnet) | [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=guibranco_MaxiPago-SDK-dotnet&metric=ncloc&branch=main)](https://sonarcloud.io/dashboard?id=guibranco_MaxiPago-SDK-dotnet) |
+
+## Code Quality
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/608c4d2f8af3473a853c470bce9d1f24)](https://www.codacy.com/gh/guibranco/MaxiPago-SDK-dotnet/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=guibranco/MaxiPago-SDK-dotnet&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/608c4d2f8af3473a853c470bce9d1f24)](https://www.codacy.com/gh/guibranco/MaxiPago-SDK-dotnet/dashboard?utm_source=github.com&utm_medium=referral&utm_content=guibranco/MaxiPago-SDK-dotnet&utm_campaign=Badge_Coverage)
@@ -57,12 +58,12 @@ Download the latest zip file from the [Release](https://github.com/guibranco/Max
 
 ## Features
 
-Implements all features of MaxiPago API available at [Integration Documentation](https://www.maxipago.com/docs/maxiPago_API_Latest.pdf)
+Implements all features of MaxiPago API available at [Integration Documentation](https://www.maxipago.com/developers/apidocs/)
 
 - Add customer
 - Delete customer
 - Update customer
-- Add card on file
+- Add a card on file
 - Delete card on file
 - Cancel recurring
 - Sale (with card data)
@@ -71,8 +72,8 @@ Implements all features of MaxiPago API available at [Integration Documentation]
 - Auth (with card data)
 - Auth (with saved card)
 - Auth (with card data, saving the card for future use)
-- Boleto (bank slip / bank bill - Brazil only!)
-- Capture (capture a pre auth request)
+- Boleto (bank slip/bank bill - Brazil only!)
+- Capture (capture a pre-auth request)
 - Return
 - Void
 - Recurring (with card data)
@@ -80,7 +81,7 @@ Implements all features of MaxiPago API available at [Integration Documentation]
 - Online Debit (Brazil only!)
 - Transactions report
 - Transaction detailed report
-- Transaction detailed report by order id
+- Transaction detailed report by order ID
 - Check request status
 
 ---
@@ -102,20 +103,20 @@ var response = api.AddConsumer(
     userIdInYourSystem,
     firstName,
     lastName,
-    addressLineOne, //if you don't has this information, use null instead
-    addressLineTwo, //if you don't has this information, use null instead
-    city, //if you don't has this information, use null instead
-    state, //if you don't has this information, use null instead
-    zipCode, //if you don't has this information, use null instead
-    phone, //if you don't has this information, use null instead
+    addressLineOne, //if you don't have this information, use null instead
+    addressLineTwo, //if you don't have this information, use null instead
+    city, //if you don't have this information, use null instead
+    state, //if you don't have this information, use null instead
+    zipCode, //if you don't have this information, use null instead
+    phone, //if you don't have this information, use null instead
     email,
-    dateOfBirth, //if you don't has this information, use null instead
+    dateOfBirth, //if you don't have this information, use null instead
     document,
     gender); //M for Male and F for Female
 
 if(!string.IsNullOrWhiteSpace(response.ErrorMessage))
     //handle the error message.
-return response.Result.CustomerId; //store this customer id value for update or delete the customer in future.
+return response.Result.CustomerId; //store this customer ID value for updating or deleting the customer in future.
 
 ```
 
@@ -205,7 +206,7 @@ return response.Result.Token; //store this token for future use (remove card, sa
 
 ```
 
-### Create recurring payment
+### Create a recurring payment
 
 ```cs
 
@@ -231,10 +232,10 @@ var response = transaction.Recurring(
         ipAddress,
         "new",
         startDate, //the date of first charge
-        frequency, //combined with period, so if frequency is 1, every "period" will be charged. So if period is "weekly" and frequency is "2", every two weeks will be charged.
+        frequency, //combined with period, so if the frequency is 1, every "period" will be charged. So if the period is "weekly" and the frequency is "2", every two weeks will be charged.
         period, //The charge recurring period: daily, weekly, monthly
         numberOfTimes, //The number of times to repeat the charge (use 999 as max value for "indefinitely" time, after 999 times, this recurring will need to be created again).
-        failureThreshold, //Number of failed attempts needed to trigger email notification to merchant.
+        failureThreshold, //Number of failed attempts needed to trigger an email notification to the merchant.
         "BRL"); //currency of the charge.
 
 if(response.IsErrorResponse){
@@ -242,7 +243,7 @@ if(response.IsErrorResponse){
         Console.WriteLine(errorResult.ErrorMsg); //handle the error message.
 }
 if(!(response is TransactionResponse result))
-    //some other erro, handle it
+    //some other error, handle it
 
 var orderId = result.OrderId;
 var responseCode = result.ResponseCode;
