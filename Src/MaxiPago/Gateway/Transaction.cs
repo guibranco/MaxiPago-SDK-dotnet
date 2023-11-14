@@ -11,9 +11,9 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System.Threading;
 using MaxiPago.DataContract;
 using MaxiPago.DataContract.Transactional;
-using System.Threading;
 
 namespace MaxiPago.Gateway
 {

@@ -11,15 +11,15 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using MaxiPago.DataContract;
-using MaxiPago.DataContract.NonTransactional;
-using MaxiPago.DataContract.Reports;
-using MaxiPago.DataContract.Transactional;
 using System;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Xml.Serialization;
+using MaxiPago.DataContract;
+using MaxiPago.DataContract.NonTransactional;
+using MaxiPago.DataContract.Reports;
+using MaxiPago.DataContract.Transactional;
 
 namespace MaxiPago.Gateway
 {
