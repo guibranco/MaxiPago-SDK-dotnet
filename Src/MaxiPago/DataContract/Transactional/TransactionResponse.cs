@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : MaxiPago
 // Author           : Guilherme Branco Stracini
 // Created          : 16/01/2023
@@ -157,7 +157,6 @@ namespace MaxiPago.DataContract.Transactional
         /// <value>The online debit URL.</value>
         //[XmlElement("partiallyApprovedAmount")]
         //public string PartiallyApprovedAmount { get; set; }
-
         [XmlElement("onlineDebitUrl")]
         public string OnlineDebitUrl { get; set; }
     }
