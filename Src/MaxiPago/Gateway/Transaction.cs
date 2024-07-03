@@ -155,7 +155,6 @@ namespace MaxiPago.Gateway
         )
         {
             _request = new TransactionRequest(merchantId, merchantKey);
-            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             var rBase = new RequestBase
             {
                 ReferenceNum = referenceNum,
@@ -910,7 +909,6 @@ namespace MaxiPago.Gateway
             _request = new TransactionRequest(merchantId, merchantKey);
 
             var order = _request.Order;
-            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             order.Sale = new RequestBase
             {
                 ReferenceNum = referenceNum,
