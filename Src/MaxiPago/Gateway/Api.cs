@@ -108,6 +108,21 @@ namespace MaxiPago.Gateway
         {
             _request = new ApiRequest(merchantId, merchantKey)
             {
+        public ApiResponse ProcessPixPayment(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string pixKey,
+            string ipAddress,
+            string customerIdExt
+        )
+        {
+            var transaction = new Transaction { Environment = Environment };
+            var response = transaction.PixPayment(merchantId, merchantKey, referenceNum, chargeTotal, pixKey, ipAddress, customerIdExt) as ApiResponse;
+            return response;
+        }
+}
                 Command = "delete-consumer",
                 CommandRequest = new CommandRequest { CustomerId = customerId }
             };
