@@ -339,6 +339,39 @@ namespace MaxiPago.Gateway
 
         /// <summary>
         /// Faz uma autorização com captura passando o token do cartão já salvo na base.
+        public ResponseBase PixPayment(
+            string merchantId,
+            string merchantKey,
+            string referenceNum,
+            decimal chargeTotal,
+            string pixKey,
+            string ipAddress,
+            string customerIdExt
+        )
+        {
+            _request = new TransactionRequest(merchantId, merchantKey)
+            {
+                Order =
+                {
+                    Sale = new RequestBase
+                    {
+                        ReferenceNum = referenceNum,
+                        IpAddress = ipAddress,
+                        CustomerIdExt = customerIdExt,
+                        Payment = new Payment
+                        {
+                            ChargeTotal = chargeTotal,
+                            PixPayment = new PixPayment
+                            {
+                                PixKey = pixKey
+                            }
+                        }
+                    }
+                }
+            };
+            return new Utils().SendRequest(_request, Environment);
+        }
+}
         /// </summary>
         /// <param name="merchantId">The merchant identifier.</param>
         /// <param name="merchantKey">The merchant key.</param>

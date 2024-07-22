@@ -47,6 +47,15 @@ namespace MaxiPago.DataContract.Transactional
         public decimal ChargeTotal { get; set; }
 
         /// <summary>
+        [XmlElement("pixPayment")]
+        public PixPayment PixPayment { get; set; }
+
+        public bool ShouldSerializePixPayment()
+        {
+            return PixPayment != null;
+        }
+    }
+}
         /// Gets or sets the currency code.
         /// </summary>
         /// <value>The currency code.</value>

@@ -43,6 +43,7 @@ The [MaxiPago gateway](https://www.maxipago.com/developers/) SDK for .NET projec
 ## Installation
 
 ### Github Releases
+- Pix Payment (Brazil only!)
 
 [![GitHub last release](https://img.shields.io/github/release-date/guibranco/MaxiPago-SDK-dotnet.svg?style=flat)](https://github.com/guibranco/MaxiPago-SDK-dotnet) [![Github All Releases](https://img.shields.io/github/downloads/guibranco/MaxiPago-SDK-dotnet/total.svg?style=flat)](https://github.com/guibranco/MaxiPago-SDK-dotnet)
 
