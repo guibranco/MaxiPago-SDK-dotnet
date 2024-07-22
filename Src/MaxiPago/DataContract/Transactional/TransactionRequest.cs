@@ -41,6 +41,15 @@ namespace MaxiPago.DataContract.Transactional
         public TransactionRequest(string merchantId, string merchantKey)
         {
             Verification = new Verification(merchantId, merchantKey);
+        [XmlElement("pixPayment")]
+        public PixPayment PixPayment { get; set; }
+
+        public bool ShouldSerializePixPayment()
+        {
+            return PixPayment != null;
+        }
+    }
+}
             Order = new Order();
             Version = "3.1.1.15";
         }
