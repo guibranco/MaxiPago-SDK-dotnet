@@ -90,8 +90,8 @@ namespace MaxiPago.Gateway
                     Email = email,
                     Dob = dob,
                     Ssn = ssn,
-                    Sex = sex
-                }
+                    Sex = sex,
+                },
             };
 
             return new Utils().SendRequest(_request, Environment) as ApiResponse;
@@ -109,7 +109,7 @@ namespace MaxiPago.Gateway
             _request = new ApiRequest(merchantId, merchantKey)
             {
                 Command = "delete-consumer",
-                CommandRequest = new CommandRequest { CustomerId = customerId }
+                CommandRequest = new CommandRequest { CustomerId = customerId },
             };
             return new Utils().SendRequest(_request, Environment) as ApiResponse;
         }
@@ -171,8 +171,8 @@ namespace MaxiPago.Gateway
                     Email = email,
                     Dob = dob,
                     Ssn = ssn,
-                    Sex = sex
-                }
+                    Sex = sex,
+                },
             };
             return new Utils().SendRequest(_request, Environment) as ApiResponse;
         }
@@ -243,8 +243,8 @@ namespace MaxiPago.Gateway
                     OnFileEndDate = onFileEndDate,
                     OnFilePermission = onFilePermission,
                     OnFileComment = onFileComment,
-                    OnFileMaxChargeAmount = onFileMaxChargeAmount
-                }
+                    OnFileMaxChargeAmount = onFileMaxChargeAmount,
+                },
             };
             return new Utils().SendRequest(_request, Environment) as ApiResponse;
         }
@@ -267,7 +267,7 @@ namespace MaxiPago.Gateway
             _request = new ApiRequest(merchantId, merchantKey)
             {
                 Command = "delete-card-onfile",
-                CommandRequest = new CommandRequest { CustomerId = customerId, Token = token }
+                CommandRequest = new CommandRequest { CustomerId = customerId, Token = token },
             };
             return new Utils().SendRequest(_request, Environment) as ApiResponse;
         }
@@ -284,7 +284,7 @@ namespace MaxiPago.Gateway
             _request = new ApiRequest(merchantId, merchantKey)
             {
                 Command = "cancel-recurring",
-                CommandRequest = new CommandRequest { OrderID = orderID }
+                CommandRequest = new CommandRequest { OrderID = orderID },
             };
             return new Utils().SendRequest(_request, Environment) as ApiResponse;
         }

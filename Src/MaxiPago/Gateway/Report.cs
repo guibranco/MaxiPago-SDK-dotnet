@@ -70,7 +70,7 @@ namespace MaxiPago.Gateway
         {
             _request = new RapiRequest(merchantId, merchantKey)
             {
-                Command = "transactionDetailReport"
+                Command = "transactionDetailReport",
             };
 
             var filter = _request.ReportRequest.FilterOptions;
@@ -105,7 +105,7 @@ namespace MaxiPago.Gateway
         {
             _request = new RapiRequest(merchantId, merchantKey)
             {
-                Command = "transactionDetailReport"
+                Command = "transactionDetailReport",
             };
             _request.ReportRequest.FilterOptions.TransactionId = transactionId;
 
@@ -128,7 +128,7 @@ namespace MaxiPago.Gateway
         {
             _request = new RapiRequest(merchantId, merchantKey)
             {
-                Command = "transactionDetailReport"
+                Command = "transactionDetailReport",
             };
             _request.ReportRequest.FilterOptions.OrderId = orderId;
 
@@ -153,7 +153,7 @@ namespace MaxiPago.Gateway
         {
             _request = new RapiRequest(merchantId, merchantKey)
             {
-                Command = "transactionDetailReport"
+                Command = "transactionDetailReport",
             };
             _request.ReportRequest.FilterOptions.PageToken = pageToken;
             _request.ReportRequest.FilterOptions.PageNumber = pageNumber;
@@ -178,7 +178,7 @@ namespace MaxiPago.Gateway
             _request = new RapiRequest(merchantId, merchantKey)
             {
                 Command = "checkRequestStatus",
-                ReportRequest = { RequestToken = requestToken }
+                ReportRequest = { RequestToken = requestToken },
             };
 
             return new Utils().SendRequest(_request, Environment) as RapiResponse;
