@@ -37,22 +37,21 @@ namespace MaxiPago.Gateway
         private RapiRequest _request;
 
         /// <summary>
-        /// Gets the transaction detail report.
+        /// Retrieves the transaction detail report for a specified merchant.
         /// </summary>
-        /// <param name="merchantId">The merchant identifier.</param>
-        /// <param name="merchantKey">The merchant key.</param>
-        /// <param name="period">The period.</param>
-        /// <param name="pageSize">Size of the page.</param>
-        /// <param name="startDate">The start date.</param>
-        /// <param name="endDate">The end date.</param>
-        /// <param name="startTime">The start time.</param>
-        /// <param name="endTime">The end time.</param>
-        /// <param name="orderByName">Name of the order by.</param>
-        /// <param name="orderByDirection">The order by direction.</param>
-        /// <param name="startRecordNumber">The start record number.</param>
-        /// <param name="endRecordNumber">The end record number.</param>
-        /// <returns>RapiResponse.</returns>
-        /// Queries a list of transactions
+        /// <param name="merchantId">The unique identifier for the merchant.</param>
+        /// <param name="merchantKey">The key associated with the merchant for authentication.</param>
+        /// <param name="pageToken">The token for pagination to retrieve specific pages of the report.</param>
+        /// <param name="pageNumber">The number of the page to retrieve from the report.</param>
+        /// <returns>A <see cref="RapiResponse"/> object containing the transaction detail report data.</returns>
+        /// <remarks>
+        /// This method constructs a request to obtain a transaction detail report by initializing a
+        /// <see cref="RapiRequest"/> object with the provided merchant credentials and setting the
+        /// appropriate command and filter options for pagination. It then sends the request using
+        /// the <see cref="Utils.SendRequest"/> method, which communicates with the relevant service
+        /// and returns the response. The response is cast to a <see cref="RapiResponse"/> type,
+        /// which contains the details of the transaction report requested.
+        /// </remarks>
         public RapiResponse GetTransactionDetailReport(
             string merchantId,
             string merchantKey,
@@ -113,13 +112,20 @@ namespace MaxiPago.Gateway
         }
 
         /// <summary>
-        /// Gets the transaction detail report by order identifier.
+        /// Retrieves the transaction detail report for a specific order ID.
         /// </summary>
-        /// <param name="merchantId">The merchant identifier.</param>
-        /// <param name="merchantKey">The merchant key.</param>
-        /// <param name="orderId">The order identifier.</param>
-        /// <returns>RapiResponse.</returns>
-        /// Queries one or more transactions by orderId.
+        /// <param name="merchantId">The unique identifier for the merchant.</param>
+        /// <param name="merchantKey">The key associated with the merchant for authentication.</param>
+        /// <param name="orderId">The unique identifier for the order whose transaction details are to be retrieved.</param>
+        /// <returns>A <see cref="RapiResponse"/> object containing the transaction detail report for the specified order ID.</returns>
+        /// <remarks>
+        /// This method constructs a request to fetch the transaction detail report by setting up a new instance of
+        /// <see cref="RapiRequest"/> with the provided merchant ID and key. It specifies the command as
+        /// "transactionDetailReport" and applies a filter based on the provided order ID. The request is then sent
+        /// using the <see cref="Utils.SendRequest"/> method, which handles the communication with the relevant
+        /// service. The response is cast to a <see cref="RapiResponse"/> type, which contains the details of the
+        /// transaction report.
+        /// </remarks>
         public RapiResponse GetTransactionDetailReportByOrderId(
             string merchantId,
             string merchantKey,
@@ -162,13 +168,18 @@ namespace MaxiPago.Gateway
         }
 
         /// <summary>
-        /// Checks the request status.
+        /// Checks the status of a request using the provided merchant credentials and request token.
         /// </summary>
-        /// <param name="merchantId">The merchant identifier.</param>
-        /// <param name="merchantKey">The merchant key.</param>
-        /// <param name="requestToken">The request token.</param>
-        /// <returns>RapiResponse.</returns>
-        /// Queries the status of a pending report
+        /// <param name="merchantId">The unique identifier for the merchant.</param>
+        /// <param name="merchantKey">The key associated with the merchant for authentication.</param>
+        /// <param name="requestToken">The token representing the specific request whose status is to be checked.</param>
+        /// <returns>A <see cref="RapiResponse"/> object containing the status of the request.</returns>
+        /// <remarks>
+        /// This method creates a new instance of <see cref="RapiRequest"/> with the specified merchant ID and key,
+        /// and sets the command to "checkRequestStatus". It then populates the request with the provided request token.
+        /// Finally, it sends the request using the <see cref="Utils.SendRequest"/> method and returns the response as a <see cref="RapiResponse"/>.
+        /// This allows the caller to determine the current status of the request identified by the given token.
+        /// </remarks>
         public RapiResponse CheckRequestStatus(
             string merchantId,
             string merchantKey,
