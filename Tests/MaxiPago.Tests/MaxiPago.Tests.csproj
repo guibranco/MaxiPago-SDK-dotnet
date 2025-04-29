@@ -1,11 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <ProjectGuid>2F57B9CD-5505-4456-B9FE-F91DCB4476D6</ProjectGuid>
     <TargetFramework>net8.0</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="coverlet.msbuild" Version="6.0.4">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -24,9 +22,7 @@
     <PackageReference Include="Bogus" Version="34.0.2" />
     <PackageReference Include="FluentAssertions" Version="6.11.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Src\MaxiPago\MaxiPago.csproj" />
   </ItemGroup>
-
 </Project>
