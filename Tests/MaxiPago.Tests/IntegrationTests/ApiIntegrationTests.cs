@@ -1,12 +1,12 @@
 using System;
-using Xunit;
-using WireMock.Server;
-using WireMock.RequestBuilders;
-using WireMock.ResponseBuilders;
 using Bogus;
 using FluentAssertions;
-using MaxiPago.Gateway;
 using MaxiPago.DataContract.NonTransactional;
+using MaxiPago.Gateway;
+using WireMock.RequestBuilders;
+using WireMock.ResponseBuilders;
+using WireMock.Server;
+using Xunit;
 
 namespace MaxiPago.Tests.IntegrationTests
 {
@@ -30,14 +30,15 @@ namespace MaxiPago.Tests.IntegrationTests
         {
             // Arrange: setup WireMock stub to simulate API endpoint
             string fakeXmlResponse = "<api-response><result>Success</result></api-response>";
-            _server.Given(
-                Request.Create().WithPath("/").UsingPost()
-            ).RespondWith(
-                Response.Create()
-                    .WithStatusCode(200)
-                    .WithBody(fakeXmlResponse)
-                    .WithHeader("Content-Type", "application/xml")
-            );
+            _server
+                .Given(Request.Create().WithPath("/").UsingPost())
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBody(fakeXmlResponse)
+                        .WithHeader("Content-Type", "application/xml")
+                );
 
             // Using Bogus to generate fake consumer data
             var faker = new Faker();
@@ -65,7 +66,23 @@ namespace MaxiPago.Tests.IntegrationTests
             ApiResponse response = null;
             try
             {
-                response = api.AddConsumer(merchantId, merchantKey, customerIdExt, firstName, lastName, address1, address2, city, state, zip, phone, email, dob, ssn, sex);
+                response = api.AddConsumer(
+                    merchantId,
+                    merchantKey,
+                    customerIdExt,
+                    firstName,
+                    lastName,
+                    address1,
+                    address2,
+                    city,
+                    state,
+                    zip,
+                    phone,
+                    email,
+                    dob,
+                    ssn,
+                    sex
+                );
             }
             catch (Exception ex)
             {

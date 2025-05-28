@@ -1,12 +1,12 @@
 using System;
-using Xunit;
-using WireMock.Server;
-using WireMock.RequestBuilders;
-using WireMock.ResponseBuilders;
 using Bogus;
 using FluentAssertions;
-using MaxiPago.Gateway;
 using MaxiPago.DataContract.Reports;
+using MaxiPago.Gateway;
+using WireMock.RequestBuilders;
+using WireMock.ResponseBuilders;
+using WireMock.Server;
+using Xunit;
 
 namespace MaxiPago.Tests.IntegrationTests
 {
@@ -31,7 +31,8 @@ namespace MaxiPago.Tests.IntegrationTests
         public void GetTransactionDetailReport_ShouldReturnValidResponse()
         {
             // Arrange: Setup WireMock to simulate a successful report response
-            string reportResponse = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string reportResponse =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
                 <rapi-response>
                     <header>
                         <errorCode>0</errorCode>
@@ -72,14 +73,15 @@ namespace MaxiPago.Tests.IntegrationTests
                     </result>
                 </rapi-response>";
 
-            _server.Given(
-                Request.Create().WithPath("/").UsingPost()
-            ).RespondWith(
-                Response.Create()
-                    .WithStatusCode(200)
-                    .WithBody(reportResponse)
-                    .WithHeader("Content-Type", "application/xml")
-            );
+            _server
+                .Given(Request.Create().WithPath("/").UsingPost())
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBody(reportResponse)
+                        .WithHeader("Content-Type", "application/xml")
+                );
 
             // Generate test data using Bogus
             string merchantId = _faker.Random.AlphaNumeric(10);
@@ -118,21 +120,21 @@ namespace MaxiPago.Tests.IntegrationTests
             // Assert: Verify the response using FluentAssertions
             response.Should().NotBeNull();
             response.Should().BeOfType<RapiResponse>();
-            
+
             var rapiResponse = response as RapiResponse;
             rapiResponse.Header.Should().NotBeNull();
             rapiResponse.Header.ErrorCode.Should().Be("0");
             rapiResponse.Header.Command.Should().Be("transactionDetailReport");
-            
+
             rapiResponse.Result.Should().NotBeNull();
             rapiResponse.Result.ResultSetInfo.Should().NotBeNull();
             rapiResponse.Result.ResultSetInfo.TotalNumberOfRecords.Should().Be("2");
             rapiResponse.Result.ResultSetInfo.PageToken.Should().Be("1");
-            
+
             rapiResponse.Result.Records.Should().NotBeNull();
             rapiResponse.Result.Records.Record.Should().NotBeNull();
             rapiResponse.Result.Records.Record.Should().HaveCount(2);
-            
+
             var firstRecord = rapiResponse.Result.Records.Record[0];
             firstRecord.TransactionId.Should().Be("123456");
             firstRecord.ReferenceNumber.Should().Be("REF123456");
@@ -145,7 +147,8 @@ namespace MaxiPago.Tests.IntegrationTests
         public void GetTransactionDetailReport_WithInvalidCredentials_ShouldReturnErrorResponse()
         {
             // Arrange: Setup WireMock to simulate an error response
-            string errorResponse = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string errorResponse =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
                 <rapi-response>
                     <header>
                         <errorCode>1</errorCode>
@@ -155,14 +158,15 @@ namespace MaxiPago.Tests.IntegrationTests
                     </header>
                 </rapi-response>";
 
-            _server.Given(
-                Request.Create().WithPath("/").UsingPost()
-            ).RespondWith(
-                Response.Create()
-                    .WithStatusCode(200)
-                    .WithBody(errorResponse)
-                    .WithHeader("Content-Type", "application/xml")
-            );
+            _server
+                .Given(Request.Create().WithPath("/").UsingPost())
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBody(errorResponse)
+                        .WithHeader("Content-Type", "application/xml")
+                );
 
             // Generate test data using Bogus
             string merchantId = "invalid_id";
@@ -201,13 +205,13 @@ namespace MaxiPago.Tests.IntegrationTests
             // Assert: Verify the error response using FluentAssertions
             response.Should().NotBeNull();
             response.Should().BeOfType<RapiResponse>();
-            
+
             var rapiResponse = response as RapiResponse;
             rapiResponse.Header.Should().NotBeNull();
             rapiResponse.Header.ErrorCode.Should().Be("1");
             rapiResponse.Header.ErrorMsg.Should().Be("Invalid merchant credentials");
             rapiResponse.Header.Command.Should().Be("transactionDetailReport");
-            
+
             // Result should be null or empty since this is an error response
             rapiResponse.Result.Should().BeNull();
         }

@@ -1,12 +1,12 @@
 using System;
-using Xunit;
-using WireMock.Server;
-using WireMock.RequestBuilders;
-using WireMock.ResponseBuilders;
 using Bogus;
 using FluentAssertions;
-using MaxiPago.Gateway;
 using MaxiPago.DataContract.Transactional;
+using MaxiPago.Gateway;
+using WireMock.RequestBuilders;
+using WireMock.ResponseBuilders;
+using WireMock.Server;
+using Xunit;
 
 namespace MaxiPago.Tests.IntegrationTests
 {
@@ -31,7 +31,8 @@ namespace MaxiPago.Tests.IntegrationTests
         public void Sale_WithValidCreditCard_ShouldReturnApprovedResponse()
         {
             // Arrange: Setup WireMock to simulate a successful transaction response
-            string successResponse = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string successResponse =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
                 <transaction-response>
                     <authCode>123456</authCode>
                     <orderID>12345</orderID>
@@ -49,14 +50,15 @@ namespace MaxiPago.Tests.IntegrationTests
                     <processorReferenceNumber>REF987654321</processorReferenceNumber>
                 </transaction-response>";
 
-            _server.Given(
-                Request.Create().WithPath("/").UsingPost()
-            ).RespondWith(
-                Response.Create()
-                    .WithStatusCode(200)
-                    .WithBody(successResponse)
-                    .WithHeader("Content-Type", "application/xml")
-            );
+            _server
+                .Given(Request.Create().WithPath("/").UsingPost())
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBody(successResponse)
+                        .WithHeader("Content-Type", "application/xml")
+                );
 
             // Generate test data using Bogus
             string merchantId = _faker.Random.AlphaNumeric(10);
@@ -97,7 +99,7 @@ namespace MaxiPago.Tests.IntegrationTests
             // Assert: Verify the response using FluentAssertions
             response.Should().NotBeNull();
             response.Should().BeOfType<TransactionResponse>();
-            
+
             var transactionResponse = response as TransactionResponse;
             transactionResponse.ResponseCode.Should().Be("0");
             transactionResponse.ResponseMessage.Should().Be("APPROVED");
@@ -111,7 +113,8 @@ namespace MaxiPago.Tests.IntegrationTests
         public void Sale_WithInvalidCreditCard_ShouldReturnDeclinedResponse()
         {
             // Arrange: Setup WireMock to simulate a declined transaction response
-            string declinedResponse = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string declinedResponse =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
                 <transaction-response>
                     <authCode></authCode>
                     <orderID>12345</orderID>
@@ -129,14 +132,15 @@ namespace MaxiPago.Tests.IntegrationTests
                     <processorReferenceNumber>REF987654321</processorReferenceNumber>
                 </transaction-response>";
 
-            _server.Given(
-                Request.Create().WithPath("/").UsingPost()
-            ).RespondWith(
-                Response.Create()
-                    .WithStatusCode(200)
-                    .WithBody(declinedResponse)
-                    .WithHeader("Content-Type", "application/xml")
-            );
+            _server
+                .Given(Request.Create().WithPath("/").UsingPost())
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBody(declinedResponse)
+                        .WithHeader("Content-Type", "application/xml")
+                );
 
             // Generate test data using Bogus
             string merchantId = _faker.Random.AlphaNumeric(10);
@@ -177,7 +181,7 @@ namespace MaxiPago.Tests.IntegrationTests
             // Assert: Verify the response using FluentAssertions
             response.Should().NotBeNull();
             response.Should().BeOfType<TransactionResponse>();
-            
+
             var transactionResponse = response as TransactionResponse;
             transactionResponse.ResponseCode.Should().Be("1");
             transactionResponse.ResponseMessage.Should().Be("DECLINED");
@@ -188,7 +192,8 @@ namespace MaxiPago.Tests.IntegrationTests
         public void Capture_WithValidTransactionId_ShouldReturnSuccessResponse()
         {
             // Arrange: Setup WireMock to simulate a successful capture response
-            string captureResponse = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string captureResponse =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
                 <transaction-response>
                     <authCode>123456</authCode>
                     <orderID>12345</orderID>
@@ -202,14 +207,15 @@ namespace MaxiPago.Tests.IntegrationTests
                     <errorMessage></errorMessage>
                 </transaction-response>";
 
-            _server.Given(
-                Request.Create().WithPath("/").UsingPost()
-            ).RespondWith(
-                Response.Create()
-                    .WithStatusCode(200)
-                    .WithBody(captureResponse)
-                    .WithHeader("Content-Type", "application/xml")
-            );
+            _server
+                .Given(Request.Create().WithPath("/").UsingPost())
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBody(captureResponse)
+                        .WithHeader("Content-Type", "application/xml")
+                );
 
             // Generate test data using Bogus
             string merchantId = _faker.Random.AlphaNumeric(10);
@@ -222,17 +228,12 @@ namespace MaxiPago.Tests.IntegrationTests
             transaction.Environment = _server.Urls[0];
 
             // Act: Process a capture transaction
-            var response = transaction.Capture(
-                merchantId,
-                merchantKey,
-                transactionId,
-                amount
-            );
+            var response = transaction.Capture(merchantId, merchantKey, transactionId, amount);
 
             // Assert: Verify the response using FluentAssertions
             response.Should().NotBeNull();
             response.Should().BeOfType<TransactionResponse>();
-            
+
             var transactionResponse = response as TransactionResponse;
             transactionResponse.ResponseCode.Should().Be("0");
             transactionResponse.ResponseMessage.Should().Be("CAPTURED");
