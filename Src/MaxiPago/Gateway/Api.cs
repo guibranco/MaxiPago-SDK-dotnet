@@ -23,11 +23,19 @@ namespace MaxiPago.Gateway
     /// <seealso cref="ServiceBase" />
     public class Api : ServiceBase
     {
+        private readonly IUtils _utils;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Api"/> class.
         /// </summary>
-        public Api()
+        public Api() : this(new Utils()) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Api"/> class with a custom <see cref="IUtils"/> implementation.
+        /// </summary>
+        public Api(IUtils utils)
         {
+            _utils = utils;
             Environment = "TEST";
         }
 
@@ -101,7 +109,7 @@ namespace MaxiPago.Gateway
                 },
             };
 
-            return new Utils().SendRequest(_request, Environment) as ApiResponse;
+            return _utils.SendRequest(_request, Environment) as ApiResponse;
         }
 
         /// <summary>
@@ -124,7 +132,7 @@ namespace MaxiPago.Gateway
                 Command = "delete-consumer",
                 CommandRequest = new CommandRequest { CustomerId = customerId },
             };
-            return new Utils().SendRequest(_request, Environment) as ApiResponse;
+            return _utils.SendRequest(_request, Environment) as ApiResponse;
         }
 
         /// <summary>
@@ -194,7 +202,7 @@ namespace MaxiPago.Gateway
                     Sex = sex,
                 },
             };
-            return new Utils().SendRequest(_request, Environment) as ApiResponse;
+            return _utils.SendRequest(_request, Environment) as ApiResponse;
         }
 
         /// <summary>
@@ -272,7 +280,7 @@ namespace MaxiPago.Gateway
                     OnFileMaxChargeAmount = onFileMaxChargeAmount,
                 },
             };
-            return new Utils().SendRequest(_request, Environment) as ApiResponse;
+            return _utils.SendRequest(_request, Environment) as ApiResponse;
         }
 
         /// <summary>
@@ -301,7 +309,7 @@ namespace MaxiPago.Gateway
                 Command = "delete-card-onfile",
                 CommandRequest = new CommandRequest { CustomerId = customerId, Token = token },
             };
-            return new Utils().SendRequest(_request, Environment) as ApiResponse;
+            return _utils.SendRequest(_request, Environment) as ApiResponse;
         }
 
         /// <summary>
@@ -325,7 +333,7 @@ namespace MaxiPago.Gateway
                 Command = "cancel-recurring",
                 CommandRequest = new CommandRequest { OrderID = orderID },
             };
-            return new Utils().SendRequest(_request, Environment) as ApiResponse;
+            return _utils.SendRequest(_request, Environment) as ApiResponse;
         }
     }
 }

@@ -24,11 +24,19 @@ namespace MaxiPago.Gateway
     /// <seealso cref="ServiceBase" />
     public class Transaction : ServiceBase
     {
+        private readonly IUtils _utils;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Transaction"/> class.
         /// </summary>
-        public Transaction()
+        public Transaction() : this(new Utils()) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Transaction"/> class with a custom <see cref="IUtils"/> implementation.
+        /// </summary>
+        public Transaction(IUtils utils)
         {
+            _utils = utils;
             Environment = "TEST";
         }
 
@@ -124,7 +132,7 @@ namespace MaxiPago.Gateway
                 iataFee
             );
 
-            return new Utils().SendRequest(_request, Environment);
+            return _utils.SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -360,7 +368,7 @@ namespace MaxiPago.Gateway
                 State = shippingState,
             };
 
-            return new Utils().SendRequest(_request, Environment);
+            return _utils.SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -611,7 +619,7 @@ namespace MaxiPago.Gateway
                 iataFee
             );
 
-            return new Utils().SendRequest(_request, Environment);
+            return _utils.SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -746,7 +754,7 @@ namespace MaxiPago.Gateway
                 State = shippingState,
             };
 
-            return new Utils().SendRequest(_request, Environment);
+            return _utils.SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -990,7 +998,7 @@ namespace MaxiPago.Gateway
                 Number = number,
             };
 
-            return new Utils().SendRequest(_request, Environment);
+            return _utils.SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -1079,7 +1087,7 @@ namespace MaxiPago.Gateway
                 _request.Order.Sale = rBase;
             else if (operation.Equals("auth"))
                 _request.Order.Auth = rBase;
-            return new Utils().SendRequest(_request, Environment);
+            return _utils.SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -1226,7 +1234,7 @@ namespace MaxiPago.Gateway
             else if (operation.Equals("auth"))
                 _request.Order.Auth = rBase;
 
-            return new Utils().SendRequest(_request, Environment);
+            return _utils.SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -1267,7 +1275,7 @@ namespace MaxiPago.Gateway
                 },
             };
 
-            return new Utils().SendRequest(_request, Environment);
+            return _utils.SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -1308,7 +1316,7 @@ namespace MaxiPago.Gateway
                 },
             };
 
-            return new Utils().SendRequest(_request, Environment);
+            return _utils.SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -1340,7 +1348,7 @@ namespace MaxiPago.Gateway
                 },
             };
 
-            return new Utils().SendRequest(_request, Environment);
+            return _utils.SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -1424,7 +1432,7 @@ namespace MaxiPago.Gateway
                 Number = creditCardNumber,
             };
 
-            return new Utils().SendRequest(_request, Environment);
+            return _utils.SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -1492,7 +1500,7 @@ namespace MaxiPago.Gateway
                 Token = token,
             };
 
-            return new Utils().SendRequest(_request, Environment);
+            return _utils.SendRequest(_request, Environment);
         }
 
         /// <summary>
@@ -1623,7 +1631,7 @@ namespace MaxiPago.Gateway
                 ParametersURL = parametersUrl ?? string.Empty,
             };
 
-            return new Utils().SendRequest(_request, Environment);
+            return _utils.SendRequest(_request, Environment);
         }
     }
 }

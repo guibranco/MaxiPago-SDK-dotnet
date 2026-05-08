@@ -26,7 +26,7 @@ namespace MaxiPago.Gateway
     /// <summary>
     /// Class Utils.
     /// </summary>
-    internal class Utils
+    internal class Utils : IUtils
     {
         /// <summary>
         /// Sends the request.
@@ -37,7 +37,7 @@ namespace MaxiPago.Gateway
         /// <returns>ResponseBase.</returns>
         /// <exception cref="System.Exception">The Request can not be null or empty</exception>
         /// Sends the request
-        internal ResponseBase SendRequest<T>(T request, string environment)
+        public ResponseBase SendRequest<T>(T request, string environment)
         {
             if (request == null)
                 throw new Exception("The Request can not be null or empty");
