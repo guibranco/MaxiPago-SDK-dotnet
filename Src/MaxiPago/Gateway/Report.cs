@@ -23,11 +23,20 @@ namespace MaxiPago.Gateway
     /// <seealso cref="ServiceBase" />
     public class Report : ServiceBase
     {
+        private readonly IUtils _utils;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Report"/> class.
         /// </summary>
         public Report()
+            : this(new Utils()) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Report"/> class with a custom <see cref="IUtils"/> implementation.
+        /// </summary>
+        public Report(IUtils utils)
         {
+            _utils = utils;
             Environment = "TEST";
         }
 
@@ -85,7 +94,7 @@ namespace MaxiPago.Gateway
             filter.StartRecordNumber = startRecordNumber;
             filter.EndRecordNumber = endRecordNumber;
 
-            return new Utils().SendRequest(_request, Environment) as RapiResponse;
+            return _utils.SendRequest(_request, Environment) as RapiResponse;
         }
 
         /// <summary>
@@ -108,7 +117,7 @@ namespace MaxiPago.Gateway
             };
             _request.ReportRequest.FilterOptions.TransactionId = transactionId;
 
-            return new Utils().SendRequest(_request, Environment) as RapiResponse;
+            return _utils.SendRequest(_request, Environment) as RapiResponse;
         }
 
         /// <summary>
@@ -138,7 +147,7 @@ namespace MaxiPago.Gateway
             };
             _request.ReportRequest.FilterOptions.OrderId = orderId;
 
-            return new Utils().SendRequest(_request, Environment) as RapiResponse;
+            return _utils.SendRequest(_request, Environment) as RapiResponse;
         }
 
         /// <summary>
@@ -164,7 +173,7 @@ namespace MaxiPago.Gateway
             _request.ReportRequest.FilterOptions.PageToken = pageToken;
             _request.ReportRequest.FilterOptions.PageNumber = pageNumber;
 
-            return new Utils().SendRequest(_request, Environment) as RapiResponse;
+            return _utils.SendRequest(_request, Environment) as RapiResponse;
         }
 
         /// <summary>
@@ -192,7 +201,7 @@ namespace MaxiPago.Gateway
                 ReportRequest = { RequestToken = requestToken },
             };
 
-            return new Utils().SendRequest(_request, Environment) as RapiResponse;
+            return _utils.SendRequest(_request, Environment) as RapiResponse;
         }
     }
 }
