@@ -29,7 +29,8 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Initializes a new instance of the <see cref="Transaction"/> class.
         /// </summary>
-        public Transaction() : this(new Utils()) { }
+        public Transaction()
+            : this(new Utils()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Transaction"/> class with a custom <see cref="IUtils"/> implementation.

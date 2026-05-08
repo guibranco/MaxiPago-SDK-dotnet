@@ -20,11 +20,13 @@ namespace MaxiPago.Tests.Gateway
         }
 
         private static string MerchantId() => Faker.Random.AlphaNumeric(8);
+
         private static string MerchantKey() => Faker.Random.AlphaNumeric(32);
 
         private void SetupRapiResponse() =>
-            _utils.SendRequest(Arg.Any<RapiRequest>(), Arg.Any<string>())
-                  .Returns(new RapiResponse());
+            _utils
+                .SendRequest(Arg.Any<RapiRequest>(), Arg.Any<string>())
+                .Returns(new RapiResponse());
 
         // ── environment ───────────────────────────────────────────────────────
 
@@ -49,18 +51,26 @@ namespace MaxiPago.Tests.Gateway
             SetupRapiResponse();
 
             _report.GetTransactionDetailReport(
-                MerchantId(), MerchantKey(),
-                "today", "25",
-                "2024-01-01", "2024-01-31",
-                "00:00:00", "23:59:59",
-                "transactionDate", "asc",
-                "0", "24"
+                MerchantId(),
+                MerchantKey(),
+                "today",
+                "25",
+                "2024-01-01",
+                "2024-01-31",
+                "00:00:00",
+                "23:59:59",
+                "transactionDate",
+                "asc",
+                "0",
+                "24"
             );
 
-            _utils.Received(1).SendRequest(
-                Arg.Is<RapiRequest>(r => r.Command == "transactionDetailReport"),
-                "TEST"
-            );
+            _utils
+                .Received(1)
+                .SendRequest(
+                    Arg.Is<RapiRequest>(r => r.Command == "transactionDetailReport"),
+                    "TEST"
+                );
         }
 
         [Fact]
@@ -72,21 +82,30 @@ namespace MaxiPago.Tests.Gateway
             var pageSize = "50";
 
             _report.GetTransactionDetailReport(
-                MerchantId(), MerchantKey(),
-                "today", pageSize,
-                startDate, endDate,
-                "00:00:00", "23:59:59",
-                "transactionDate", "asc",
-                "0", "49"
+                MerchantId(),
+                MerchantKey(),
+                "today",
+                pageSize,
+                startDate,
+                endDate,
+                "00:00:00",
+                "23:59:59",
+                "transactionDate",
+                "asc",
+                "0",
+                "49"
             );
 
-            _utils.Received(1).SendRequest(
-                Arg.Is<RapiRequest>(r =>
-                    r.ReportRequest.FilterOptions.StartDate == startDate &&
-                    r.ReportRequest.FilterOptions.EndDate == endDate &&
-                    r.ReportRequest.FilterOptions.PageSize == pageSize),
-                Arg.Any<string>()
-            );
+            _utils
+                .Received(1)
+                .SendRequest(
+                    Arg.Is<RapiRequest>(r =>
+                        r.ReportRequest.FilterOptions.StartDate == startDate
+                        && r.ReportRequest.FilterOptions.EndDate == endDate
+                        && r.ReportRequest.FilterOptions.PageSize == pageSize
+                    ),
+                    Arg.Any<string>()
+                );
         }
 
         [Fact]
@@ -95,20 +114,29 @@ namespace MaxiPago.Tests.Gateway
             SetupRapiResponse();
 
             _report.GetTransactionDetailReport(
-                MerchantId(), MerchantKey(),
-                "today", "25",
-                "2024-01-01", "2024-01-31",
-                "00:00:00", "23:59:59",
-                "transactionDate", "desc",
-                "0", "24"
+                MerchantId(),
+                MerchantKey(),
+                "today",
+                "25",
+                "2024-01-01",
+                "2024-01-31",
+                "00:00:00",
+                "23:59:59",
+                "transactionDate",
+                "desc",
+                "0",
+                "24"
             );
 
-            _utils.Received(1).SendRequest(
-                Arg.Is<RapiRequest>(r =>
-                    r.ReportRequest.FilterOptions.OrderByName == "transactionDate" &&
-                    r.ReportRequest.FilterOptions.OrderByDirection == "desc"),
-                Arg.Any<string>()
-            );
+            _utils
+                .Received(1)
+                .SendRequest(
+                    Arg.Is<RapiRequest>(r =>
+                        r.ReportRequest.FilterOptions.OrderByName == "transactionDate"
+                        && r.ReportRequest.FilterOptions.OrderByDirection == "desc"
+                    ),
+                    Arg.Any<string>()
+                );
         }
 
         [Fact]
@@ -118,12 +146,18 @@ namespace MaxiPago.Tests.Gateway
             _utils.SendRequest(Arg.Any<RapiRequest>(), Arg.Any<string>()).Returns(expected);
 
             var result = _report.GetTransactionDetailReport(
-                MerchantId(), MerchantKey(),
-                "today", "25",
-                "2024-01-01", "2024-01-31",
-                "00:00:00", "23:59:59",
-                "transactionDate", "asc",
-                "0", "24"
+                MerchantId(),
+                MerchantKey(),
+                "today",
+                "25",
+                "2024-01-01",
+                "2024-01-31",
+                "00:00:00",
+                "23:59:59",
+                "transactionDate",
+                "asc",
+                "0",
+                "24"
             );
 
             result.Should().BeSameAs(expected);
@@ -140,12 +174,15 @@ namespace MaxiPago.Tests.Gateway
 
             _report.GetTransactionDetailReport(MerchantId(), MerchantKey(), transactionId);
 
-            _utils.Received(1).SendRequest(
-                Arg.Is<RapiRequest>(r =>
-                    r.Command == "transactionDetailReport" &&
-                    r.ReportRequest.FilterOptions.TransactionId == transactionId),
-                "TEST"
-            );
+            _utils
+                .Received(1)
+                .SendRequest(
+                    Arg.Is<RapiRequest>(r =>
+                        r.Command == "transactionDetailReport"
+                        && r.ReportRequest.FilterOptions.TransactionId == transactionId
+                    ),
+                    "TEST"
+                );
         }
 
         // ── GetTransactionDetailReportByOrderId ───────────────────────────────
@@ -158,12 +195,15 @@ namespace MaxiPago.Tests.Gateway
 
             _report.GetTransactionDetailReportByOrderId(MerchantId(), MerchantKey(), orderId);
 
-            _utils.Received(1).SendRequest(
-                Arg.Is<RapiRequest>(r =>
-                    r.Command == "transactionDetailReport" &&
-                    r.ReportRequest.FilterOptions.OrderId == orderId),
-                "TEST"
-            );
+            _utils
+                .Received(1)
+                .SendRequest(
+                    Arg.Is<RapiRequest>(r =>
+                        r.Command == "transactionDetailReport"
+                        && r.ReportRequest.FilterOptions.OrderId == orderId
+                    ),
+                    "TEST"
+                );
         }
 
         // ── GetTransactionDetailReport (pagination) ───────────────────────────
@@ -175,17 +215,18 @@ namespace MaxiPago.Tests.Gateway
             var pageToken = Faker.Random.AlphaNumeric(20);
             var pageNumber = "2";
 
-            _report.GetTransactionDetailReport(
-                MerchantId(), MerchantKey(), pageToken, pageNumber
-            );
+            _report.GetTransactionDetailReport(MerchantId(), MerchantKey(), pageToken, pageNumber);
 
-            _utils.Received(1).SendRequest(
-                Arg.Is<RapiRequest>(r =>
-                    r.Command == "transactionDetailReport" &&
-                    r.ReportRequest.FilterOptions.PageToken == pageToken &&
-                    r.ReportRequest.FilterOptions.PageNumber == pageNumber),
-                "TEST"
-            );
+            _utils
+                .Received(1)
+                .SendRequest(
+                    Arg.Is<RapiRequest>(r =>
+                        r.Command == "transactionDetailReport"
+                        && r.ReportRequest.FilterOptions.PageToken == pageToken
+                        && r.ReportRequest.FilterOptions.PageNumber == pageNumber
+                    ),
+                    "TEST"
+                );
         }
 
         // ── CheckRequestStatus ────────────────────────────────────────────────
@@ -198,12 +239,15 @@ namespace MaxiPago.Tests.Gateway
 
             _report.CheckRequestStatus(MerchantId(), MerchantKey(), requestToken);
 
-            _utils.Received(1).SendRequest(
-                Arg.Is<RapiRequest>(r =>
-                    r.Command == "checkRequestStatus" &&
-                    r.ReportRequest.RequestToken == requestToken),
-                "TEST"
-            );
+            _utils
+                .Received(1)
+                .SendRequest(
+                    Arg.Is<RapiRequest>(r =>
+                        r.Command == "checkRequestStatus"
+                        && r.ReportRequest.RequestToken == requestToken
+                    ),
+                    "TEST"
+                );
         }
 
         [Fact]
@@ -213,7 +257,8 @@ namespace MaxiPago.Tests.Gateway
             _utils.SendRequest(Arg.Any<RapiRequest>(), Arg.Any<string>()).Returns(expected);
 
             var result = _report.CheckRequestStatus(
-                MerchantId(), MerchantKey(),
+                MerchantId(),
+                MerchantKey(),
                 Faker.Random.AlphaNumeric(30)
             );
 
@@ -228,10 +273,7 @@ namespace MaxiPago.Tests.Gateway
             SetupRapiResponse();
             _report.Environment = "LIVE";
 
-            _report.CheckRequestStatus(
-                MerchantId(), MerchantKey(),
-                Faker.Random.AlphaNumeric(30)
-            );
+            _report.CheckRequestStatus(MerchantId(), MerchantKey(), Faker.Random.AlphaNumeric(30));
 
             _utils.Received(1).SendRequest(Arg.Any<RapiRequest>(), "LIVE");
         }
@@ -245,14 +287,21 @@ namespace MaxiPago.Tests.Gateway
             var merchantId = MerchantId();
             var merchantKey = MerchantKey();
 
-            _report.GetTransactionDetailReport(merchantId, merchantKey, Faker.Random.AlphaNumeric(15));
-
-            _utils.Received(1).SendRequest(
-                Arg.Is<RapiRequest>(r =>
-                    r.Verification.MerchantId == merchantId &&
-                    r.Verification.MerchantKey == merchantKey),
-                Arg.Any<string>()
+            _report.GetTransactionDetailReport(
+                merchantId,
+                merchantKey,
+                Faker.Random.AlphaNumeric(15)
             );
+
+            _utils
+                .Received(1)
+                .SendRequest(
+                    Arg.Is<RapiRequest>(r =>
+                        r.Verification.MerchantId == merchantId
+                        && r.Verification.MerchantKey == merchantKey
+                    ),
+                    Arg.Any<string>()
+                );
         }
     }
 }

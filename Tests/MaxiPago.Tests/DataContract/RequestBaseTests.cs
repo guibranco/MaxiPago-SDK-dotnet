@@ -92,10 +92,7 @@ namespace MaxiPago.Tests.DataContract
         [Fact]
         public void ShouldSerializeCustomerIdExt_ReturnsTrue_WhenSet()
         {
-            var requestBase = new RequestBase
-            {
-                CustomerIdExt = Faker.Random.AlphaNumeric(10),
-            };
+            var requestBase = new RequestBase { CustomerIdExt = Faker.Random.AlphaNumeric(10) };
 
             requestBase.ShouldSerializeCustomerIdExt().Should().BeTrue();
         }

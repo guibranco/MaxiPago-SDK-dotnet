@@ -28,7 +28,8 @@ namespace MaxiPago.Gateway
         /// <summary>
         /// Initializes a new instance of the <see cref="Api"/> class.
         /// </summary>
-        public Api() : this(new Utils()) { }
+        public Api()
+            : this(new Utils()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Api"/> class with a custom <see cref="IUtils"/> implementation.
